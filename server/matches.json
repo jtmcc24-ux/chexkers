@@ -1,0 +1,6414 @@
+{
+  "matches": [
+    {
+      "id": "4635d115-2cef-44d5-9116-213631892dc5",
+      "tableId": "1779640923052",
+      "room": "beginner",
+      "gameType": "Ranked",
+      "reason": "resign",
+      "redPlayer": "JT",
+      "blackPlayer": "JTM",
+      "winnerColor": "red",
+      "winnerName": "JT",
+      "loserName": "JTM",
+      "redCaptured": 4,
+      "blackCaptured": 4,
+      "moveCount": 15,
+      "moveHistory": [
+        {
+          "number": 1,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 2,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-E5"
+        },
+        {
+          "number": 3,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece D4xF6"
+        },
+        {
+          "number": 4,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece G7xE5"
+        },
+        {
+          "number": 5,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E3-D4"
+        },
+        {
+          "number": 6,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": {
+            "row": 4,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black Piece E5xC3"
+        },
+        {
+          "number": 7,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": {
+            "row": 5,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece B2xD4"
+        },
+        {
+          "number": 8,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-E5"
+        },
+        {
+          "number": 9,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece D4xF6"
+        },
+        {
+          "number": 10,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece E7xG5"
+        },
+        {
+          "number": 11,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-F4"
+        },
+        {
+          "number": 12,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 6
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": {
+            "row": 4,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece G5xE3"
+        },
+        {
+          "number": 13,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 5,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece D2xF4"
+        },
+        {
+          "number": 14,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C7-D6"
+        },
+        {
+          "number": 15,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F2-E3"
+        }
+      ],
+      "ratingResult": {
+        "ranked": true,
+        "reason": "resign",
+        "winnerColor": "red",
+        "winnerScreenName": "JT",
+        "loserScreenName": "JTM",
+        "winnerDelta": 13,
+        "loserDelta": -13,
+        "winnerRating": 1544,
+        "loserRating": 1456
+      },
+      "createdAt": "2026-05-24T16:42:39.280Z"
+    },
+    {
+      "id": "960a88fb-70e0-4f32-88f1-2e821cff0ba9",
+      "tableId": "1779641487019",
+      "room": "beginner",
+      "gameType": "Casual",
+      "reason": "checkers",
+      "redPlayer": "JTM",
+      "blackPlayer": "Computer_2",
+      "winnerColor": "red",
+      "winnerName": "JTM",
+      "loserName": "Computer_2",
+      "redCaptured": 4,
+      "blackCaptured": 12,
+      "moveCount": 43,
+      "moveHistory": [
+        {
+          "number": 1,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 2,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-C5"
+        },
+        {
+          "number": 3,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 4,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C7-D6"
+        },
+        {
+          "number": 5,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-H4"
+        },
+        {
+          "number": 6,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-E5"
+        },
+        {
+          "number": 7,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-B4"
+        },
+        {
+          "number": 8,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": {
+            "row": 4,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black Piece E5xC3"
+        },
+        {
+          "number": 9,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece B4xD6"
+        },
+        {
+          "number": 10,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black Piece E7xC5"
+        },
+        {
+          "number": 11,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": {
+            "row": 5,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece D2xB4"
+        },
+        {
+          "number": 12,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece B4xD6"
+        },
+        {
+          "number": 13,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D8-C7"
+        },
+        {
+          "number": 14,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D6-E7"
+        },
+        {
+          "number": 15,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 1,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Black Piece F8xD6"
+        },
+        {
+          "number": 16,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F2-G3"
+        },
+        {
+          "number": 17,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H6-G5"
+        },
+        {
+          "number": 18,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 4
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E1-D2"
+        },
+        {
+          "number": 19,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G5-F4"
+        },
+        {
+          "number": 20,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": {
+            "row": 4,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red Piece E3xG5"
+        },
+        {
+          "number": 21,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 6
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red Piece G5xE7"
+        },
+        {
+          "number": 22,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 2,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G7-H6"
+        },
+        {
+          "number": 23,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 0,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": true,
+          "notation": "Red King E7-D8 = KING"
+        },
+        {
+          "number": 24,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-C5"
+        },
+        {
+          "number": 25,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D2-C3"
+        },
+        {
+          "number": 26,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C5-D4"
+        },
+        {
+          "number": 27,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 4,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red Piece C3xE5"
+        },
+        {
+          "number": 28,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C7-D6"
+        },
+        {
+          "number": 29,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red Piece E5xC7"
+        },
+        {
+          "number": 30,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 1
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 1,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Black Piece B8xD6"
+        },
+        {
+          "number": 31,
+          "color": "red",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King D8-C7"
+        },
+        {
+          "number": 32,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 7
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H8-G7"
+        },
+        {
+          "number": 33,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red King C7xE5"
+        },
+        {
+          "number": 34,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G7-F6"
+        },
+        {
+          "number": 35,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red King E5xG7"
+        },
+        {
+          "number": 36,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-A5"
+        },
+        {
+          "number": 37,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-F4"
+        },
+        {
+          "number": 38,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 0
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A5-B4"
+        },
+        {
+          "number": 39,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 0
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": {
+            "row": 4,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Red Piece A3xC5"
+        },
+        {
+          "number": 40,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H6-G5"
+        },
+        {
+          "number": 41,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 2,
+            "col": 7
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece F4xH6"
+        },
+        {
+          "number": 42,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 0
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A7-B6"
+        },
+        {
+          "number": 43,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 1,
+            "col": 0
+          },
+          "capture": {
+            "row": 2,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Red Piece C5xA7"
+        }
+      ],
+      "ratingResult": null,
+      "createdAt": "2026-05-24T16:52:22.029Z"
+    },
+    {
+      "id": "e2eff370-1bef-4f1f-ad80-4a934506dd50",
+      "tableId": "1779641586784",
+      "room": "beginner",
+      "gameType": "Casual",
+      "reason": "checkers",
+      "redPlayer": "JTM",
+      "blackPlayer": "Computer_2",
+      "winnerColor": "red",
+      "winnerName": "JTM",
+      "loserName": "Computer_2",
+      "redCaptured": 5,
+      "blackCaptured": 12,
+      "moveCount": 62,
+      "moveHistory": [
+        {
+          "number": 1,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 2,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-E5"
+        },
+        {
+          "number": 3,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece D4xF6"
+        },
+        {
+          "number": 4,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece E7xG5"
+        },
+        {
+          "number": 5,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-H4"
+        },
+        {
+          "number": 6,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G7-F6"
+        },
+        {
+          "number": 7,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 8,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-E5"
+        },
+        {
+          "number": 9,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 2
+          },
+          "to": {
+            "row": 6,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C1-B2"
+        },
+        {
+          "number": 10,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E5-F4"
+        },
+        {
+          "number": 11,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E3-D4"
+        },
+        {
+          "number": 12,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F8-E7"
+        },
+        {
+          "number": 13,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 0
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece A3-B4"
+        },
+        {
+          "number": 14,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F4-E3"
+        },
+        {
+          "number": 15,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 5,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece D2xF4"
+        },
+        {
+          "number": 16,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 6
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": {
+            "row": 4,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece G5xE3"
+        },
+        {
+          "number": 17,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D4-C5"
+        },
+        {
+          "number": 18,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Black Piece B6xD4"
+        },
+        {
+          "number": 19,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 4,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red Piece C3xE5"
+        },
+        {
+          "number": 20,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red Piece E5xG7"
+        },
+        {
+          "number": 21,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 7
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 1,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Black Piece H8xF6"
+        },
+        {
+          "number": 22,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": {
+            "row": 5,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece F2xD4"
+        },
+        {
+          "number": 23,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H6-G5"
+        },
+        {
+          "number": 24,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 7
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece H2-G3"
+        },
+        {
+          "number": 25,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-E5"
+        },
+        {
+          "number": 26,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece D4xF6"
+        },
+        {
+          "number": 27,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 0
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A7-B6"
+        },
+        {
+          "number": 28,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F6-G7"
+        },
+        {
+          "number": 29,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E7-D6"
+        },
+        {
+          "number": 30,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece H4xF6"
+        },
+        {
+          "number": 31,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-C5"
+        },
+        {
+          "number": 32,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece B4xD6"
+        },
+        {
+          "number": 33,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black Piece C7xE5"
+        },
+        {
+          "number": 34,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 0,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": true,
+          "notation": "Red King G7-F8 = KING"
+        },
+        {
+          "number": 35,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D8-E7"
+        },
+        {
+          "number": 36,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 0,
+            "col": 3
+          },
+          "capture": {
+            "row": 1,
+            "col": 4
+          },
+          "promoted": true,
+          "notation": "Red King F6xD8 = KING"
+        },
+        {
+          "number": 37,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-C5"
+        },
+        {
+          "number": 38,
+          "color": "red",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King F8-E7"
+        },
+        {
+          "number": 39,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C5-D4"
+        },
+        {
+          "number": 40,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King E7-D6"
+        },
+        {
+          "number": 41,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 1
+          },
+          "to": {
+            "row": 1,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B8-A7"
+        },
+        {
+          "number": 42,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red King D6xF4"
+        },
+        {
+          "number": 43,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D4-E3"
+        },
+        {
+          "number": 44,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": {
+            "row": 5,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red King F4xD2"
+        },
+        {
+          "number": 45,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 0
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A7-B6"
+        },
+        {
+          "number": 46,
+          "color": "red",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King D8-C7"
+        },
+        {
+          "number": 47,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-C5"
+        },
+        {
+          "number": 48,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King C7-D6"
+        },
+        {
+          "number": 49,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C5-B4"
+        },
+        {
+          "number": 50,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King D6-C5"
+        },
+        {
+          "number": 51,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B4-A3"
+        },
+        {
+          "number": 52,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 53,
+          "color": "black",
+          "from": {
+            "row": 5,
+            "col": 0
+          },
+          "to": {
+            "row": 6,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A3-B2"
+        },
+        {
+          "number": 54,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-B4"
+        },
+        {
+          "number": 55,
+          "color": "black",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 7,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": true,
+          "notation": "Black King B2-C1 = KING"
+        },
+        {
+          "number": 56,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King D2-C3"
+        },
+        {
+          "number": 57,
+          "color": "black",
+          "from": {
+            "row": 7,
+            "col": 2
+          },
+          "to": {
+            "row": 6,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black King C1-B2"
+        },
+        {
+          "number": 58,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King C3-D2"
+        },
+        {
+          "number": 59,
+          "color": "black",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black King B2-C3"
+        },
+        {
+          "number": 60,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B4-A5"
+        },
+        {
+          "number": 61,
+          "color": "black",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black King C3-D4"
+        },
+        {
+          "number": 62,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": {
+            "row": 4,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red King C5xE3"
+        }
+      ],
+      "ratingResult": null,
+      "createdAt": "2026-05-24T16:54:20.421Z"
+    },
+    {
+      "id": "a4082428-bda9-4651-babd-796c078ea9a2",
+      "tableId": "1779642008316",
+      "room": "beginner",
+      "gameType": "Casual",
+      "reason": "checkers",
+      "redPlayer": "JTM",
+      "blackPlayer": "Computer_2",
+      "winnerColor": "red",
+      "winnerName": "JTM",
+      "loserName": "Computer_2",
+      "redCaptured": 6,
+      "blackCaptured": 12,
+      "moveCount": 44,
+      "moveHistory": [
+        {
+          "number": 1,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 2,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-E5"
+        },
+        {
+          "number": 3,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece D4xF6"
+        },
+        {
+          "number": 4,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece E7xG5"
+        },
+        {
+          "number": 5,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 6,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G5-H4"
+        },
+        {
+          "number": 7,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E3-F4"
+        },
+        {
+          "number": 8,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-C5"
+        },
+        {
+          "number": 9,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D2-E3"
+        },
+        {
+          "number": 10,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G7-F6"
+        },
+        {
+          "number": 11,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 2
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C1-D2"
+        },
+        {
+          "number": 12,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C5-D4"
+        },
+        {
+          "number": 13,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 4,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red Piece C3xE5"
+        },
+        {
+          "number": 14,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red Piece E5xG7"
+        },
+        {
+          "number": 15,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 7
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 1,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Black Piece H8xF6"
+        },
+        {
+          "number": 16,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F4-G5"
+        },
+        {
+          "number": 17,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Black Piece H6xF4"
+        },
+        {
+          "number": 18,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 4,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red Piece G3xE5"
+        },
+        {
+          "number": 19,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red Piece E5xG7"
+        },
+        {
+          "number": 20,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 2,
+            "col": 7
+          },
+          "capture": {
+            "row": 1,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Black Piece F8xH6"
+        },
+        {
+          "number": 21,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E3-F4"
+        },
+        {
+          "number": 22,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H4-G3"
+        },
+        {
+          "number": 23,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": {
+            "row": 5,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece F2xH4"
+        },
+        {
+          "number": 24,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-E5"
+        },
+        {
+          "number": 25,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece F4xD6"
+        },
+        {
+          "number": 26,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black Piece C7xE5"
+        },
+        {
+          "number": 27,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D2-E3"
+        },
+        {
+          "number": 28,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 0
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A7-B6"
+        },
+        {
+          "number": 29,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 0
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece A3-B4"
+        },
+        {
+          "number": 30,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E5-F4"
+        },
+        {
+          "number": 31,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": {
+            "row": 4,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red Piece E3xG5"
+        },
+        {
+          "number": 32,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Black Piece H6xF4"
+        },
+        {
+          "number": 33,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 0
+          },
+          "to": {
+            "row": 6,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece A1-B2"
+        },
+        {
+          "number": 34,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 1
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B8-C7"
+        },
+        {
+          "number": 35,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 6
+          },
+          "to": {
+            "row": 6,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G1-F2"
+        },
+        {
+          "number": 36,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-C5"
+        },
+        {
+          "number": 37,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece B4xD6"
+        },
+        {
+          "number": 38,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 0,
+            "col": 1
+          },
+          "capture": {
+            "row": 1,
+            "col": 2
+          },
+          "promoted": true,
+          "notation": "Red King D6xB8 = KING"
+        },
+        {
+          "number": 39,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F4-E3"
+        },
+        {
+          "number": 40,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": {
+            "row": 5,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece F2xD4"
+        },
+        {
+          "number": 41,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D8-E7"
+        },
+        {
+          "number": 42,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D4-E5"
+        },
+        {
+          "number": 43,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E7-D6"
+        },
+        {
+          "number": 44,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red Piece E5xC7"
+        }
+      ],
+      "ratingResult": null,
+      "createdAt": "2026-05-24T17:01:00.375Z"
+    },
+    {
+      "id": "445f861c-c5fe-41b9-bd33-f58494ce6783",
+      "tableId": "1779642464412",
+      "room": "beginner",
+      "gameType": "Casual",
+      "reason": "checkers",
+      "redPlayer": "JTM",
+      "blackPlayer": "Computer_2",
+      "winnerColor": "black",
+      "winnerName": "Computer_2",
+      "loserName": "JTM",
+      "redCaptured": 12,
+      "blackCaptured": 7,
+      "moveCount": 52,
+      "moveHistory": [
+        {
+          "number": 1,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 2,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-C5"
+        },
+        {
+          "number": 3,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 4,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C7-D6"
+        },
+        {
+          "number": 5,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-H4"
+        },
+        {
+          "number": 6,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 1
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B8-C7"
+        },
+        {
+          "number": 7,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F2-G3"
+        },
+        {
+          "number": 8,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H6-G5"
+        },
+        {
+          "number": 9,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 2
+          },
+          "to": {
+            "row": 6,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C1-B2"
+        },
+        {
+          "number": 10,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 2,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G7-H6"
+        },
+        {
+          "number": 11,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-F4"
+        },
+        {
+          "number": 12,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F8-G7"
+        },
+        {
+          "number": 13,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-B4"
+        },
+        {
+          "number": 14,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-A5"
+        },
+        {
+          "number": 15,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece D4xB6"
+        },
+        {
+          "number": 16,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 0
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": {
+            "row": 2,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Black Piece A7xC5"
+        },
+        {
+          "number": 17,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 6
+          },
+          "to": {
+            "row": 6,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G1-F2"
+        },
+        {
+          "number": 18,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 0
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": {
+            "row": 4,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Black Piece A5xC3"
+        },
+        {
+          "number": 19,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": {
+            "row": 5,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece B2xD4"
+        },
+        {
+          "number": 20,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece D4xB6"
+        },
+        {
+          "number": 21,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": {
+            "row": 2,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Black Piece C7xA5"
+        },
+        {
+          "number": 22,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D2-C3"
+        },
+        {
+          "number": 23,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D8-C7"
+        },
+        {
+          "number": 24,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 25,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C7-B6"
+        },
+        {
+          "number": 26,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 4
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E1-D2"
+        },
+        {
+          "number": 27,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-E5"
+        },
+        {
+          "number": 28,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece D4xF6"
+        },
+        {
+          "number": 29,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 0,
+            "col": 3
+          },
+          "capture": {
+            "row": 1,
+            "col": 4
+          },
+          "promoted": true,
+          "notation": "Red King F6xD8 = KING"
+        },
+        {
+          "number": 30,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-C5"
+        },
+        {
+          "number": 31,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece H4xF6"
+        },
+        {
+          "number": 32,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece G7xE5"
+        },
+        {
+          "number": 33,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": {
+            "row": 4,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece E5xG3"
+        },
+        {
+          "number": 34,
+          "color": "black",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 7,
+            "col": 4
+          },
+          "capture": {
+            "row": 6,
+            "col": 5
+          },
+          "promoted": true,
+          "notation": "Black King G3xE1 = KING"
+        },
+        {
+          "number": 35,
+          "color": "black",
+          "from": {
+            "row": 7,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": {
+            "row": 6,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black King E1xC3"
+        },
+        {
+          "number": 36,
+          "color": "red",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King D8-C7"
+        },
+        {
+          "number": 37,
+          "color": "black",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black King C3-D2"
+        },
+        {
+          "number": 38,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red King C7xE5"
+        },
+        {
+          "number": 39,
+          "color": "black",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 5,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Black King D2xF4"
+        },
+        {
+          "number": 40,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Black King F4xD6"
+        },
+        {
+          "number": 41,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 7
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece H2-G3"
+        },
+        {
+          "number": 42,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black King D6-E5"
+        },
+        {
+          "number": 43,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-H4"
+        },
+        {
+          "number": 44,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 0
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A5-B4"
+        },
+        {
+          "number": 45,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 0
+          },
+          "to": {
+            "row": 6,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece A1-B2"
+        },
+        {
+          "number": 46,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 7
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H8-G7"
+        },
+        {
+          "number": 47,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece H4-G5"
+        },
+        {
+          "number": 48,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Black Piece H6xF4"
+        },
+        {
+          "number": 49,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 50,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": {
+            "row": 5,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Black Piece B4xD2"
+        },
+        {
+          "number": 51,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 0
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece A3-B4"
+        },
+        {
+          "number": 52,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 5,
+            "col": 0
+          },
+          "capture": {
+            "row": 4,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Black Piece C5xA3"
+        }
+      ],
+      "ratingResult": null,
+      "createdAt": "2026-05-24T17:09:38.043Z"
+    },
+    {
+      "id": "33079889-2046-4283-af6d-48b04db46dfc",
+      "tableId": "1779645107197",
+      "room": "beginner",
+      "gameType": "Casual",
+      "reason": "checkers",
+      "redPlayer": "JTM",
+      "blackPlayer": "Computer_2",
+      "winnerColor": "red",
+      "winnerName": "JTM",
+      "loserName": "Computer_2",
+      "redCaptured": 3,
+      "blackCaptured": 12,
+      "moveCount": 44,
+      "moveHistory": [
+        {
+          "number": 1,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 2,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-E5"
+        },
+        {
+          "number": 3,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 4,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C7-D6"
+        },
+        {
+          "number": 5,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-H4"
+        },
+        {
+          "number": 6,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-A5"
+        },
+        {
+          "number": 7,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D4-C5"
+        },
+        {
+          "number": 8,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Black Piece D6xB4"
+        },
+        {
+          "number": 9,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 0
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": {
+            "row": 4,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Red Piece A3xC5"
+        },
+        {
+          "number": 10,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 1
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B8-C7"
+        },
+        {
+          "number": 11,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C5-D6"
+        },
+        {
+          "number": 12,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black Piece E7xC5"
+        },
+        {
+          "number": 13,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 14,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": {
+            "row": 4,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black Piece E5xC3"
+        },
+        {
+          "number": 15,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": {
+            "row": 5,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece D2xB4"
+        },
+        {
+          "number": 16,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece B4xD6"
+        },
+        {
+          "number": 17,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 0,
+            "col": 1
+          },
+          "capture": {
+            "row": 1,
+            "col": 2
+          },
+          "promoted": true,
+          "notation": "Red King D6xB8 = KING"
+        },
+        {
+          "number": 18,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 0
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A5-B4"
+        },
+        {
+          "number": 19,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E3-D4"
+        },
+        {
+          "number": 20,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B4-C3"
+        },
+        {
+          "number": 21,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D4-C5"
+        },
+        {
+          "number": 22,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-E5"
+        },
+        {
+          "number": 23,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F2-E3"
+        },
+        {
+          "number": 24,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D8-C7"
+        },
+        {
+          "number": 25,
+          "color": "red",
+          "from": {
+            "row": 0,
+            "col": 1
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 1,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red King B8xD6"
+        },
+        {
+          "number": 26,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red King D6xF4"
+        },
+        {
+          "number": 27,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 0
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A7-B6"
+        },
+        {
+          "number": 28,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 1,
+            "col": 0
+          },
+          "capture": {
+            "row": 2,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Red Piece C5xA7"
+        },
+        {
+          "number": 29,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F8-E7"
+        },
+        {
+          "number": 30,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King F4-E5"
+        },
+        {
+          "number": 31,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E7-D6"
+        },
+        {
+          "number": 32,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red King E5xC7"
+        },
+        {
+          "number": 33,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G7-F6"
+        },
+        {
+          "number": 34,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King C7-D6"
+        },
+        {
+          "number": 35,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H6-G5"
+        },
+        {
+          "number": 36,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King D6-E7"
+        },
+        {
+          "number": 37,
+          "color": "black",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C3-D2"
+        },
+        {
+          "number": 38,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": {
+            "row": 6,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red Piece E1xC3"
+        },
+        {
+          "number": 39,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-E5"
+        },
+        {
+          "number": 40,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece H4xF6"
+        },
+        {
+          "number": 41,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E5-F4"
+        },
+        {
+          "number": 42,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": {
+            "row": 4,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red Piece E3xG5"
+        },
+        {
+          "number": 43,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 7
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H8-G7"
+        },
+        {
+          "number": 44,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 0,
+            "col": 7
+          },
+          "capture": {
+            "row": 1,
+            "col": 6
+          },
+          "promoted": true,
+          "notation": "Red King F6xH8 = KING"
+        }
+      ],
+      "ratingResult": null,
+      "createdAt": "2026-05-24T17:52:30.606Z"
+    },
+    {
+      "id": "ce60fd08-5899-4ca6-bc20-5119cf600b9d",
+      "tableId": "1779645614186",
+      "room": "beginner",
+      "gameType": "Casual",
+      "reason": "checkers",
+      "redPlayer": "JTM",
+      "blackPlayer": "Computer_2",
+      "winnerColor": "black",
+      "winnerName": "Computer_2",
+      "loserName": "JTM",
+      "redCaptured": 12,
+      "blackCaptured": 8,
+      "moveCount": 69,
+      "moveHistory": [
+        {
+          "number": 1,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 2,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-C5"
+        },
+        {
+          "number": 3,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-H4"
+        },
+        {
+          "number": 4,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C7-D6"
+        },
+        {
+          "number": 5,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 6,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 1
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B8-C7"
+        },
+        {
+          "number": 7,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-B4"
+        },
+        {
+          "number": 8,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-G5"
+        },
+        {
+          "number": 9,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece H4xF6"
+        },
+        {
+          "number": 10,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece G7xE5"
+        },
+        {
+          "number": 11,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": {
+            "row": 4,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black Piece E5xC3"
+        },
+        {
+          "number": 12,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B4-A5"
+        },
+        {
+          "number": 13,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C5-B4"
+        },
+        {
+          "number": 14,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 0
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": {
+            "row": 4,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Red Piece A3xC5"
+        },
+        {
+          "number": 15,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Black Piece D6xB4"
+        },
+        {
+          "number": 16,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E3-F4"
+        },
+        {
+          "number": 17,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E7-F6"
+        },
+        {
+          "number": 18,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 7
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece H2-G3"
+        },
+        {
+          "number": 19,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-C5"
+        },
+        {
+          "number": 20,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-H4"
+        },
+        {
+          "number": 21,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 0
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A7-B6"
+        },
+        {
+          "number": 22,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F2-E3"
+        },
+        {
+          "number": 23,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F8-G7"
+        },
+        {
+          "number": 24,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 6
+          },
+          "to": {
+            "row": 6,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G1-H2"
+        },
+        {
+          "number": 25,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-G5"
+        },
+        {
+          "number": 26,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece H4xF6"
+        },
+        {
+          "number": 27,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece G7xE5"
+        },
+        {
+          "number": 28,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": {
+            "row": 4,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece E5xG3"
+        },
+        {
+          "number": 29,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 7
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 5,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece H2xF4"
+        },
+        {
+          "number": 30,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 7
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H8-G7"
+        },
+        {
+          "number": 31,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 2
+          },
+          "to": {
+            "row": 6,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C1-B2"
+        },
+        {
+          "number": 32,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G7-F6"
+        },
+        {
+          "number": 33,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": {
+            "row": 5,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece B2xD4"
+        },
+        {
+          "number": 34,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B4-A3"
+        },
+        {
+          "number": 35,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 4
+          },
+          "to": {
+            "row": 6,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E1-F2"
+        },
+        {
+          "number": 36,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D8-E7"
+        },
+        {
+          "number": 37,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F2-G3"
+        },
+        {
+          "number": 38,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C5-B4"
+        },
+        {
+          "number": 39,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-H4"
+        },
+        {
+          "number": 40,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B4-C3"
+        },
+        {
+          "number": 41,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": {
+            "row": 5,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece D2xB4"
+        },
+        {
+          "number": 42,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E7-D6"
+        },
+        {
+          "number": 43,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece H4-G5"
+        },
+        {
+          "number": 44,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Black Piece F6xH4"
+        },
+        {
+          "number": 45,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D4-E5"
+        },
+        {
+          "number": 46,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H6-G5"
+        },
+        {
+          "number": 47,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 2,
+            "col": 7
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece F4xH6"
+        },
+        {
+          "number": 48,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Black Piece D6xF4"
+        },
+        {
+          "number": 49,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": {
+            "row": 5,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Black Piece F4xD2"
+        },
+        {
+          "number": 50,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece H6-G7"
+        },
+        {
+          "number": 51,
+          "color": "black",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 7,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": true,
+          "notation": "Black King D2-C1 = KING"
+        },
+        {
+          "number": 52,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 0,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": true,
+          "notation": "Red King G7-F8 = KING"
+        },
+        {
+          "number": 53,
+          "color": "black",
+          "from": {
+            "row": 7,
+            "col": 2
+          },
+          "to": {
+            "row": 6,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black King C1-D2"
+        },
+        {
+          "number": 54,
+          "color": "red",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King F8-E7"
+        },
+        {
+          "number": 55,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H4-G3"
+        },
+        {
+          "number": 56,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King E7-F6"
+        },
+        {
+          "number": 57,
+          "color": "black",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 6,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G3-F2"
+        },
+        {
+          "number": 58,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King F6-E5"
+        },
+        {
+          "number": 59,
+          "color": "black",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 7,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": true,
+          "notation": "Black King F2-E1 = KING"
+        },
+        {
+          "number": 60,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King E5-D4"
+        },
+        {
+          "number": 61,
+          "color": "black",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black King D2-E3"
+        },
+        {
+          "number": 62,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 6,
+            "col": 5
+          },
+          "capture": {
+            "row": 5,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red King D4xF2"
+        },
+        {
+          "number": 63,
+          "color": "black",
+          "from": {
+            "row": 7,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": {
+            "row": 6,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black King E1xG3"
+        },
+        {
+          "number": 64,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B4-C5"
+        },
+        {
+          "number": 65,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Black Piece B6xD4"
+        },
+        {
+          "number": 66,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 0
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece A5-B6"
+        },
+        {
+          "number": 67,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": {
+            "row": 2,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Black Piece C7xA5"
+        },
+        {
+          "number": 68,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 0
+          },
+          "to": {
+            "row": 6,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece A1-B2"
+        },
+        {
+          "number": 69,
+          "color": "black",
+          "from": {
+            "row": 5,
+            "col": 0
+          },
+          "to": {
+            "row": 7,
+            "col": 2
+          },
+          "capture": {
+            "row": 6,
+            "col": 1
+          },
+          "promoted": true,
+          "notation": "Black King A3xC1 = KING"
+        }
+      ],
+      "ratingResult": null,
+      "createdAt": "2026-05-24T18:02:41.089Z"
+    },
+    {
+      "id": "b23c2cba-4e04-43be-8851-28fa007bc260",
+      "tableId": "1779645785385",
+      "room": "beginner",
+      "gameType": "Ranked",
+      "reason": "resign",
+      "redPlayer": "JT",
+      "blackPlayer": "JTM",
+      "winnerColor": "red",
+      "winnerName": "JT",
+      "loserName": "JTM",
+      "redCaptured": 0,
+      "blackCaptured": 0,
+      "moveCount": 5,
+      "moveHistory": [
+        {
+          "number": 1,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 2,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-E5"
+        },
+        {
+          "number": 3,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 4,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-A5"
+        },
+        {
+          "number": 5,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D4-C5"
+        }
+      ],
+      "ratingResult": {
+        "ranked": true,
+        "reason": "resign",
+        "winnerColor": "red",
+        "winnerScreenName": "JT",
+        "loserScreenName": "JTM",
+        "winnerDelta": 12,
+        "loserDelta": -12,
+        "winnerRating": 1556,
+        "loserRating": 1444
+      },
+      "createdAt": "2026-05-24T18:03:53.558Z"
+    },
+    {
+      "id": "33163c3d-a4d9-4482-a2c5-e7f5bfa00d55",
+      "tableId": "1779654270369",
+      "room": "beginner",
+      "gameType": "Casual",
+      "reason": "checkers",
+      "redPlayer": "JTM",
+      "blackPlayer": "Computer_2",
+      "winnerColor": "red",
+      "winnerName": "JTM",
+      "loserName": "Computer_2",
+      "redCaptured": 5,
+      "blackCaptured": 10,
+      "moveCount": 55,
+      "moveHistory": [
+        {
+          "number": 1,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 2,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-G5"
+        },
+        {
+          "number": 3,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 4,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G7-F6"
+        },
+        {
+          "number": 5,
+          "color": "red",
+          "from": {
+            "row": 7,
+            "col": 0
+          },
+          "to": {
+            "row": 6,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece A1-B2"
+        },
+        {
+          "number": 6,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B6-A5"
+        },
+        {
+          "number": 7,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece G3-F4"
+        },
+        {
+          "number": 8,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-C5"
+        },
+        {
+          "number": 9,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 1
+          },
+          "capture": {
+            "row": 3,
+            "col": 2
+          },
+          "promoted": false,
+          "notation": "Red Piece D4xB6"
+        },
+        {
+          "number": 10,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 0
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": {
+            "row": 2,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Black Piece A7xC5"
+        },
+        {
+          "number": 11,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F4-E5"
+        },
+        {
+          "number": 12,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Black Piece F6xD4"
+        },
+        {
+          "number": 13,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 4,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red Piece C3xE5"
+        },
+        {
+          "number": 14,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G5-H4"
+        },
+        {
+          "number": 15,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E3-F4"
+        },
+        {
+          "number": 16,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 0
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece A5-B4"
+        },
+        {
+          "number": 17,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 1
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B2-C3"
+        },
+        {
+          "number": 18,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E7-D6"
+        },
+        {
+          "number": 19,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 0
+          },
+          "capture": {
+            "row": 4,
+            "col": 1
+          },
+          "promoted": false,
+          "notation": "Red Piece C3xA5"
+        },
+        {
+          "number": 20,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C5-D4"
+        },
+        {
+          "number": 21,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece E5-F6"
+        },
+        {
+          "number": 22,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H4-G3"
+        },
+        {
+          "number": 23,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 5
+          },
+          "to": {
+            "row": 4,
+            "col": 7
+          },
+          "capture": {
+            "row": 5,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece F2xH4"
+        },
+        {
+          "number": 24,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 3
+          },
+          "to": {
+            "row": 5,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D4-E3"
+        },
+        {
+          "number": 25,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 0
+          },
+          "to": {
+            "row": 4,
+            "col": 1
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece A3-B4"
+        },
+        {
+          "number": 26,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F8-G7"
+        },
+        {
+          "number": 27,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece F6-E7"
+        },
+        {
+          "number": 28,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 3
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 1,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Black Piece D8xF6"
+        },
+        {
+          "number": 29,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 3
+          },
+          "to": {
+            "row": 5,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D2-C3"
+        },
+        {
+          "number": 30,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece D6-E5"
+        },
+        {
+          "number": 31,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": {
+            "row": 3,
+            "col": 4
+          },
+          "promoted": false,
+          "notation": "Red Piece F4xD6"
+        },
+        {
+          "number": 32,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Black Piece C7xE5"
+        },
+        {
+          "number": 33,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 1
+          },
+          "to": {
+            "row": 3,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece B4-C5"
+        },
+        {
+          "number": 34,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H6-G5"
+        },
+        {
+          "number": 35,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C5-D6"
+        },
+        {
+          "number": 36,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 6
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G5-F4"
+        },
+        {
+          "number": 37,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 3
+          },
+          "to": {
+            "row": 1,
+            "col": 4
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece D6-E7"
+        },
+        {
+          "number": 38,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 1
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece B8-C7"
+        },
+        {
+          "number": 39,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 4
+          },
+          "to": {
+            "row": 0,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": true,
+          "notation": "Red King E7-F8 = KING"
+        },
+        {
+          "number": 40,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece C7-D6"
+        },
+        {
+          "number": 41,
+          "color": "red",
+          "from": {
+            "row": 0,
+            "col": 5
+          },
+          "to": {
+            "row": 2,
+            "col": 7
+          },
+          "capture": {
+            "row": 1,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red King F8xH6"
+        },
+        {
+          "number": 42,
+          "color": "black",
+          "from": {
+            "row": 4,
+            "col": 5
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F4-G3"
+        },
+        {
+          "number": 43,
+          "color": "red",
+          "from": {
+            "row": 6,
+            "col": 7
+          },
+          "to": {
+            "row": 4,
+            "col": 5
+          },
+          "capture": {
+            "row": 5,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece H2xF4"
+        },
+        {
+          "number": 44,
+          "color": "black",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 5,
+            "col": 6
+          },
+          "capture": {
+            "row": 4,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Black Piece E5xG3"
+        },
+        {
+          "number": 45,
+          "color": "red",
+          "from": {
+            "row": 2,
+            "col": 7
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King H6-G7"
+        },
+        {
+          "number": 46,
+          "color": "black",
+          "from": {
+            "row": 5,
+            "col": 6
+          },
+          "to": {
+            "row": 6,
+            "col": 7
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G3-H2"
+        },
+        {
+          "number": 47,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 3,
+            "col": 4
+          },
+          "capture": {
+            "row": 2,
+            "col": 5
+          },
+          "promoted": false,
+          "notation": "Red King G7xE5"
+        },
+        {
+          "number": 48,
+          "color": "red",
+          "from": {
+            "row": 3,
+            "col": 4
+          },
+          "to": {
+            "row": 1,
+            "col": 2
+          },
+          "capture": {
+            "row": 2,
+            "col": 3
+          },
+          "promoted": false,
+          "notation": "Red King E5xC7"
+        },
+        {
+          "number": 49,
+          "color": "black",
+          "from": {
+            "row": 0,
+            "col": 7
+          },
+          "to": {
+            "row": 1,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece H8-G7"
+        },
+        {
+          "number": 50,
+          "color": "red",
+          "from": {
+            "row": 5,
+            "col": 2
+          },
+          "to": {
+            "row": 4,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red Piece C3-D4"
+        },
+        {
+          "number": 51,
+          "color": "black",
+          "from": {
+            "row": 1,
+            "col": 6
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece G7-F6"
+        },
+        {
+          "number": 52,
+          "color": "red",
+          "from": {
+            "row": 1,
+            "col": 2
+          },
+          "to": {
+            "row": 2,
+            "col": 3
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Red King C7-D6"
+        },
+        {
+          "number": 53,
+          "color": "black",
+          "from": {
+            "row": 2,
+            "col": 5
+          },
+          "to": {
+            "row": 3,
+            "col": 6
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece F6-G5"
+        },
+        {
+          "number": 54,
+          "color": "red",
+          "from": {
+            "row": 4,
+            "col": 7
+          },
+          "to": {
+            "row": 2,
+            "col": 5
+          },
+          "capture": {
+            "row": 3,
+            "col": 6
+          },
+          "promoted": false,
+          "notation": "Red Piece H4xF6"
+        },
+        {
+          "number": 55,
+          "color": "black",
+          "from": {
+            "row": 5,
+            "col": 4
+          },
+          "to": {
+            "row": 6,
+            "col": 5
+          },
+          "capture": null,
+          "promoted": false,
+          "notation": "Black Piece E3-F2"
+        }
+      ],
+      "ratingResult": null,
+      "createdAt": "2026-05-24T20:26:40.434Z"
+    }
+  ]
+}

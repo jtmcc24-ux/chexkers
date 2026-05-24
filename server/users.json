@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": "67aa0acd-277c-45ba-8b35-44d351da7b69",
+      "email": "jtmcc24@gmail.com",
+      "screenName": "JT",
+      "rating": 1556,
+      "wins": 4,
+      "losses": 0,
+      "passwordSalt": "5f638884ab1413c5d4726953544a518d",
+      "passwordHash": "ec0ab7cfe8e549e1a40122017a8696275e7df80021efb881700ee200a56bfd15f26d3f5b5b379a152fad97b1d72b85013aa89b0d4de055e2d8df5196f186d6a4",
+      "createdAt": "2026-05-24T07:11:57.865Z"
+    },
+    {
+      "id": "a1dde51f-6c4d-4928-9d36-6ee1bdb538cd",
+      "email": "b_ball_jt_1@yahoo.com",
+      "screenName": "JTM",
+      "rating": 1444,
+      "wins": 0,
+      "losses": 4,
+      "passwordSalt": "9310f1c5c1b1cd5cd9c3a9244736987d",
+      "passwordHash": "37a29d4a979ef34f3c32f8de98c4422b73baa14ad7eba15e8b5dfb6e64b8b7c0cf8c459bf7b6ea7e33c39e4123b6080fa9937c3ba37cf9c662adde86828c4050",
+      "createdAt": "2026-05-24T07:19:52.430Z"
+    }
+  ]
+}
