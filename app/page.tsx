@@ -4672,6 +4672,178 @@ export default function Home() {
       }
       /* CHEXKERS MOBILE LOBBY CLEANUP V3 END */
 
+      /* CHEXKERS MOBILE TOP CLEANUP V4 START */
+      @media (max-width: 900px) {
+        /* Header controls become intentional mobile cards */
+        main > div:first-child.flex.items-center.justify-between > div:last-child {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr !important;
+          gap: 10px !important;
+          width: 100% !important;
+          min-width: 0 !important;
+          align-items: stretch !important;
+        }
+
+        /* Player card */
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(1) {
+          grid-column: 1 / 2 !important;
+          grid-row: 1 !important;
+        }
+
+        /* Logout */
+        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(2) {
+          grid-column: 2 / 3 !important;
+          grid-row: 1 !important;
+        }
+
+        /* Server status: move to its own clean row below CHEXKERS area on mobile */
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(3) {
+          grid-column: 1 / -1 !important;
+          grid-row: 2 !important;
+          min-height: 38px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: flex-start !important;
+          border: 0 !important;
+          background: transparent !important;
+          padding: 0 !important;
+          color: #a1a1aa !important;
+          font-size: 18px !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(3) span,
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(3) strong {
+          color: #22c55e !important;
+          font-weight: 800 !important;
+        }
+
+        /* Queue wrapper: full row, clean segmented control */
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) {
+          grid-column: 1 / -1 !important;
+          grid-row: 3 !important;
+          display: grid !important;
+          grid-template-columns: auto 1fr 1fr !important;
+          gap: 8px !important;
+          align-items: center !important;
+          min-height: 64px !important;
+          padding: 8px !important;
+          overflow: hidden !important;
+          border-radius: 12px !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) > span,
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) > div:first-child {
+          white-space: nowrap !important;
+          color: #a1a1aa !important;
+          font-size: 17px !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) button {
+          min-width: 0 !important;
+          width: 100% !important;
+          height: 48px !important;
+          min-height: 48px !important;
+          padding: 0 8px !important;
+          border-radius: 8px !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+          font-size: 17px !important;
+          font-weight: 800 !important;
+        }
+
+        /* Find + Create */
+        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(5) {
+          grid-column: 1 / 2 !important;
+          grid-row: 4 !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(6) {
+          grid-column: 2 / 3 !important;
+          grid-row: 4 !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(5),
+        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(6) {
+          min-height: 58px !important;
+          font-size: 18px !important;
+          line-height: 1.15 !important;
+          white-space: normal !important;
+          border-radius: 10px !important;
+        }
+
+        /* Avoid right-side Safari clipping */
+        main > div:first-child.flex.items-center.justify-between > div:last-child > * {
+          max-width: 100% !important;
+          overflow: hidden !important;
+        }
+      }
+
+      @media (max-width: 900px) and (orientation: landscape) {
+        /* Landscape: logo left, compact control grid right, no sideways clipping */
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between {
+          display: grid !important;
+          grid-template-columns: minmax(240px, 0.85fr) minmax(360px, 1.15fr) !important;
+          gap: 12px !important;
+          align-items: center !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr 1fr 1fr !important;
+          gap: 8px !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(1) {
+          grid-column: 1 / 2 !important;
+          grid-row: 1 !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(2) {
+          grid-column: 2 / 3 !important;
+          grid-row: 1 !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(3) {
+          grid-column: 3 / 5 !important;
+          grid-row: 1 !important;
+          font-size: 16px !important;
+          min-height: 48px !important;
+          align-items: center !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) {
+          grid-column: 1 / 3 !important;
+          grid-row: 2 !important;
+          min-height: 54px !important;
+          grid-template-columns: auto 1fr 1fr !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) button {
+          height: 40px !important;
+          min-height: 40px !important;
+          font-size: 15px !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(5) {
+          grid-column: 3 / 4 !important;
+          grid-row: 2 !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(6) {
+          grid-column: 4 / 5 !important;
+          grid-row: 2 !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(5),
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(6) {
+          min-height: 54px !important;
+          font-size: 15px !important;
+        }
+      }
+      /* CHEXKERS MOBILE TOP CLEANUP V4 END */
+
+
     `}</style>
 
                       <option>Ranked</option>
