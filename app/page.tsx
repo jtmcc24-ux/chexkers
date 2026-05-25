@@ -130,6 +130,12 @@ type LeaderboardPlayer = {
   createdAt: string;
 };
 
+type LivePlayer = {
+  screenName: string;
+  rating: number;
+  connectedAt?: number;
+};
+
 type MatchRecord = {
   id: string;
   tableId: string;
@@ -226,28 +232,6 @@ type Tournament = {
   chatEnabled: boolean;
 };
 
-type FeaturedMatch = {
-  id: string;
-  room: RoomId;
-  redPlayer: string;
-  blackPlayer: string;
-  redRating: number;
-  blackRating: number;
-  gameType: string;
-  timeControl: string;
-  moveTimer: string;
-  spectators: number;
-  status: string;
-  opponentType: "Human" | "Computer";
-  currentTurn: Color;
-  winner: Color | null;
-  redTimeLeft: number | null;
-  blackTimeLeft: number | null;
-  moveTimeLeft: number | null;
-  moveCount: number;
-  board: Piece[][];
-  lastMove?: LastMove;
-};
 
 const players: Player[] = [
   { name: "RedCirclePro", rating: 2210 },
@@ -310,7 +294,7 @@ function getRating(name: string) {
 
 function formatClock(seconds: number | null | undefined) {
   if (seconds === null || seconds === undefined) {
-    return "∞";
+    return "âˆž";
   }
 
   const safeSeconds = Math.max(0, seconds);
@@ -777,44 +761,6 @@ function CapturedPieceTray({
   );
 }
 
-function FeaturedMiniBoard({ board }: { board: Piece[][] }) {
-  return (
-    <div className="grid grid-cols-8 grid-rows-8 w-32 h-32 border-2 border-amber-900 shadow-inner">
-      {Array.from({ length: 64 }).map((_, index) => {
-        const row = Math.floor(index / 8);
-        const col = index % 8;
-        const dark = (row + col) % 2 === 1;
-        const piece = board?.[row]?.[col];
-
-        return (
-          <div
-            key={index}
-            className={`flex items-center justify-center ${
-              dark ? "bg-[#5b2f1f]" : "bg-[#c08a5a]"
-            }`}
-          >
-            {piece && (
-              <div
-                className={`h-3.5 w-3.5 rounded-full border ${
-                  piece.color === "red"
-                    ? "bg-red-600 border-red-300"
-                    : "bg-zinc-900 border-zinc-500"
-                }`}
-              >
-                {piece.king && (
-                  <div className="text-[7px] leading-[12px] text-center text-amber-300 font-bold">
-                    K
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 export default function Home() {
   const [serverStatus, setServerStatus] = useState("Connecting...");
   const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
@@ -837,7 +783,6 @@ export default function Home() {
   const [profileError, setProfileError] = useState("");
   const [reconnectMessage, setReconnectMessage] = useState("");
   const [tournaments, setTournaments] = useState<Tournament[]>([]);
-  const [featuredMatch, setFeaturedMatch] = useState<FeaturedMatch | null>(null);
   const [showCreateTournament, setShowCreateTournament] = useState(false);
   const [newTournamentName, setNewTournamentName] = useState("Community Cup");
   const [newTournamentType, setNewTournamentType] = useState<"Casual" | "Ranked">("Casual");
@@ -1020,10 +965,6 @@ export default function Home() {
       setTournaments(updatedTournaments);
     });
 
-    socket.on("featuredMatchUpdated", (match: FeaturedMatch | null) => {
-      setFeaturedMatch(match);
-    });
-
     socket.on(
       "gameStateUpdated",
       ({
@@ -1142,7 +1083,6 @@ export default function Home() {
       socket.off("leaderboardUpdated");
       socket.off("livePlayersUpdated");
       socket.off("tournamentsUpdated");
-      socket.off("featuredMatchUpdated");
       socket.off("gameStateUpdated");
     };
   }, []);
@@ -1510,136 +1450,7 @@ export default function Home() {
   }
 
   function leaveTable() {
-  
-  if (!currentUser) {
-    return (
-      <main className="min-h-screen bg-[#17100d] text-white p-5 flex items-center justify-center">
-        <BoardEffects />
-
-        <div className="w-full max-w-[480px] bg-[#241815] border border-amber-700 rounded-2xl p-6 shadow-2xl">
-<div className="flex items-start justify-center select-none mb-2">
-            <div className="flex items-start select-none">
-            <div className="flex items-start select-none">
-  <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
-    CHEXKERS
-  </h1>
-
-  <span className="ml-1 mt-[4px] text-[10px] font-bold uppercase tracking-[0.22em] text-amber-700 opacity-80">
-    by JT
-  </span>
-</div>
-          </div>
-          </div>
-
-          <p className="text-center text-zinc-400 mb-6">
-            {authMode === "register"
-              ? "Create your account and choose your screen name."
-              : "Login to play online."}
-          </p>
-
-          <div className="flex bg-[#1b120f] rounded-lg p-1 mb-5 border border-[#3a2721]">
-            <button
-              onClick={() => {
-                setAuthMode("login");
-                setAuthError("");
-              }}
-              className={`flex-1 py-2 rounded font-bold ${
-                authMode === "login"
-                  ? "bg-amber-500 text-black"
-                  : "text-zinc-300 hover:bg-[#2b1d18]"
-              }`}
-            >
-              Login
-            </button>
-
-            <button
-              onClick={() => {
-                setAuthMode("register");
-                setAuthError("");
-              }}
-              className={`flex-1 py-2 rounded font-bold ${
-                authMode === "register"
-                  ? "bg-amber-500 text-black"
-                  : "text-zinc-300 hover:bg-[#2b1d18]"
-              }`}
-            >
-              Register
-            </button>
-          </div>
-
-          <div className="space-y-4">
-            <label className="block">
-              <span className="text-sm text-zinc-300">Email</span>
-              <input
-                value={authEmail}
-                onChange={(event) => setAuthEmail(event.target.value)}
-                placeholder="you@example.com"
-                className="mt-1 w-full bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 outline-none focus:border-amber-500"
-              />
-            </label>
-
-            {authMode === "register" && (
-              <label className="block">
-                <span className="text-sm text-zinc-300">Screen Name</span>
-                <input
-                  value={authScreenName}
-                  onChange={(event) => setAuthScreenName(event.target.value)}
-                  placeholder="Keyblade300"
-                  className="mt-1 w-full bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 outline-none focus:border-amber-500"
-                />
-
-                <div className="text-xs text-zinc-500 mt-1">
-                  3-16 characters. Owner account can use JT.
-                </div>
-              </label>
-            )}
-
-            <label className="block">
-              <span className="text-sm text-zinc-300">Password</span>
-              <input
-                value={authPassword}
-                onChange={(event) => setAuthPassword(event.target.value)}
-                type="password"
-                placeholder="Password"
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    submitAuth();
-                  }
-                }}
-                className="mt-1 w-full bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 outline-none focus:border-amber-500"
-              />
-            </label>
-
-            {authError && (
-              <div className="bg-red-950/40 border border-red-700 text-red-300 rounded p-3 text-sm">
-                {authError}
-              </div>
-            )}
-
-            <button
-              onClick={submitAuth}
-              disabled={authLoading}
-              className="w-full bg-amber-500 hover:bg-amber-400 disabled:bg-zinc-700 disabled:text-zinc-400 disabled:cursor-not-allowed text-black font-bold py-3 rounded-lg"
-            >
-              {authLoading
-                ? "Please wait..."
-                : authMode === "register"
-                ? "Create Account"
-                : "Login"}
-            </button>
-          </div>
-
-          <div className="mt-5 text-xs text-zinc-500 leading-relaxed">
-            Local development account system. Accounts save to your backend
-            users.json file. Later, this can move to a real database for
-            chexkers.com.
-          </div>
-        </div>
-      </main>
-    );
-  }
-
-  if (currentTable) {
+    if (currentTable) {
       socket.emit("leaveTable", currentTable.id);
     }
 
@@ -1649,6 +1460,7 @@ export default function Home() {
     setAnalysisMoveIndex(null);
     setReconnectMessage("");
     setDragged(null);
+
     selectionClearedMoveKeyRef.current = "";
   }
 
@@ -1762,17 +1574,13 @@ export default function Home() {
 
         <div className="w-full max-w-[480px] bg-[#241815] border border-amber-700 rounded-2xl p-6 shadow-2xl">
 <div className="flex items-start justify-center select-none mb-2">
-            <div className="flex items-start select-none">
-            <div className="flex items-start select-none">
-  <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
-    CHEXKERS
-  </h1>
+            <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
+              CHEXKERS
+            </h1>
 
-  <span className="ml-1 mt-[4px] text-[10px] font-bold uppercase tracking-[0.22em] text-amber-700 opacity-80">
-    by JT
-  </span>
-</div>
-          </div>
+            <span className="ml-1 mt-[4px] text-[10px] font-bold uppercase tracking-[0.22em] text-amber-700 opacity-80">
+              by JT
+            </span>
           </div>
 
           <p className="text-center text-zinc-400 mb-6">
@@ -1892,17 +1700,13 @@ export default function Home() {
         <BoardEffects />
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-start select-none">
-            <div className="flex items-start select-none">
-            <div className="flex items-start select-none">
-  <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
-    CHEXKERS
-  </h1>
+            <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
+              CHEXKERS
+            </h1>
 
-  <span className="ml-1 mt-[4px] text-[10px] font-bold uppercase tracking-[0.22em] text-amber-700 opacity-80">
-    by JT
-  </span>
-</div>
-          </div>
+            <span className="ml-1 mt-[4px] text-[10px] font-bold uppercase tracking-[0.22em] text-amber-700 opacity-80">
+              by JT
+            </span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -2713,7 +2517,7 @@ export default function Home() {
         </div>
       )}
 
-      <div className="grid grid-rows-[1fr_150px_82px_300px] gap-4 h-[82vh]">
+      <div className="grid grid-rows-[1fr_82px_300px] gap-4 h-[82vh]">
         <section className="bg-[#241815] border border-amber-700 rounded-xl p-4 overflow-y-auto">
           <h2 className="text-2xl text-amber-300 mb-4">
             Active Tables -{" "}
@@ -2786,111 +2590,7 @@ export default function Home() {
           )}
         </section>
 
-                                  <section className="rounded-xl border border-amber-700 bg-[#241815] px-4 py-3 overflow-hidden">
-          {featuredMatch ? (
-            <div className="h-full flex items-center gap-5">
-              <div className="w-56">
-                <div className="text-xs text-zinc-500 uppercase tracking-wide">
-                  Featured Live Match
-                </div>
-                <div className="text-xl font-bold text-amber-300 mt-1">
-                  {featuredMatch.redPlayer} vs {featuredMatch.blackPlayer}
-                </div>
-                <div className="mt-1 text-xs text-zinc-500">
-                  {featuredMatch.gameType} • {featuredMatch.room} room
-                </div>
-                <button
-                  onClick={() => watchTable(featuredMatch.id)}
-                  className="mt-3 bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold px-4 py-2 rounded"
-                >
-                  Watch Live
-                </button>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="text-right w-32">
-                  <div className="text-red-300 font-bold truncate">
-                    {featuredMatch.redPlayer}
-                  </div>
-                  <div className="text-xs text-zinc-500">
-                    {featuredMatch.redRating}
-                  </div>
-                  <div className="text-2xl font-bold text-white mt-1">
-                    {formatClock(featuredMatch.redTimeLeft)}
-                  </div>
-                </div>
-
-                <div className="rounded-lg border border-[#5a4034] bg-[#1b120f] p-2">
-                  <FeaturedMiniBoard board={featuredMatch.board} />
-                </div>
-
-                <div className="text-left w-32">
-                  <div className="text-zinc-200 font-bold truncate">
-                    {featuredMatch.blackPlayer}
-                  </div>
-                  <div className="text-xs text-zinc-500">
-                    {featuredMatch.blackRating}
-                  </div>
-                  <div className="text-2xl font-bold text-white mt-1">
-                    {formatClock(featuredMatch.blackTimeLeft)}
-                  </div>
-                </div>
-              </div>
-
-              <div className="ml-auto grid grid-cols-2 gap-3 text-sm min-w-[260px]">
-                <div className="rounded-lg bg-[#1b120f] border border-[#3a2721] p-3">
-                  <div className="text-zinc-500 text-xs">Turn</div>
-                  <div
-                    className={
-                      featuredMatch.currentTurn === "red"
-                        ? "text-red-300 font-bold uppercase"
-                        : "text-zinc-200 font-bold uppercase"
-                    }
-                  >
-                    {featuredMatch.currentTurn}
-                  </div>
-                </div>
-
-                <div className="rounded-lg bg-[#1b120f] border border-[#3a2721] p-3">
-                  <div className="text-zinc-500 text-xs">Move</div>
-                  <div className="text-amber-300 font-bold">
-                    {formatClock(featuredMatch.moveTimeLeft)}
-                  </div>
-                </div>
-
-                <div className="rounded-lg bg-[#1b120f] border border-[#3a2721] p-3">
-                  <div className="text-zinc-500 text-xs">Moves</div>
-                  <div className="text-zinc-100 font-bold">
-                    {featuredMatch.moveCount}
-                  </div>
-                </div>
-
-                <div className="rounded-lg bg-[#1b120f] border border-[#3a2721] p-3">
-                  <div className="text-zinc-500 text-xs">Viewers</div>
-                  <div className="text-zinc-100 font-bold">
-                    {featuredMatch.spectators}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="h-full flex items-center justify-between">
-              <div>
-                <div className="text-xs text-zinc-500 uppercase tracking-wide">
-                  Featured Live Match
-                </div>
-                <div className="text-xl font-bold text-amber-300 mt-1">
-                  No live featured match yet
-                </div>
-                <div className="text-sm text-zinc-500 mt-1">
-                  Start a ranked or casual table and it will appear here.
-                </div>
-              </div>
-
-              <div className="w-20" />
-            </div>
-          )}
-        </section>
+                                  
 
 <section className="rounded-xl border border-amber-700 bg-[#241815] px-4 py-3 overflow-hidden">
           <div className="flex items-center gap-4">
@@ -3026,49 +2726,45 @@ export default function Home() {
             <h2 className="text-xl text-amber-300 mb-4">Players & Ratings</h2>
 
             <div className="space-y-2">
-                            {[
-                ...(livePlayers.length > 0
-                  ? livePlayers.map((player) => ({
-                      name: player.screenName,
-                      rating: player.rating,
-                    }))
-                  : [
-                      {
-                        name: currentUser.screenName,
-                        rating: currentUser.rating,
-                      },
-                      ...leaderboardPlayers.map((player) => ({
-                        name: player.screenName,
-                        rating: player.rating,
-                      })),
-                    ]),
-              ]
-                .filter(
+                            {(() => {
+                const combinedPlayers = [
+                  ...(livePlayers.length > 0
+                    ? livePlayers.map((player) => ({
+                        name: player.screenName || "Unknown Player",
+                        rating:
+                          typeof player.rating === "number"
+                            ? player.rating
+                            : 1500,
+                      }))
+                    : [
+                        {
+                          name: currentUser.screenName,
+                          rating: currentUser.rating,
+                        },
+                        ...leaderboardPlayers.map((player) => ({
+                          name: player.screenName || "Unknown Player",
+                          rating:
+                            typeof player.rating === "number"
+                              ? player.rating
+                              : 1500,
+                        })),
+                      ]),
+                ];
+
+                const uniquePlayers = combinedPlayers.filter(
                   (player, index, list) =>
                     list.findIndex(
                       (item) =>
-                        item.name.toLowerCase() === player.name.toLowerCase()
+                        String(item.name || "").toLowerCase() ===
+                        String(player.name || "").toLowerCase()
                     ) === index
-                )
-                .sort((a, b) => b.rating - a.rating)
-                .map((player) => ({
-                  name: player.screenName,
-                  rating: player.rating,
-                })),
-              ]
-                .filter(
-                  (player, index, list) =>
-                    list.findIndex(
-                      (item) =>
-                        item.name.toLowerCase() === player.name.toLowerCase()
-                    ) === index
-                )
-                .sort((a, b) => {
-                  if (a.name === currentUser.screenName) return -1;
-                  if (b.name === currentUser.screenName) return 1;
-                  return b.rating - a.rating;
-                })
-                .map((player) => (
+                );
+
+                const sortedPlayers = uniquePlayers.sort(
+                  (a, b) => (b.rating || 0) - (a.rating || 0)
+                );
+
+                return sortedPlayers.map((player) => (
                   <div
                     key={player.name}
                     onClick={() => openPlayerProfile(player.name)}
@@ -3080,7 +2776,8 @@ export default function Home() {
                       {player.rating}
                     </span>
                   </div>
-                ))}
+                ));
+              })()}
             </div>
           </div>
 
@@ -3287,7 +2984,7 @@ export default function Home() {
                         </div>
 
                         <div className="text-xs text-zinc-500 mt-1">
-                          {match.gameType} • {match.moveCount} moves •{" "}
+                          {match.gameType} â€¢ {match.moveCount} moves â€¢{" "}
                           {match.reason}
                         </div>
 
@@ -3344,8 +3041,8 @@ export default function Home() {
                 </h2>
 
                 <div className="text-sm text-zinc-400 mt-1">
-                  {selectedTournament.type} • {selectedTournament.format} •{" "}
-                  {selectedTournament.timeControl} • {selectedTournament.moveTimer}
+                  {selectedTournament.type} â€¢ {selectedTournament.format} â€¢{" "}
+                  {selectedTournament.timeControl} â€¢ {selectedTournament.moveTimer}
                 </div>
               </div>
 
