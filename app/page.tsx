@@ -1572,6 +1572,326 @@ export default function Home() {
       <main className="min-h-screen bg-[#17100d] text-white p-5 flex items-center justify-center">
         <BoardEffects />
 
+        <style jsx global>{`
+          @media (max-width: 768px) {
+            html,
+            body {
+              width: 100%;
+              max-width: 100%;
+              overflow-x: hidden;
+              background: #17100d;
+            }
+
+            body {
+              touch-action: manipulation;
+            }
+
+            input,
+            button,
+            select,
+            textarea {
+              font-size: 16px !important;
+            }
+
+            button {
+              min-height: 44px;
+            }
+
+            main {
+              width: 100% !important;
+              max-width: 100% !important;
+              overflow-x: hidden !important;
+            }
+
+            main.min-h-screen,
+            main.h-screen {
+              height: auto !important;
+              min-height: 100dvh !important;
+              overflow-y: auto !important;
+              padding: 12px !important;
+            }
+
+            /* Login card */
+            main.min-h-screen > div.w-full.max-w-\[480px\] {
+              width: 100% !important;
+              max-width: 100% !important;
+              padding: 18px !important;
+            }
+
+            main.min-h-screen h1 {
+              font-size: 38px !important;
+              line-height: 0.9 !important;
+            }
+
+            /* Lobby header */
+            main.min-h-screen > div.flex.items-center.justify-between.mb-4,
+            main.min-h-screen > div.flex.items-center.justify-between.mb-3,
+            main.h-screen > div.flex.items-center.justify-between.mb-3 {
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: stretch !important;
+              gap: 12px !important;
+              margin-bottom: 12px !important;
+            }
+
+            main.min-h-screen > div.flex.items-center.justify-between.mb-4 h1,
+            main.min-h-screen > div.flex.items-center.justify-between.mb-3 h1,
+            main.h-screen > div.flex.items-center.justify-between.mb-3 h1 {
+              font-size: 42px !important;
+              line-height: 0.9 !important;
+            }
+
+            main.min-h-screen > div.flex.items-center.justify-between.mb-4 > div:last-child,
+            main.min-h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child,
+            main.h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child {
+              display: grid !important;
+              grid-template-columns: 1fr 1fr !important;
+              gap: 8px !important;
+              width: 100% !important;
+            }
+
+            main.min-h-screen > div.flex.items-center.justify-between.mb-4 > div:last-child > *,
+            main.min-h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child > *,
+            main.h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child > * {
+              width: 100% !important;
+              min-width: 0 !important;
+              text-align: center !important;
+            }
+
+            /* Room tabs */
+            main.min-h-screen > div.flex.gap-3.mb-4 {
+              display: grid !important;
+              grid-template-columns: 1fr 1fr !important;
+              gap: 8px !important;
+              margin-bottom: 12px !important;
+            }
+
+            main.min-h-screen > div.flex.gap-3.mb-4 button {
+              width: 100% !important;
+              padding: 10px 12px !important;
+              font-size: 16px !important;
+            }
+
+            /* Main lobby layout */
+            .grid.grid-rows-\[1fr_82px_300px\],
+            .grid.grid-rows-\[1fr_76px_300px\],
+            .grid.grid-rows-\[1fr_300px\] {
+              display: flex !important;
+              flex-direction: column !important;
+              height: auto !important;
+              gap: 12px !important;
+            }
+
+            /* Remove extra tall active table empty area on phones */
+            .grid.grid-rows-\[1fr_82px_300px\] > section:first-child,
+            .grid.grid-rows-\[1fr_76px_300px\] > section:first-child {
+              min-height: 150px !important;
+              max-height: none !important;
+            }
+
+            section {
+              width: 100% !important;
+              max-width: 100% !important;
+              overflow: hidden !important;
+              padding: 12px !important;
+            }
+
+            section h2 {
+              font-size: 22px !important;
+              line-height: 1.15 !important;
+            }
+
+            /* Events compact */
+            section:has(.text-amber-300.font-bold.text-lg) > div {
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: stretch !important;
+              gap: 10px !important;
+            }
+
+            section:has(.text-amber-300.font-bold.text-lg) .flex-1 {
+              width: 100% !important;
+              overflow-x: auto !important;
+            }
+
+            .min-w-\[360px\] {
+              min-width: 260px !important;
+              max-width: 260px !important;
+            }
+
+            /* Bottom lobby stack */
+            .grid.grid-cols-\[300px_1fr\] {
+              display: flex !important;
+              flex-direction: column !important;
+              height: auto !important;
+              gap: 12px !important;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] > aside {
+              width: 100% !important;
+              max-height: 260px !important;
+              overflow-y: auto !important;
+              order: 1;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] > section {
+              width: 100% !important;
+              min-height: 520px !important;
+              order: 2;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] > section > div {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 12px !important;
+              height: auto !important;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] > section > div > div {
+              width: 100% !important;
+              min-height: 230px !important;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] input {
+              min-height: 48px !important;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] button {
+              min-height: 48px !important;
+            }
+
+            /* GAME SCREEN */
+            main.h-screen {
+              height: auto !important;
+              min-height: 100dvh !important;
+              overflow: visible !important;
+            }
+
+            .grid.grid-cols-\[270px_1fr_340px\],
+            .grid.grid-cols-\[280px_1fr_340px\],
+            .grid.grid-cols-\[300px_1fr_340px\],
+            .grid.grid-cols-\[1fr_340px\] {
+              display: flex !important;
+              flex-direction: column !important;
+              height: auto !important;
+              min-height: 0 !important;
+              gap: 12px !important;
+            }
+
+            .grid.grid-cols-\[270px_1fr_340px\] > section,
+            .grid.grid-cols-\[280px_1fr_340px\] > section,
+            .grid.grid-cols-\[300px_1fr_340px\] > section,
+            .grid.grid-cols-\[1fr_340px\] > section {
+              order: 1 !important;
+            }
+
+            .grid.grid-cols-\[270px_1fr_340px\] > aside:first-child,
+            .grid.grid-cols-\[280px_1fr_340px\] > aside:first-child,
+            .grid.grid-cols-\[300px_1fr_340px\] > aside:first-child {
+              order: 2 !important;
+            }
+
+            .grid.grid-cols-\[270px_1fr_340px\] > aside:last-child,
+            .grid.grid-cols-\[280px_1fr_340px\] > aside:last-child,
+            .grid.grid-cols-\[300px_1fr_340px\] > aside:last-child,
+            .grid.grid-cols-\[1fr_340px\] > aside:last-child {
+              order: 3 !important;
+            }
+
+            /* Live Match top bar */
+            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child {
+              flex-direction: column !important;
+              align-items: stretch !important;
+              gap: 12px !important;
+            }
+
+            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child {
+              display: grid !important;
+              grid-template-columns: 1fr 1fr 1fr !important;
+              gap: 6px !important;
+            }
+
+            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child > div {
+              min-width: 0 !important;
+              padding: 8px 6px !important;
+            }
+
+            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child .text-2xl {
+              font-size: 20px !important;
+            }
+
+            /* Board wrapper */
+            .grid.grid-cols-\[24px_640px_24px\] {
+              grid-template-columns: 18px calc(100vw - 60px) 18px !important;
+              grid-template-rows: 18px calc(100vw - 60px) 18px !important;
+              width: calc(100vw - 24px) !important;
+              max-width: calc(100vw - 24px) !important;
+              justify-content: center !important;
+              margin: 0 auto !important;
+            }
+
+            .w-\[640px\].h-\[640px\],
+            .w-\[560px\].h-\[560px\],
+            .w-\[520px\].h-\[520px\] {
+              width: calc(100vw - 60px) !important;
+              height: calc(100vw - 60px) !important;
+            }
+
+            .grid.grid-rows-8.h-\[640px\],
+            .grid.grid-rows-8.h-\[560px\],
+            .grid.grid-rows-8.h-\[520px\] {
+              height: calc(100vw - 60px) !important;
+            }
+
+            /* Pieces scale to squares */
+            .h-14.w-14,
+            .w-14.h-14 {
+              width: 72% !important;
+              height: 72% !important;
+              border-width: 3px !important;
+            }
+
+            .h-10.w-10,
+            .w-10.h-10 {
+              width: 70% !important;
+              height: 70% !important;
+            }
+
+            /* Side panels below board */
+            aside {
+              width: 100% !important;
+              max-width: 100% !important;
+              max-height: none !important;
+              overflow: visible !important;
+            }
+
+            aside .text-2xl {
+              font-size: 22px !important;
+            }
+
+            /* Modals */
+            .fixed.inset-0 {
+              padding: 12px !important;
+              align-items: flex-start !important;
+              overflow-y: auto !important;
+            }
+
+            .fixed.inset-0 > div {
+              width: 100% !important;
+              max-width: 100% !important;
+              max-height: 90dvh !important;
+              overflow-y: auto !important;
+              padding: 18px !important;
+            }
+
+            .fixed.inset-0 .grid.grid-cols-\[260px_1fr\] {
+              display: flex !important;
+              flex-direction: column !important;
+            }
+          }
+        `}</style>
+
+
         <div className="w-full max-w-[480px] bg-[#241815] border border-amber-700 rounded-2xl p-6 shadow-2xl">
 <div className="flex items-start justify-center select-none mb-2">
             <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
@@ -1698,6 +2018,326 @@ export default function Home() {
     return (
       <main className="h-screen overflow-hidden bg-[#17100d] text-white p-5">
         <BoardEffects />
+
+        <style jsx global>{`
+          @media (max-width: 768px) {
+            html,
+            body {
+              width: 100%;
+              max-width: 100%;
+              overflow-x: hidden;
+              background: #17100d;
+            }
+
+            body {
+              touch-action: manipulation;
+            }
+
+            input,
+            button,
+            select,
+            textarea {
+              font-size: 16px !important;
+            }
+
+            button {
+              min-height: 44px;
+            }
+
+            main {
+              width: 100% !important;
+              max-width: 100% !important;
+              overflow-x: hidden !important;
+            }
+
+            main.min-h-screen,
+            main.h-screen {
+              height: auto !important;
+              min-height: 100dvh !important;
+              overflow-y: auto !important;
+              padding: 12px !important;
+            }
+
+            /* Login card */
+            main.min-h-screen > div.w-full.max-w-\[480px\] {
+              width: 100% !important;
+              max-width: 100% !important;
+              padding: 18px !important;
+            }
+
+            main.min-h-screen h1 {
+              font-size: 38px !important;
+              line-height: 0.9 !important;
+            }
+
+            /* Lobby header */
+            main.min-h-screen > div.flex.items-center.justify-between.mb-4,
+            main.min-h-screen > div.flex.items-center.justify-between.mb-3,
+            main.h-screen > div.flex.items-center.justify-between.mb-3 {
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: stretch !important;
+              gap: 12px !important;
+              margin-bottom: 12px !important;
+            }
+
+            main.min-h-screen > div.flex.items-center.justify-between.mb-4 h1,
+            main.min-h-screen > div.flex.items-center.justify-between.mb-3 h1,
+            main.h-screen > div.flex.items-center.justify-between.mb-3 h1 {
+              font-size: 42px !important;
+              line-height: 0.9 !important;
+            }
+
+            main.min-h-screen > div.flex.items-center.justify-between.mb-4 > div:last-child,
+            main.min-h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child,
+            main.h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child {
+              display: grid !important;
+              grid-template-columns: 1fr 1fr !important;
+              gap: 8px !important;
+              width: 100% !important;
+            }
+
+            main.min-h-screen > div.flex.items-center.justify-between.mb-4 > div:last-child > *,
+            main.min-h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child > *,
+            main.h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child > * {
+              width: 100% !important;
+              min-width: 0 !important;
+              text-align: center !important;
+            }
+
+            /* Room tabs */
+            main.min-h-screen > div.flex.gap-3.mb-4 {
+              display: grid !important;
+              grid-template-columns: 1fr 1fr !important;
+              gap: 8px !important;
+              margin-bottom: 12px !important;
+            }
+
+            main.min-h-screen > div.flex.gap-3.mb-4 button {
+              width: 100% !important;
+              padding: 10px 12px !important;
+              font-size: 16px !important;
+            }
+
+            /* Main lobby layout */
+            .grid.grid-rows-\[1fr_82px_300px\],
+            .grid.grid-rows-\[1fr_76px_300px\],
+            .grid.grid-rows-\[1fr_300px\] {
+              display: flex !important;
+              flex-direction: column !important;
+              height: auto !important;
+              gap: 12px !important;
+            }
+
+            /* Remove extra tall active table empty area on phones */
+            .grid.grid-rows-\[1fr_82px_300px\] > section:first-child,
+            .grid.grid-rows-\[1fr_76px_300px\] > section:first-child {
+              min-height: 150px !important;
+              max-height: none !important;
+            }
+
+            section {
+              width: 100% !important;
+              max-width: 100% !important;
+              overflow: hidden !important;
+              padding: 12px !important;
+            }
+
+            section h2 {
+              font-size: 22px !important;
+              line-height: 1.15 !important;
+            }
+
+            /* Events compact */
+            section:has(.text-amber-300.font-bold.text-lg) > div {
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: stretch !important;
+              gap: 10px !important;
+            }
+
+            section:has(.text-amber-300.font-bold.text-lg) .flex-1 {
+              width: 100% !important;
+              overflow-x: auto !important;
+            }
+
+            .min-w-\[360px\] {
+              min-width: 260px !important;
+              max-width: 260px !important;
+            }
+
+            /* Bottom lobby stack */
+            .grid.grid-cols-\[300px_1fr\] {
+              display: flex !important;
+              flex-direction: column !important;
+              height: auto !important;
+              gap: 12px !important;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] > aside {
+              width: 100% !important;
+              max-height: 260px !important;
+              overflow-y: auto !important;
+              order: 1;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] > section {
+              width: 100% !important;
+              min-height: 520px !important;
+              order: 2;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] > section > div {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 12px !important;
+              height: auto !important;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] > section > div > div {
+              width: 100% !important;
+              min-height: 230px !important;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] input {
+              min-height: 48px !important;
+            }
+
+            .grid.grid-cols-\[300px_1fr\] button {
+              min-height: 48px !important;
+            }
+
+            /* GAME SCREEN */
+            main.h-screen {
+              height: auto !important;
+              min-height: 100dvh !important;
+              overflow: visible !important;
+            }
+
+            .grid.grid-cols-\[270px_1fr_340px\],
+            .grid.grid-cols-\[280px_1fr_340px\],
+            .grid.grid-cols-\[300px_1fr_340px\],
+            .grid.grid-cols-\[1fr_340px\] {
+              display: flex !important;
+              flex-direction: column !important;
+              height: auto !important;
+              min-height: 0 !important;
+              gap: 12px !important;
+            }
+
+            .grid.grid-cols-\[270px_1fr_340px\] > section,
+            .grid.grid-cols-\[280px_1fr_340px\] > section,
+            .grid.grid-cols-\[300px_1fr_340px\] > section,
+            .grid.grid-cols-\[1fr_340px\] > section {
+              order: 1 !important;
+            }
+
+            .grid.grid-cols-\[270px_1fr_340px\] > aside:first-child,
+            .grid.grid-cols-\[280px_1fr_340px\] > aside:first-child,
+            .grid.grid-cols-\[300px_1fr_340px\] > aside:first-child {
+              order: 2 !important;
+            }
+
+            .grid.grid-cols-\[270px_1fr_340px\] > aside:last-child,
+            .grid.grid-cols-\[280px_1fr_340px\] > aside:last-child,
+            .grid.grid-cols-\[300px_1fr_340px\] > aside:last-child,
+            .grid.grid-cols-\[1fr_340px\] > aside:last-child {
+              order: 3 !important;
+            }
+
+            /* Live Match top bar */
+            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child {
+              flex-direction: column !important;
+              align-items: stretch !important;
+              gap: 12px !important;
+            }
+
+            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child {
+              display: grid !important;
+              grid-template-columns: 1fr 1fr 1fr !important;
+              gap: 6px !important;
+            }
+
+            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child > div {
+              min-width: 0 !important;
+              padding: 8px 6px !important;
+            }
+
+            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child .text-2xl {
+              font-size: 20px !important;
+            }
+
+            /* Board wrapper */
+            .grid.grid-cols-\[24px_640px_24px\] {
+              grid-template-columns: 18px calc(100vw - 60px) 18px !important;
+              grid-template-rows: 18px calc(100vw - 60px) 18px !important;
+              width: calc(100vw - 24px) !important;
+              max-width: calc(100vw - 24px) !important;
+              justify-content: center !important;
+              margin: 0 auto !important;
+            }
+
+            .w-\[640px\].h-\[640px\],
+            .w-\[560px\].h-\[560px\],
+            .w-\[520px\].h-\[520px\] {
+              width: calc(100vw - 60px) !important;
+              height: calc(100vw - 60px) !important;
+            }
+
+            .grid.grid-rows-8.h-\[640px\],
+            .grid.grid-rows-8.h-\[560px\],
+            .grid.grid-rows-8.h-\[520px\] {
+              height: calc(100vw - 60px) !important;
+            }
+
+            /* Pieces scale to squares */
+            .h-14.w-14,
+            .w-14.h-14 {
+              width: 72% !important;
+              height: 72% !important;
+              border-width: 3px !important;
+            }
+
+            .h-10.w-10,
+            .w-10.h-10 {
+              width: 70% !important;
+              height: 70% !important;
+            }
+
+            /* Side panels below board */
+            aside {
+              width: 100% !important;
+              max-width: 100% !important;
+              max-height: none !important;
+              overflow: visible !important;
+            }
+
+            aside .text-2xl {
+              font-size: 22px !important;
+            }
+
+            /* Modals */
+            .fixed.inset-0 {
+              padding: 12px !important;
+              align-items: flex-start !important;
+              overflow-y: auto !important;
+            }
+
+            .fixed.inset-0 > div {
+              width: 100% !important;
+              max-width: 100% !important;
+              max-height: 90dvh !important;
+              overflow-y: auto !important;
+              padding: 18px !important;
+            }
+
+            .fixed.inset-0 .grid.grid-cols-\[260px_1fr\] {
+              display: flex !important;
+              flex-direction: column !important;
+            }
+          }
+        `}</style>
+
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-start select-none">
             <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
@@ -3393,279 +4033,6 @@ export default function Home() {
                   <option>Casual</option>
                   {opponentType === "Human" && (
                     <>
-
-      <style jsx global>{`
-        @media (max-width: 768px) {
-          html,
-          body {
-            overflow-x: hidden;
-            background: #160d0b;
-          }
-
-          body {
-            touch-action: manipulation;
-          }
-
-          input,
-          button,
-          select,
-          textarea {
-            font-size: 16px !important;
-          }
-
-          /* Main page shell */
-          .min-h-screen.bg-\[\#160d0b\].text-white {
-            padding: 12px !important;
-          }
-
-          /* Header: stack into phone-friendly rows */
-          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: stretch !important;
-            gap: 12px !important;
-          }
-
-          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child h1 {
-            font-size: 40px !important;
-            line-height: 0.9 !important;
-          }
-
-          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child > div:last-child {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 8px !important;
-            width: 100% !important;
-          }
-
-          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child > div:last-child > * {
-            width: 100% !important;
-            min-height: 44px !important;
-          }
-
-          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child > div:last-child button {
-            min-height: 44px !important;
-          }
-
-          /* Room tabs become swipeable pills */
-          .min-h-screen.bg-\[\#160d0b\].text-white > div:nth-child(2) {
-            display: flex !important;
-            overflow-x: auto !important;
-            gap: 8px !important;
-            padding-bottom: 4px !important;
-            -webkit-overflow-scrolling: touch;
-          }
-
-          .min-h-screen.bg-\[\#160d0b\].text-white > div:nth-child(2) button {
-            flex: 0 0 auto !important;
-            min-height: 44px !important;
-            padding: 10px 14px !important;
-          }
-
-          /* Main lobby grid: stack sections vertically */
-          .grid.h-\[82vh\],
-          .grid.grid-rows-\[1fr_150px_82px_300px\],
-          .grid.grid-rows-\[1fr_82px_300px\],
-          .grid.grid-rows-\[1fr_76px_300px\] {
-            display: flex !important;
-            flex-direction: column !important;
-            height: auto !important;
-            gap: 12px !important;
-          }
-
-          /* General cards */
-          section {
-            width: 100% !important;
-            max-width: 100% !important;
-          }
-
-          section.rounded-xl,
-          section.bg-\[\#241815\] {
-            padding: 12px !important;
-          }
-
-          section h2 {
-            font-size: 20px !important;
-          }
-
-          /* Active tables should not be huge empty space on mobile */
-          section:has(h2) {
-            min-height: auto !important;
-          }
-
-          section:has(h2.text-2xl) {
-            max-height: none !important;
-          }
-
-          /* Active table cards */
-          .grid.grid-cols-2,
-          .grid.grid-cols-3,
-          .grid.grid-cols-\[300px_1fr\] {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 12px !important;
-          }
-
-          /* Featured match compresses */
-          section:has(.uppercase.tracking-wide) {
-            min-height: auto !important;
-          }
-
-          section:has(.uppercase.tracking-wide) > div {
-            flex-direction: column !important;
-            align-items: stretch !important;
-            gap: 12px !important;
-          }
-
-          /* Events bar: swipe horizontally, smaller and centered */
-          section:has(button):has(.text-amber-300.font-bold.text-lg) > div {
-            align-items: stretch !important;
-          }
-
-          .min-w-\[360px\] {
-            min-width: 280px !important;
-            max-width: 280px !important;
-          }
-
-          .w-24 {
-            width: 48px !important;
-          }
-
-          /* Bottom lobby: players + chat/feed stack */
-          .grid.grid-cols-\[300px_1fr\] {
-            display: flex !important;
-            flex-direction: column !important;
-          }
-
-          .grid.grid-cols-\[300px_1fr\] > aside {
-            max-height: 180px !important;
-            overflow-y: auto !important;
-          }
-
-          .grid.grid-cols-\[300px_1fr\] > section {
-            min-height: 420px !important;
-          }
-
-          .grid.grid-cols-\[300px_1fr\] > section > div {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 12px !important;
-          }
-
-          .grid.grid-cols-\[300px_1fr\] input {
-            min-height: 46px !important;
-          }
-
-          .grid.grid-cols-\[300px_1fr\] button {
-            min-height: 46px !important;
-          }
-
-          /* Login/Register card */
-          .min-h-screen.bg-\[\#160d0b\] .w-\[540px\] {
-            width: calc(100vw - 24px) !important;
-            max-width: calc(100vw - 24px) !important;
-            padding: 20px !important;
-          }
-
-          .min-h-screen.bg-\[\#160d0b\] .w-\[540px\] h1 {
-            font-size: 42px !important;
-          }
-
-          /* Live game layout: stack board and info */
-          .grid.grid-cols-\[1fr_340px\],
-          .grid.grid-cols-\[280px_1fr_340px\],
-          .grid.grid-cols-\[300px_1fr_340px\] {
-            display: flex !important;
-            flex-direction: column !important;
-            height: auto !important;
-            gap: 12px !important;
-          }
-
-          /* Game header/buttons */
-          .flex.justify-end.gap-3,
-          .flex.items-center.justify-between {
-            flex-wrap: wrap !important;
-            gap: 8px !important;
-          }
-
-          /* Board sizing on phones */
-          .grid.grid-cols-8.grid-rows-8 {
-            max-width: calc(100vw - 48px) !important;
-            max-height: calc(100vw - 48px) !important;
-          }
-
-          .w-\[560px\],
-          .h-\[560px\] {
-            width: calc(100vw - 48px) !important;
-            height: calc(100vw - 48px) !important;
-          }
-
-          .w-\[520px\],
-          .h-\[520px\] {
-            width: calc(100vw - 48px) !important;
-            height: calc(100vw - 48px) !important;
-          }
-
-          /* Checker pieces scale down */
-          .w-14.h-14,
-          .h-14.w-14 {
-            width: 70% !important;
-            height: 70% !important;
-          }
-
-          .w-12.h-12,
-          .h-12.w-12 {
-            width: 68% !important;
-            height: 68% !important;
-          }
-
-          /* Side panels become comfortable cards */
-          aside {
-            width: 100% !important;
-            max-width: 100% !important;
-          }
-
-          aside .text-2xl {
-            font-size: 20px !important;
-          }
-
-          aside .grid {
-            gap: 8px !important;
-          }
-
-          /* Modals fit phone screens */
-          .fixed.inset-0 > .w-\[920px\],
-          .fixed.inset-0 > .w-\[460px\],
-          .fixed.inset-0 > .w-\[540px\] {
-            width: calc(100vw - 24px) !important;
-            max-width: calc(100vw - 24px) !important;
-            max-height: 88vh !important;
-            overflow-y: auto !important;
-            padding: 18px !important;
-          }
-
-          .fixed.inset-0 .grid.grid-cols-\[260px_1fr\] {
-            display: flex !important;
-            flex-direction: column !important;
-          }
-
-          /* Make action buttons finger friendly */
-          button {
-            border-radius: 10px !important;
-          }
-
-          /* Keep chat input visible and easy to tap */
-          input[placeholder="Type message..."],
-          input[placeholder="Table message..."] {
-            height: 46px !important;
-          }
-
-          /* Hide decorative/empty dead space on mobile */
-          .opacity-20 {
-            display: none !important;
-          }
-        }
-      `}</style>
 
                       <option>Ranked</option>
                       <option>Blitz</option>
