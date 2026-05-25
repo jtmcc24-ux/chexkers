@@ -367,6 +367,7 @@ function reconnectSocketToTable(socket, table) {
 
 
 const activeTables = [];
+const connectedPlayers = new Map();
 const tournaments = [];
 const matchmakingQueue = [];
 
@@ -1274,6 +1275,10 @@ function broadcastLobbyData(socket) {
   socket.emit("systemFeedUpdated", systemFeed);
   socket.emit("tournamentsUpdated", tournaments);
   socket.emit("featuredMatchUpdated", getFeaturedMatch());
+  socket.emit("livePlayersUpdated", getLivePlayersForLobby());
+  if (typeof getLeaderboardPlayers === "function") {
+    socket.emit("leaderboardUpdated", getLeaderboardPlayers());
+  }
 }
 
 
@@ -1442,6 +1447,38 @@ function getFeaturedMatch() {
 
 function broadcastFeaturedMatch() {
   io.emit("featuredMatchUpdated", getFeaturedMatch());
+}
+
+
+function getLivePlayersForLobby() {
+  const liveByName = new Map();
+
+  for (const player of connectedPlayers.values()) {
+    if (!player?.screenName) continue;
+
+    liveByName.set(player.screenName.toLowerCase(), {
+      screenName: player.screenName,
+      rating: player.rating || 1500,
+      connectedAt: player.connectedAt || Date.now(),
+    });
+  }
+
+  return Array.from(liveByName.values()).sort((a, b) => b.rating - a.rating);
+}
+
+function broadcastLivePlayers() {
+  io.emit("livePlayersUpdated", getLivePlayersForLobby());
+
+  if (typeof getLeaderboardPlayers === "function") {
+    io.emit("leaderboardUpdated", getLeaderboardPlayers());
+  }
+}
+
+function broadcastLobbyRealtime() {
+  if (typeof broadcastTables === "function") broadcastTables();
+  broadcastLivePlayers();
+  if (typeof broadcastTournaments === "function") broadcastTournaments();
+  if (typeof broadcastFeaturedMatch === "function") broadcastFeaturedMatch();
 }
 
 function broadcastTables() {
@@ -1654,11 +1691,30 @@ app.get("/api/matches/:screenName", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+  function rememberSocketUser() {
+    const user = socket.data?.user;
+
+    if (!user?.screenName) return;
+
+    connectedPlayers.set(socket.id, {
+      screenName: user.screenName,
+      rating: user.rating || 1500,
+      connectedAt: Date.now(),
+    });
+
+    broadcastLivePlayers();
+  }
+
   console.log("User connected:", socket.id);
+  socket.emit("livePlayersUpdated", getLivePlayersForLobby());
+  if (typeof getLeaderboardPlayers === "function") {
+    socket.emit("leaderboardUpdated", getLeaderboardPlayers());
+  }
 
   socket.on("setCurrentUser", (userData) => {
     if (!userData || !userData.id || !userData.screenName) {
       socket.data.user = null;
+    rememberSocketUser();
       return;
     }
 
@@ -2179,6 +2235,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
+    connectedPlayers.delete(socket.id);
+    broadcastLivePlayers();
     console.log("User disconnected:", socket.id);
 
     removeFromMatchmaking(socket.id);
@@ -2201,6 +2259,13 @@ io.on("connection", (socket) => {
     broadcastTables();
   });
 });
+
+
+const LIVE_LOBBY_PULSE_MS = 5000;
+
+setInterval(() => {
+  broadcastLobbyRealtime();
+}, LIVE_LOBBY_PULSE_MS);
 
 const PORT = process.env.PORT || 4000;
 

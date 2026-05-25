@@ -829,6 +829,7 @@ export default function Home() {
   const [matchmakingMessage, setMatchmakingMessage] = useState("");
   const [queueType, setQueueType] = useState<"Casual" | "Ranked">("Casual");
   const [leaderboardPlayers, setLeaderboardPlayers] = useState<LeaderboardPlayer[]>([]);
+  const [livePlayers, setLivePlayers] = useState<LivePlayer[]>([]);
   const [lobbyMessages, setLobbyMessages] = useState<LobbyMessage[]>([]);
   const [systemFeedItems, setSystemFeedItems] = useState<SystemFeedItem[]>([]);
   const [lobbyChatText, setLobbyChatText] = useState("");
@@ -1011,6 +1012,10 @@ export default function Home() {
       setLeaderboardPlayers(players);
     });
 
+    socket.on("livePlayersUpdated", (players: LivePlayer[]) => {
+      setLivePlayers(players);
+    });
+
     socket.on("tournamentsUpdated", (updatedTournaments: Tournament[]) => {
       setTournaments(updatedTournaments);
     });
@@ -1135,6 +1140,7 @@ export default function Home() {
       socket.off("lobbyMessagesUpdated");
       socket.off("systemFeedUpdated");
       socket.off("leaderboardUpdated");
+      socket.off("livePlayersUpdated");
       socket.off("tournamentsUpdated");
       socket.off("featuredMatchUpdated");
       socket.off("gameStateUpdated");
@@ -3020,12 +3026,32 @@ export default function Home() {
             <h2 className="text-xl text-amber-300 mb-4">Players & Ratings</h2>
 
             <div className="space-y-2">
-              {[
-                {
-                  name: currentUser.screenName,
-                  rating: currentUser.rating,
-                },
-                ...leaderboardPlayers.map((player) => ({
+                            {[
+                ...(livePlayers.length > 0
+                  ? livePlayers.map((player) => ({
+                      name: player.screenName,
+                      rating: player.rating,
+                    }))
+                  : [
+                      {
+                        name: currentUser.screenName,
+                        rating: currentUser.rating,
+                      },
+                      ...leaderboardPlayers.map((player) => ({
+                        name: player.screenName,
+                        rating: player.rating,
+                      })),
+                    ]),
+              ]
+                .filter(
+                  (player, index, list) =>
+                    list.findIndex(
+                      (item) =>
+                        item.name.toLowerCase() === player.name.toLowerCase()
+                    ) === index
+                )
+                .sort((a, b) => b.rating - a.rating)
+                .map((player) => ({
                   name: player.screenName,
                   rating: player.rating,
                 })),
@@ -3670,6 +3696,280 @@ export default function Home() {
                   <option>Casual</option>
                   {opponentType === "Human" && (
                     <>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          html,
+          body {
+            overflow-x: hidden;
+            background: #160d0b;
+          }
+
+          body {
+            touch-action: manipulation;
+          }
+
+          input,
+          button,
+          select,
+          textarea {
+            font-size: 16px !important;
+          }
+
+          /* Main page shell */
+          .min-h-screen.bg-\[\#160d0b\].text-white {
+            padding: 12px !important;
+          }
+
+          /* Header: stack into phone-friendly rows */
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child h1 {
+            font-size: 40px !important;
+            line-height: 0.9 !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child > div:last-child {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 8px !important;
+            width: 100% !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child > div:last-child > * {
+            width: 100% !important;
+            min-height: 44px !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child > div:last-child button {
+            min-height: 44px !important;
+          }
+
+          /* Room tabs become swipeable pills */
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:nth-child(2) {
+            display: flex !important;
+            overflow-x: auto !important;
+            gap: 8px !important;
+            padding-bottom: 4px !important;
+            -webkit-overflow-scrolling: touch;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:nth-child(2) button {
+            flex: 0 0 auto !important;
+            min-height: 44px !important;
+            padding: 10px 14px !important;
+          }
+
+          /* Main lobby grid: stack sections vertically */
+          .grid.h-\[82vh\],
+          .grid.grid-rows-\[1fr_150px_82px_300px\],
+          .grid.grid-rows-\[1fr_82px_300px\],
+          .grid.grid-rows-\[1fr_76px_300px\] {
+            display: flex !important;
+            flex-direction: column !important;
+            height: auto !important;
+            gap: 12px !important;
+          }
+
+          /* General cards */
+          section {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          section.rounded-xl,
+          section.bg-\[\#241815\] {
+            padding: 12px !important;
+          }
+
+          section h2 {
+            font-size: 20px !important;
+          }
+
+          /* Active tables should not be huge empty space on mobile */
+          section:has(h2) {
+            min-height: auto !important;
+          }
+
+          section:has(h2.text-2xl) {
+            max-height: none !important;
+          }
+
+          /* Active table cards */
+          .grid.grid-cols-2,
+          .grid.grid-cols-3,
+          .grid.grid-cols-\[300px_1fr\] {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+          }
+
+          /* Featured match compresses */
+          section:has(.uppercase.tracking-wide) {
+            min-height: auto !important;
+          }
+
+          section:has(.uppercase.tracking-wide) > div {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+          }
+
+          /* Events bar: swipe horizontally, smaller and centered */
+          section:has(button):has(.text-amber-300.font-bold.text-lg) > div {
+            align-items: stretch !important;
+          }
+
+          .min-w-\[360px\] {
+            min-width: 280px !important;
+            max-width: 280px !important;
+          }
+
+          .w-24 {
+            width: 48px !important;
+          }
+
+          /* Bottom lobby: players + chat/feed stack */
+          .grid.grid-cols-\[300px_1fr\] {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] > aside {
+            max-height: 180px !important;
+            overflow-y: auto !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] > section {
+            min-height: 420px !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] > section > div {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] input {
+            min-height: 46px !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] button {
+            min-height: 46px !important;
+          }
+
+          /* Login/Register card */
+          .min-h-screen.bg-\[\#160d0b\] .w-\[540px\] {
+            width: calc(100vw - 24px) !important;
+            max-width: calc(100vw - 24px) !important;
+            padding: 20px !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\] .w-\[540px\] h1 {
+            font-size: 42px !important;
+          }
+
+          /* Live game layout: stack board and info */
+          .grid.grid-cols-\[1fr_340px\],
+          .grid.grid-cols-\[280px_1fr_340px\],
+          .grid.grid-cols-\[300px_1fr_340px\] {
+            display: flex !important;
+            flex-direction: column !important;
+            height: auto !important;
+            gap: 12px !important;
+          }
+
+          /* Game header/buttons */
+          .flex.justify-end.gap-3,
+          .flex.items-center.justify-between {
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+          }
+
+          /* Board sizing on phones */
+          .grid.grid-cols-8.grid-rows-8 {
+            max-width: calc(100vw - 48px) !important;
+            max-height: calc(100vw - 48px) !important;
+          }
+
+          .w-\[560px\],
+          .h-\[560px\] {
+            width: calc(100vw - 48px) !important;
+            height: calc(100vw - 48px) !important;
+          }
+
+          .w-\[520px\],
+          .h-\[520px\] {
+            width: calc(100vw - 48px) !important;
+            height: calc(100vw - 48px) !important;
+          }
+
+          /* Checker pieces scale down */
+          .w-14.h-14,
+          .h-14.w-14 {
+            width: 70% !important;
+            height: 70% !important;
+          }
+
+          .w-12.h-12,
+          .h-12.w-12 {
+            width: 68% !important;
+            height: 68% !important;
+          }
+
+          /* Side panels become comfortable cards */
+          aside {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          aside .text-2xl {
+            font-size: 20px !important;
+          }
+
+          aside .grid {
+            gap: 8px !important;
+          }
+
+          /* Modals fit phone screens */
+          .fixed.inset-0 > .w-\[920px\],
+          .fixed.inset-0 > .w-\[460px\],
+          .fixed.inset-0 > .w-\[540px\] {
+            width: calc(100vw - 24px) !important;
+            max-width: calc(100vw - 24px) !important;
+            max-height: 88vh !important;
+            overflow-y: auto !important;
+            padding: 18px !important;
+          }
+
+          .fixed.inset-0 .grid.grid-cols-\[260px_1fr\] {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+
+          /* Make action buttons finger friendly */
+          button {
+            border-radius: 10px !important;
+          }
+
+          /* Keep chat input visible and easy to tap */
+          input[placeholder="Type message..."],
+          input[placeholder="Table message..."] {
+            height: 46px !important;
+          }
+
+          /* Hide decorative/empty dead space on mobile */
+          .opacity-20 {
+            display: none !important;
+          }
+        }
+      `}</style>
+
                       <option>Ranked</option>
                       <option>Blitz</option>
                       <option>Ranked Blitz</option>
