@@ -1978,7 +1978,7 @@ export default function Home() {
 
                 <span className="text-zinc-400">Captured</span>
                 <span className="text-right">
-                  R {gameState.redCaptured} â€¢ B {gameState.blackCaptured}
+                  R {gameState.redCaptured} • B {gameState.blackCaptured}
                 </span>
               </div>
             </div>
@@ -2059,7 +2059,7 @@ export default function Home() {
             </div>
 
             <div className="text-xs text-zinc-400 mt-1">
-              {currentUser.screenName} â€¢ {playerRole?.toUpperCase()}
+              {currentUser.screenName} • {playerRole?.toUpperCase()}
             </div>
           </div>
 
@@ -2328,7 +2328,7 @@ export default function Home() {
 
             <span className="text-zinc-400">Captured</span>
             <span className="text-right">
-              R {gameState.redCaptured} â€¢ B {gameState.blackCaptured}
+              R {gameState.redCaptured} • B {gameState.blackCaptured}
             </span>
 
             <span className="text-zinc-400">Status</span>
@@ -3669,7 +3669,7 @@ export default function Home() {
                         </div>
 
                         <div className="text-xs text-zinc-500 mt-1">
-                          {match.gameType} â€¢ {match.moveCount} moves â€¢{" "}
+                          {match.gameType} • {match.moveCount} moves •{" "}
                           {match.reason}
                         </div>
 
@@ -3726,8 +3726,8 @@ export default function Home() {
                 </h2>
 
                 <div className="text-sm text-zinc-400 mt-1">
-                  {selectedTournament.type} â€¢ {selectedTournament.format} â€¢{" "}
-                  {selectedTournament.timeControl} â€¢ {selectedTournament.moveTimer}
+                  {selectedTournament.type} • {selectedTournament.format} •{" "}
+                  {selectedTournament.timeControl} • {selectedTournament.moveTimer}
                 </div>
               </div>
 
