@@ -294,7 +294,7 @@ function getRating(name: string) {
 
 function formatClock(seconds: number | null | undefined) {
   if (seconds === null || seconds === undefined) {
-    return "∞";
+    return "âˆž";
   }
 
   const safeSeconds = Math.max(0, seconds);
@@ -1469,7 +1469,246 @@ export default function Home() {
   }
 
   function leaveTable() {
-  
+    if (currentTable) {
+      socket.emit("leaveTable", currentTable.id);
+    }
+
+    setCurrentTable(null);
+    setPlayerRole(null);
+    setSelected(null);
+    setAnalysisMoveIndex(null);
+    setReconnectMessage("");
+    setDragged(null);
+
+    selectionClearedMoveKeyRef.current = "";
+  }
+
+  function resignGame() {
+    if (!currentTable) return;
+    if (playerRole !== "red" && playerRole !== "black") return;
+    if (gameState.winner) return;
+
+    socket.emit("resignGame", currentTable.id);
+  }
+
+  function resetGame() {
+    if (!currentTable) return;
+
+    socket.emit("resetGame", currentTable.id);
+  }
+
+  function handleSquareClick(row: number, col: number) {
+    if (!currentTable || gameState.winner || playerRole === "spectator" || reviewingMove) return;
+
+    const piece = displayBoard[row]?.[col];
+
+    if (piece && piece.color === gameState.turn && playerRole === gameState.turn) {
+      if (
+        gameState.forcedPiece &&
+        (gameState.forcedPiece.row !== row || gameState.forcedPiece.col !== col)
+      ) {
+        return;
+      }
+
+      setSelected({ row, col });
+      return;
+    }
+
+    const legalTarget = isLegalTarget(row, col);
+
+    if (!selected || !legalTarget) {
+      setSelected(null);
+      return;
+    }
+
+    socket.emit("makeMove", {
+      tableId: currentTable.id,
+      from: selected,
+      to: {
+        row,
+        col,
+      },
+    });
+  }
+
+  function handleDraggedMove(row: number, col: number) {
+    if (!currentTable || !dragged || gameState.winner || playerRole === "spectator" || reviewingMove) {
+      setDragged(null);
+      return;
+    }
+
+    const draggedLegalMoves = getLegalMoves(dragged.row, dragged.col);
+    const legalTarget = draggedLegalMoves.find(
+      (move) => move.row === row && move.col === col
+    );
+
+    if (!legalTarget) {
+      setDragged(null);
+      return;
+    }
+
+    socket.emit("makeMove", {
+      tableId: currentTable.id,
+      from: dragged,
+      to: {
+        row,
+        col,
+      },
+    });
+
+    setDragged(null);
+  }
+
+  function getTurnMessage() {
+    if (gameState.winner) {
+      return `${gameState.winner.toUpperCase()} wins`;
+    }
+
+    if (gameState.multiJumpActive || gameState.forcedPiece) {
+      return "Multi-jump required";
+    }
+
+    const forcedPieces = getForcedCapturePieces();
+
+    if (forcedPieces.length > 0) {
+      return "Capture required";
+    }
+
+    if (playerRole === "spectator") {
+      return `Watching ${gameState.turn.toUpperCase()}'s turn`;
+    }
+
+    if (playerRole === gameState.turn) {
+      return "Your move";
+    }
+
+    return "Opponent's move";
+  }
+
+
+  if (!currentUser) {
+    return (
+      <main className="min-h-screen bg-[#17100d] text-white p-5 flex items-center justify-center">
+        <BoardEffects />
+
+        <div className="w-full max-w-[480px] bg-[#241815] border border-amber-700 rounded-2xl p-6 shadow-2xl">
+<div className="flex items-start justify-center select-none mb-2">
+            <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
+              CHEXKERS
+            </h1>
+
+            <span className="ml-1 mt-[4px] text-[10px] font-bold uppercase tracking-[0.22em] text-amber-700 opacity-80">
+              by JT
+            </span>
+          </div>
+
+          <p className="text-center text-zinc-400 mb-6">
+            {authMode === "register"
+              ? "Create your account and choose your screen name."
+              : "Login to play online."}
+          </p>
+
+          <div className="flex bg-[#1b120f] rounded-lg p-1 mb-5 border border-[#3a2721]">
+            <button
+              onClick={() => {
+                setAuthMode("login");
+                setAuthError("");
+              }}
+              className={`flex-1 py-2 rounded font-bold ${
+                authMode === "login"
+                  ? "bg-amber-500 text-black"
+                  : "text-zinc-300 hover:bg-[#2b1d18]"
+              }`}
+            >
+              Login
+            </button>
+
+            <button
+              onClick={() => {
+                setAuthMode("register");
+                setAuthError("");
+              }}
+              className={`flex-1 py-2 rounded font-bold ${
+                authMode === "register"
+                  ? "bg-amber-500 text-black"
+                  : "text-zinc-300 hover:bg-[#2b1d18]"
+              }`}
+            >
+              Register
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            <label className="block">
+              <span className="text-sm text-zinc-300">Email</span>
+              <input
+                value={authEmail}
+                onChange={(event) => setAuthEmail(event.target.value)}
+                placeholder="you@example.com"
+                className="mt-1 w-full bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 outline-none focus:border-amber-500"
+              />
+            </label>
+
+            {authMode === "register" && (
+              <label className="block">
+                <span className="text-sm text-zinc-300">Screen Name</span>
+                <input
+                  value={authScreenName}
+                  onChange={(event) => setAuthScreenName(event.target.value)}
+                  placeholder="Keyblade300"
+                  className="mt-1 w-full bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 outline-none focus:border-amber-500"
+                />
+
+                <div className="text-xs text-zinc-500 mt-1">
+                  3-16 characters. Owner account can use JT.
+                </div>
+              </label>
+            )}
+
+            <label className="block">
+              <span className="text-sm text-zinc-300">Password</span>
+              <input
+                value={authPassword}
+                onChange={(event) => setAuthPassword(event.target.value)}
+                type="password"
+                placeholder="Password"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    submitAuth();
+                  }
+                }}
+                className="mt-1 w-full bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 outline-none focus:border-amber-500"
+              />
+            </label>
+
+            {authError && (
+              <div className="bg-red-950/40 border border-red-700 text-red-300 rounded p-3 text-sm">
+                {authError}
+              </div>
+            )}
+
+            <button
+              onClick={submitAuth}
+              disabled={authLoading}
+              className="w-full bg-amber-500 hover:bg-amber-400 disabled:bg-zinc-700 disabled:text-zinc-400 disabled:cursor-not-allowed text-black font-bold py-3 rounded-lg"
+            >
+              {authLoading
+                ? "Please wait..."
+                : authMode === "register"
+                ? "Create Account"
+                : "Login"}
+            </button>
+          </div>
+
+          <div className="mt-5 text-xs text-zinc-500 leading-relaxed">
+            Local development account system. Accounts save to your backend
+            users.json file. Later, this can move to a real database for
+            chexkers.com.
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   if (currentTable && isMobileLandscape) {
     const forcedPieces = getForcedCapturePieces();
@@ -1739,7 +1978,7 @@ export default function Home() {
 
                 <span className="text-zinc-400">Captured</span>
                 <span className="text-right">
-                  R {gameState.redCaptured} • B {gameState.blackCaptured}
+                  R {gameState.redCaptured} â€¢ B {gameState.blackCaptured}
                 </span>
               </div>
             </div>
@@ -1820,7 +2059,7 @@ export default function Home() {
             </div>
 
             <div className="text-xs text-zinc-400 mt-1">
-              {currentUser.screenName} • {playerRole?.toUpperCase()}
+              {currentUser.screenName} â€¢ {playerRole?.toUpperCase()}
             </div>
           </div>
 
@@ -2089,7 +2328,7 @@ export default function Home() {
 
             <span className="text-zinc-400">Captured</span>
             <span className="text-right">
-              R {gameState.redCaptured} • B {gameState.blackCaptured}
+              R {gameState.redCaptured} â€¢ B {gameState.blackCaptured}
             </span>
 
             <span className="text-zinc-400">Status</span>
@@ -2133,247 +2372,6 @@ export default function Home() {
             </button>
           </div>
         </section>
-      </main>
-    );
-  }
-
-  if (currentTable) {
-      socket.emit("leaveTable", currentTable.id);
-    }
-
-    setCurrentTable(null);
-    setPlayerRole(null);
-    setSelected(null);
-    setAnalysisMoveIndex(null);
-    setReconnectMessage("");
-    setDragged(null);
-
-    selectionClearedMoveKeyRef.current = "";
-  }
-
-  function resignGame() {
-    if (!currentTable) return;
-    if (playerRole !== "red" && playerRole !== "black") return;
-    if (gameState.winner) return;
-
-    socket.emit("resignGame", currentTable.id);
-  }
-
-  function resetGame() {
-    if (!currentTable) return;
-
-    socket.emit("resetGame", currentTable.id);
-  }
-
-  function handleSquareClick(row: number, col: number) {
-    if (!currentTable || gameState.winner || playerRole === "spectator" || reviewingMove) return;
-
-    const piece = displayBoard[row]?.[col];
-
-    if (piece && piece.color === gameState.turn && playerRole === gameState.turn) {
-      if (
-        gameState.forcedPiece &&
-        (gameState.forcedPiece.row !== row || gameState.forcedPiece.col !== col)
-      ) {
-        return;
-      }
-
-      setSelected({ row, col });
-      return;
-    }
-
-    const legalTarget = isLegalTarget(row, col);
-
-    if (!selected || !legalTarget) {
-      setSelected(null);
-      return;
-    }
-
-    socket.emit("makeMove", {
-      tableId: currentTable.id,
-      from: selected,
-      to: {
-        row,
-        col,
-      },
-    });
-  }
-
-  function handleDraggedMove(row: number, col: number) {
-    if (!currentTable || !dragged || gameState.winner || playerRole === "spectator" || reviewingMove) {
-      setDragged(null);
-      return;
-    }
-
-    const draggedLegalMoves = getLegalMoves(dragged.row, dragged.col);
-    const legalTarget = draggedLegalMoves.find(
-      (move) => move.row === row && move.col === col
-    );
-
-    if (!legalTarget) {
-      setDragged(null);
-      return;
-    }
-
-    socket.emit("makeMove", {
-      tableId: currentTable.id,
-      from: dragged,
-      to: {
-        row,
-        col,
-      },
-    });
-
-    setDragged(null);
-  }
-
-  function getTurnMessage() {
-    if (gameState.winner) {
-      return `${gameState.winner.toUpperCase()} wins`;
-    }
-
-    if (gameState.multiJumpActive || gameState.forcedPiece) {
-      return "Multi-jump required";
-    }
-
-    const forcedPieces = getForcedCapturePieces();
-
-    if (forcedPieces.length > 0) {
-      return "Capture required";
-    }
-
-    if (playerRole === "spectator") {
-      return `Watching ${gameState.turn.toUpperCase()}'s turn`;
-    }
-
-    if (playerRole === gameState.turn) {
-      return "Your move";
-    }
-
-    return "Opponent's move";
-  }
-
-
-  if (!currentUser) {
-    return (
-      <main className="min-h-screen bg-[#17100d] text-white p-5 flex items-center justify-center">
-        <BoardEffects />
-
-        <div className="w-full max-w-[480px] bg-[#241815] border border-amber-700 rounded-2xl p-6 shadow-2xl">
-<div className="flex items-start justify-center select-none mb-2">
-            <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
-              CHEXKERS
-            </h1>
-
-            <span className="ml-1 mt-[4px] text-[10px] font-bold uppercase tracking-[0.22em] text-amber-700 opacity-80">
-              by JT
-            </span>
-          </div>
-
-          <p className="text-center text-zinc-400 mb-6">
-            {authMode === "register"
-              ? "Create your account and choose your screen name."
-              : "Login to play online."}
-          </p>
-
-          <div className="flex bg-[#1b120f] rounded-lg p-1 mb-5 border border-[#3a2721]">
-            <button
-              onClick={() => {
-                setAuthMode("login");
-                setAuthError("");
-              }}
-              className={`flex-1 py-2 rounded font-bold ${
-                authMode === "login"
-                  ? "bg-amber-500 text-black"
-                  : "text-zinc-300 hover:bg-[#2b1d18]"
-              }`}
-            >
-              Login
-            </button>
-
-            <button
-              onClick={() => {
-                setAuthMode("register");
-                setAuthError("");
-              }}
-              className={`flex-1 py-2 rounded font-bold ${
-                authMode === "register"
-                  ? "bg-amber-500 text-black"
-                  : "text-zinc-300 hover:bg-[#2b1d18]"
-              }`}
-            >
-              Register
-            </button>
-          </div>
-
-          <div className="space-y-4">
-            <label className="block">
-              <span className="text-sm text-zinc-300">Email</span>
-              <input
-                value={authEmail}
-                onChange={(event) => setAuthEmail(event.target.value)}
-                placeholder="you@example.com"
-                className="mt-1 w-full bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 outline-none focus:border-amber-500"
-              />
-            </label>
-
-            {authMode === "register" && (
-              <label className="block">
-                <span className="text-sm text-zinc-300">Screen Name</span>
-                <input
-                  value={authScreenName}
-                  onChange={(event) => setAuthScreenName(event.target.value)}
-                  placeholder="Keyblade300"
-                  className="mt-1 w-full bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 outline-none focus:border-amber-500"
-                />
-
-                <div className="text-xs text-zinc-500 mt-1">
-                  3-16 characters. Owner account can use JT.
-                </div>
-              </label>
-            )}
-
-            <label className="block">
-              <span className="text-sm text-zinc-300">Password</span>
-              <input
-                value={authPassword}
-                onChange={(event) => setAuthPassword(event.target.value)}
-                type="password"
-                placeholder="Password"
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    submitAuth();
-                  }
-                }}
-                className="mt-1 w-full bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 outline-none focus:border-amber-500"
-              />
-            </label>
-
-            {authError && (
-              <div className="bg-red-950/40 border border-red-700 text-red-300 rounded p-3 text-sm">
-                {authError}
-              </div>
-            )}
-
-            <button
-              onClick={submitAuth}
-              disabled={authLoading}
-              className="w-full bg-amber-500 hover:bg-amber-400 disabled:bg-zinc-700 disabled:text-zinc-400 disabled:cursor-not-allowed text-black font-bold py-3 rounded-lg"
-            >
-              {authLoading
-                ? "Please wait..."
-                : authMode === "register"
-                ? "Create Account"
-                : "Login"}
-            </button>
-          </div>
-
-          <div className="mt-5 text-xs text-zinc-500 leading-relaxed">
-            Local development account system. Accounts save to your backend
-            users.json file. Later, this can move to a real database for
-            chexkers.com.
-          </div>
-        </div>
       </main>
     );
   }
@@ -3671,7 +3669,7 @@ export default function Home() {
                         </div>
 
                         <div className="text-xs text-zinc-500 mt-1">
-                          {match.gameType} • {match.moveCount} moves •{" "}
+                          {match.gameType} â€¢ {match.moveCount} moves â€¢{" "}
                           {match.reason}
                         </div>
 
@@ -3728,8 +3726,8 @@ export default function Home() {
                 </h2>
 
                 <div className="text-sm text-zinc-400 mt-1">
-                  {selectedTournament.type} • {selectedTournament.format} •{" "}
-                  {selectedTournament.timeControl} • {selectedTournament.moveTimer}
+                  {selectedTournament.type} â€¢ {selectedTournament.format} â€¢{" "}
+                  {selectedTournament.timeControl} â€¢ {selectedTournament.moveTimer}
                 </div>
               </div>
 
