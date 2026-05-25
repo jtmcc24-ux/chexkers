@@ -804,6 +804,7 @@ export default function Home() {
     "red" | "black" | "spectator" | null
   >(null);
   const [showCreateTable, setShowCreateTable] = useState(false);
+  const [isMobileLayout, setIsMobileLayout] = useState(false);
 
   const [gameType, setGameType] = useState("Casual");
   const [timeControl, setTimeControl] = useState("5 Minutes");
@@ -820,6 +821,21 @@ export default function Home() {
   useEffect(() => {
     currentUserRef.current = currentUser;
   }, [currentUser]);
+
+  useEffect(() => {
+    const updateMobileLayout = () => {
+      setIsMobileLayout(window.innerWidth <= 900);
+    };
+
+    updateMobileLayout();
+    window.addEventListener("resize", updateMobileLayout);
+    window.addEventListener("orientationchange", updateMobileLayout);
+
+    return () => {
+      window.removeEventListener("resize", updateMobileLayout);
+      window.removeEventListener("orientationchange", updateMobileLayout);
+    };
+  }, []);
 
   useEffect(() => {
     const savedUser = window.localStorage.getItem("chexkersUser");
@@ -1450,7 +1466,345 @@ export default function Home() {
   }
 
   function leaveTable() {
-    if (currentTable) {
+  
+  if (currentTable && isMobileLayout) {
+    const forcedPieces = getForcedCapturePieces();
+
+    return (
+      <main className="min-h-screen bg-[#17100d] text-white p-3 overflow-x-hidden">
+        <BoardEffects />
+
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div className="min-w-0">
+            <div className="flex items-start select-none">
+              <h1 className="text-[34px] font-bold text-amber-400 tracking-wide leading-none">
+                CHEXKERS
+              </h1>
+
+              <span className="ml-1 mt-[3px] text-[8px] font-bold uppercase tracking-[0.18em] text-amber-700 opacity-80">
+                by JT
+              </span>
+            </div>
+
+            <div className="text-xs text-zinc-400 mt-1">
+              {currentUser.screenName} â€¢ {playerRole?.toUpperCase()}
+            </div>
+          </div>
+
+          <button
+            onClick={leaveTable}
+            className="bg-[#5a3a2d] hover:bg-[#6c4737] px-3 py-2 rounded-lg text-sm font-bold shrink-0"
+          >
+            Leave
+          </button>
+        </div>
+
+        <section className="rounded-xl border border-amber-700 bg-[#241815] p-3 mb-3">
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <div>
+              <h2 className="text-xl text-amber-300 font-bold">Live Match</h2>
+
+              <div
+                className={`text-sm mt-1 ${
+                  gameState.winner
+                    ? "text-green-400"
+                    : gameState.multiJumpActive || gameState.forcedPiece
+                    ? "text-orange-400"
+                    : forcedPieces.length > 0
+                    ? "text-red-400"
+                    : "text-zinc-400"
+                }`}
+              >
+                {reviewingMove
+                  ? `Reviewing ${analysisSnapshot?.label || "position"}`
+                  : gameState.resignedColor
+                  ? `${gameState.resignedColor.toUpperCase()} resigned`
+                  : gameState.timeoutWinner
+                  ? `${gameState.timeoutWinner.toUpperCase()} wins by timeout`
+                  : getTurnMessage()}
+              </div>
+            </div>
+
+            <button
+              onClick={() => setSoundEnabled((value) => !value)}
+              className="bg-[#5a3a2d] hover:bg-[#6c4737] px-3 py-2 rounded-lg text-xs"
+            >
+              Sound {soundEnabled ? "On" : "Off"}
+            </button>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 mb-3">
+            <div
+              className={`rounded-lg border p-2 text-center ${
+                gameState.turn === "red"
+                  ? "border-red-400 bg-red-950/40"
+                  : "border-zinc-700 bg-zinc-900/40"
+              }`}
+            >
+              <div className="text-[10px] uppercase text-zinc-400">Red</div>
+              <div
+                className={`text-lg font-bold ${
+                  isLowTime(gameState.redTimeLeft)
+                    ? "text-red-400 animate-pulse"
+                    : "text-white"
+                }`}
+              >
+                {formatClock(gameState.redTimeLeft)}
+              </div>
+            </div>
+
+            <div
+              className={`rounded-lg border p-2 text-center ${
+                isLowTime(gameState.moveTimeLeft)
+                  ? "border-orange-400 bg-orange-950/40"
+                  : "border-amber-700 bg-[#2a1c17]"
+              }`}
+            >
+              <div className="text-[10px] uppercase text-zinc-400">Move</div>
+              <div
+                className={`text-lg font-bold ${
+                  isLowTime(gameState.moveTimeLeft)
+                    ? "text-orange-400 animate-pulse"
+                    : "text-amber-300"
+                }`}
+              >
+                {formatClock(gameState.moveTimeLeft)}
+              </div>
+            </div>
+
+            <div
+              className={`rounded-lg border p-2 text-center ${
+                gameState.turn === "black"
+                  ? "border-zinc-300 bg-zinc-800/60"
+                  : "border-zinc-700 bg-zinc-900/40"
+              }`}
+            >
+              <div className="text-[10px] uppercase text-zinc-400">Black</div>
+              <div
+                className={`text-lg font-bold ${
+                  isLowTime(gameState.blackTimeLeft)
+                    ? "text-red-400 animate-pulse"
+                    : "text-white"
+                }`}
+              >
+                {formatClock(gameState.blackTimeLeft)}
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto w-[calc(100vw-32px)] max-w-[520px]">
+            <div className="grid grid-cols-8 text-center text-[10px] text-amber-300/80 font-bold tracking-wide mb-1">
+              {Array.from({ length: 8 }).map((_, col) => (
+                <div key={`mobile-file-${col}`}>{"ABCDEFGH"[col]}</div>
+              ))}
+            </div>
+
+            <div className="w-[calc(100vw-32px)] h-[calc(100vw-32px)] max-w-[520px] max-h-[520px] grid grid-cols-8 grid-rows-8 border-4 border-amber-900 shadow-2xl">
+              {Array.from({ length: 64 }).map((_, index) => {
+                const row = Math.floor(index / 8);
+                const col = index % 8;
+                const dark = (row + col) % 2 === 1;
+                const piece = displayBoard[row]?.[col];
+                const isSelected = selected?.row === row && selected?.col === col;
+                const legalTarget = isLegalTarget(row, col);
+                const forcedPieceGlow = isForcedPiece(row, col);
+                const canSelectPiece =
+                  piece &&
+                  piece.color === gameState.turn &&
+                  playerRole === gameState.turn &&
+                  !gameState.winner &&
+                  (!gameState.forcedPiece ||
+                    (gameState.forcedPiece.row === row &&
+                      gameState.forcedPiece.col === col));
+
+                const captureTarget = Boolean(legalTarget?.capture);
+                const isLastMoveFrom = positionsMatch(gameState.lastMove?.from, {
+                  row,
+                  col,
+                });
+                const isLastMoveTo = positionsMatch(gameState.lastMove?.to, {
+                  row,
+                  col,
+                });
+
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleSquareClick(row, col)}
+                    className={`relative flex items-center justify-center transition ${
+                      dark ? "bg-[#5b2f1f]" : "bg-[#c08a5a]"
+                    } ${isSelected ? "ring-4 ring-amber-300 z-20" : ""} ${
+                      legalTarget
+                        ? captureTarget
+                          ? "ring-4 ring-red-400 z-10"
+                          : "ring-4 ring-green-400 z-10"
+                        : ""
+                    } ${
+                      forcedPieceGlow && !isSelected
+                        ? "ring-4 ring-orange-400 z-10"
+                        : ""
+                    } ${canSelectPiece ? "cursor-pointer" : ""}`}
+                  >
+                    {isLastMoveFrom && (
+                      <div className="absolute inset-1 border-2 border-blue-300/45 rounded-sm chex-move-trail" />
+                    )}
+
+                    {isLastMoveTo && (
+                      <div className="absolute inset-1 border-2 border-blue-200/60 rounded-sm chex-move-trail" />
+                    )}
+
+                    {legalTarget && (
+                      <div
+                        className={`absolute rounded-full ${
+                          captureTarget
+                            ? "h-6 w-6 bg-red-500/75 animate-pulse"
+                            : "h-4 w-4 bg-green-400/75"
+                        }`}
+                      />
+                    )}
+
+                    {piece && (
+                      <div
+                        className={`h-[72%] w-[72%] rounded-full border-[3px] shadow-lg flex items-center justify-center ${
+                          piece.color === "red"
+                            ? "bg-red-600 border-red-300"
+                            : "bg-zinc-900 border-zinc-500"
+                        } ${
+                          forcedPieceGlow
+                            ? "shadow-[0_0_18px_rgba(251,146,60,0.95)]"
+                            : canSelectPiece
+                            ? "shadow-[0_0_12px_rgba(251,191,36,0.65)]"
+                            : ""
+                        }`}
+                      >
+                        <div className="h-[70%] w-[70%] rounded-full border-2 border-black/30 flex items-center justify-center">
+                          {piece.king && (
+                            <span className="text-amber-300 text-base font-bold">
+                              K
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 mt-3">
+            <button
+              onClick={resetGame}
+              disabled={playerRole !== "red"}
+              className="bg-[#5a3a2d] hover:bg-[#6c4737] disabled:opacity-40 disabled:cursor-not-allowed py-2 rounded-lg font-bold"
+            >
+              {gameState.winner ? "Rematch" : "Reset"}
+            </button>
+
+            <button
+              onClick={resignGame}
+              disabled={
+                (playerRole !== "red" && playerRole !== "black") ||
+                gameState.winner !== null ||
+                reviewingMove
+              }
+              className="bg-red-700 hover:bg-red-600 disabled:opacity-40 disabled:cursor-not-allowed py-2 rounded-lg font-bold"
+            >
+              Resign
+            </button>
+          </div>
+        </section>
+
+        <section className="rounded-xl border border-amber-700 bg-[#241815] p-3 mb-3">
+          <h2 className="text-xl text-amber-300 font-bold mb-3">Move History</h2>
+
+          <div className="rounded-lg border border-[#3a2721] bg-[#1b120f] p-3 max-h-44 overflow-y-auto text-sm space-y-1">
+            {(gameState.moveHistory || []).length === 0 ? (
+              <div className="text-zinc-500">No moves yet.</div>
+            ) : (
+              (gameState.moveHistory || []).map((move) => (
+                <div
+                  key={move.number}
+                  className="grid grid-cols-[42px_1fr] gap-2 text-xs"
+                >
+                  <span className="text-zinc-500">#{move.number}</span>
+                  <span
+                    className={
+                      move.color === "red" ? "text-red-300" : "text-zinc-200"
+                    }
+                  >
+                    {move.notation}
+                  </span>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+
+        <section className="rounded-xl border border-amber-700 bg-[#241815] p-3 mb-3">
+          <h2 className="text-xl text-amber-300 font-bold mb-3">Table Info</h2>
+
+          <div className="grid grid-cols-2 gap-y-2 text-sm">
+            <span className="text-zinc-400">Mode</span>
+            <span className="text-right">{currentTable.gameType}</span>
+
+            <span className="text-zinc-400">Red</span>
+            <span className="text-right">{currentTable.redPlayer}</span>
+
+            <span className="text-zinc-400">Black</span>
+            <span className="text-right">{currentTable.blackPlayer}</span>
+
+            <span className="text-zinc-400">Captured</span>
+            <span className="text-right">
+              R {gameState.redCaptured} â€¢ B {gameState.blackCaptured}
+            </span>
+
+            <span className="text-zinc-400">Status</span>
+            <span className="text-right">{getTurnMessage()}</span>
+          </div>
+        </section>
+
+        <section className="rounded-xl border border-amber-700 bg-[#241815] p-3">
+          <h2 className="text-xl text-amber-300 font-bold mb-3">Table Chat</h2>
+
+          <div className="bg-[#1b120f] rounded p-3 h-36 text-sm space-y-2 overflow-y-auto">
+            <div>System: Table opened.</div>
+            <div>System: {currentTable.redPlayer} is seated as Red.</div>
+            {currentTable.blackPlayer !== "Open Seat" && (
+              <div>System: {currentTable.blackPlayer} is seated as Black.</div>
+            )}
+            {forcedPieces.length > 0 && !gameState.winner && (
+              <div className="text-red-300">System: Capture required.</div>
+            )}
+            {(gameState.multiJumpActive || gameState.forcedPiece) &&
+              !gameState.winner && (
+                <div className="text-orange-300">
+                  System: Multi-jump must continue.
+                </div>
+              )}
+            {gameState.winner && (
+              <div className="text-amber-300">
+                System: {gameState.winner.toUpperCase()} wins.
+              </div>
+            )}
+          </div>
+
+          <div className="mt-3 flex gap-2">
+            <input
+              placeholder="Table message..."
+              className="flex-1 bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 text-sm outline-none"
+            />
+
+            <button className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-4 rounded">
+              Send
+            </button>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  if (currentTable) {
       socket.emit("leaveTable", currentTable.id);
     }
 
@@ -1571,326 +1925,6 @@ export default function Home() {
     return (
       <main className="min-h-screen bg-[#17100d] text-white p-5 flex items-center justify-center">
         <BoardEffects />
-
-        <style jsx global>{`
-          @media (max-width: 768px) {
-            html,
-            body {
-              width: 100%;
-              max-width: 100%;
-              overflow-x: hidden;
-              background: #17100d;
-            }
-
-            body {
-              touch-action: manipulation;
-            }
-
-            input,
-            button,
-            select,
-            textarea {
-              font-size: 16px !important;
-            }
-
-            button {
-              min-height: 44px;
-            }
-
-            main {
-              width: 100% !important;
-              max-width: 100% !important;
-              overflow-x: hidden !important;
-            }
-
-            main.min-h-screen,
-            main.h-screen {
-              height: auto !important;
-              min-height: 100dvh !important;
-              overflow-y: auto !important;
-              padding: 12px !important;
-            }
-
-            /* Login card */
-            main.min-h-screen > div.w-full.max-w-\[480px\] {
-              width: 100% !important;
-              max-width: 100% !important;
-              padding: 18px !important;
-            }
-
-            main.min-h-screen h1 {
-              font-size: 38px !important;
-              line-height: 0.9 !important;
-            }
-
-            /* Lobby header */
-            main.min-h-screen > div.flex.items-center.justify-between.mb-4,
-            main.min-h-screen > div.flex.items-center.justify-between.mb-3,
-            main.h-screen > div.flex.items-center.justify-between.mb-3 {
-              display: flex !important;
-              flex-direction: column !important;
-              align-items: stretch !important;
-              gap: 12px !important;
-              margin-bottom: 12px !important;
-            }
-
-            main.min-h-screen > div.flex.items-center.justify-between.mb-4 h1,
-            main.min-h-screen > div.flex.items-center.justify-between.mb-3 h1,
-            main.h-screen > div.flex.items-center.justify-between.mb-3 h1 {
-              font-size: 42px !important;
-              line-height: 0.9 !important;
-            }
-
-            main.min-h-screen > div.flex.items-center.justify-between.mb-4 > div:last-child,
-            main.min-h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child,
-            main.h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child {
-              display: grid !important;
-              grid-template-columns: 1fr 1fr !important;
-              gap: 8px !important;
-              width: 100% !important;
-            }
-
-            main.min-h-screen > div.flex.items-center.justify-between.mb-4 > div:last-child > *,
-            main.min-h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child > *,
-            main.h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child > * {
-              width: 100% !important;
-              min-width: 0 !important;
-              text-align: center !important;
-            }
-
-            /* Room tabs */
-            main.min-h-screen > div.flex.gap-3.mb-4 {
-              display: grid !important;
-              grid-template-columns: 1fr 1fr !important;
-              gap: 8px !important;
-              margin-bottom: 12px !important;
-            }
-
-            main.min-h-screen > div.flex.gap-3.mb-4 button {
-              width: 100% !important;
-              padding: 10px 12px !important;
-              font-size: 16px !important;
-            }
-
-            /* Main lobby layout */
-            .grid.grid-rows-\[1fr_82px_300px\],
-            .grid.grid-rows-\[1fr_76px_300px\],
-            .grid.grid-rows-\[1fr_300px\] {
-              display: flex !important;
-              flex-direction: column !important;
-              height: auto !important;
-              gap: 12px !important;
-            }
-
-            /* Remove extra tall active table empty area on phones */
-            .grid.grid-rows-\[1fr_82px_300px\] > section:first-child,
-            .grid.grid-rows-\[1fr_76px_300px\] > section:first-child {
-              min-height: 150px !important;
-              max-height: none !important;
-            }
-
-            section {
-              width: 100% !important;
-              max-width: 100% !important;
-              overflow: hidden !important;
-              padding: 12px !important;
-            }
-
-            section h2 {
-              font-size: 22px !important;
-              line-height: 1.15 !important;
-            }
-
-            /* Events compact */
-            section:has(.text-amber-300.font-bold.text-lg) > div {
-              display: flex !important;
-              flex-direction: column !important;
-              align-items: stretch !important;
-              gap: 10px !important;
-            }
-
-            section:has(.text-amber-300.font-bold.text-lg) .flex-1 {
-              width: 100% !important;
-              overflow-x: auto !important;
-            }
-
-            .min-w-\[360px\] {
-              min-width: 260px !important;
-              max-width: 260px !important;
-            }
-
-            /* Bottom lobby stack */
-            .grid.grid-cols-\[300px_1fr\] {
-              display: flex !important;
-              flex-direction: column !important;
-              height: auto !important;
-              gap: 12px !important;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] > aside {
-              width: 100% !important;
-              max-height: 260px !important;
-              overflow-y: auto !important;
-              order: 1;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] > section {
-              width: 100% !important;
-              min-height: 520px !important;
-              order: 2;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] > section > div {
-              display: flex !important;
-              flex-direction: column !important;
-              gap: 12px !important;
-              height: auto !important;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] > section > div > div {
-              width: 100% !important;
-              min-height: 230px !important;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] input {
-              min-height: 48px !important;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] button {
-              min-height: 48px !important;
-            }
-
-            /* GAME SCREEN */
-            main.h-screen {
-              height: auto !important;
-              min-height: 100dvh !important;
-              overflow: visible !important;
-            }
-
-            .grid.grid-cols-\[270px_1fr_340px\],
-            .grid.grid-cols-\[280px_1fr_340px\],
-            .grid.grid-cols-\[300px_1fr_340px\],
-            .grid.grid-cols-\[1fr_340px\] {
-              display: flex !important;
-              flex-direction: column !important;
-              height: auto !important;
-              min-height: 0 !important;
-              gap: 12px !important;
-            }
-
-            .grid.grid-cols-\[270px_1fr_340px\] > section,
-            .grid.grid-cols-\[280px_1fr_340px\] > section,
-            .grid.grid-cols-\[300px_1fr_340px\] > section,
-            .grid.grid-cols-\[1fr_340px\] > section {
-              order: 1 !important;
-            }
-
-            .grid.grid-cols-\[270px_1fr_340px\] > aside:first-child,
-            .grid.grid-cols-\[280px_1fr_340px\] > aside:first-child,
-            .grid.grid-cols-\[300px_1fr_340px\] > aside:first-child {
-              order: 2 !important;
-            }
-
-            .grid.grid-cols-\[270px_1fr_340px\] > aside:last-child,
-            .grid.grid-cols-\[280px_1fr_340px\] > aside:last-child,
-            .grid.grid-cols-\[300px_1fr_340px\] > aside:last-child,
-            .grid.grid-cols-\[1fr_340px\] > aside:last-child {
-              order: 3 !important;
-            }
-
-            /* Live Match top bar */
-            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child {
-              flex-direction: column !important;
-              align-items: stretch !important;
-              gap: 12px !important;
-            }
-
-            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child {
-              display: grid !important;
-              grid-template-columns: 1fr 1fr 1fr !important;
-              gap: 6px !important;
-            }
-
-            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child > div {
-              min-width: 0 !important;
-              padding: 8px 6px !important;
-            }
-
-            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child .text-2xl {
-              font-size: 20px !important;
-            }
-
-            /* Board wrapper */
-            .grid.grid-cols-\[24px_640px_24px\] {
-              grid-template-columns: 18px calc(100vw - 60px) 18px !important;
-              grid-template-rows: 18px calc(100vw - 60px) 18px !important;
-              width: calc(100vw - 24px) !important;
-              max-width: calc(100vw - 24px) !important;
-              justify-content: center !important;
-              margin: 0 auto !important;
-            }
-
-            .w-\[640px\].h-\[640px\],
-            .w-\[560px\].h-\[560px\],
-            .w-\[520px\].h-\[520px\] {
-              width: calc(100vw - 60px) !important;
-              height: calc(100vw - 60px) !important;
-            }
-
-            .grid.grid-rows-8.h-\[640px\],
-            .grid.grid-rows-8.h-\[560px\],
-            .grid.grid-rows-8.h-\[520px\] {
-              height: calc(100vw - 60px) !important;
-            }
-
-            /* Pieces scale to squares */
-            .h-14.w-14,
-            .w-14.h-14 {
-              width: 72% !important;
-              height: 72% !important;
-              border-width: 3px !important;
-            }
-
-            .h-10.w-10,
-            .w-10.h-10 {
-              width: 70% !important;
-              height: 70% !important;
-            }
-
-            /* Side panels below board */
-            aside {
-              width: 100% !important;
-              max-width: 100% !important;
-              max-height: none !important;
-              overflow: visible !important;
-            }
-
-            aside .text-2xl {
-              font-size: 22px !important;
-            }
-
-            /* Modals */
-            .fixed.inset-0 {
-              padding: 12px !important;
-              align-items: flex-start !important;
-              overflow-y: auto !important;
-            }
-
-            .fixed.inset-0 > div {
-              width: 100% !important;
-              max-width: 100% !important;
-              max-height: 90dvh !important;
-              overflow-y: auto !important;
-              padding: 18px !important;
-            }
-
-            .fixed.inset-0 .grid.grid-cols-\[260px_1fr\] {
-              display: flex !important;
-              flex-direction: column !important;
-            }
-          }
-        `}</style>
-
 
         <div className="w-full max-w-[480px] bg-[#241815] border border-amber-700 rounded-2xl p-6 shadow-2xl">
 <div className="flex items-start justify-center select-none mb-2">
@@ -2018,326 +2052,6 @@ export default function Home() {
     return (
       <main className="h-screen overflow-hidden bg-[#17100d] text-white p-5">
         <BoardEffects />
-
-        <style jsx global>{`
-          @media (max-width: 768px) {
-            html,
-            body {
-              width: 100%;
-              max-width: 100%;
-              overflow-x: hidden;
-              background: #17100d;
-            }
-
-            body {
-              touch-action: manipulation;
-            }
-
-            input,
-            button,
-            select,
-            textarea {
-              font-size: 16px !important;
-            }
-
-            button {
-              min-height: 44px;
-            }
-
-            main {
-              width: 100% !important;
-              max-width: 100% !important;
-              overflow-x: hidden !important;
-            }
-
-            main.min-h-screen,
-            main.h-screen {
-              height: auto !important;
-              min-height: 100dvh !important;
-              overflow-y: auto !important;
-              padding: 12px !important;
-            }
-
-            /* Login card */
-            main.min-h-screen > div.w-full.max-w-\[480px\] {
-              width: 100% !important;
-              max-width: 100% !important;
-              padding: 18px !important;
-            }
-
-            main.min-h-screen h1 {
-              font-size: 38px !important;
-              line-height: 0.9 !important;
-            }
-
-            /* Lobby header */
-            main.min-h-screen > div.flex.items-center.justify-between.mb-4,
-            main.min-h-screen > div.flex.items-center.justify-between.mb-3,
-            main.h-screen > div.flex.items-center.justify-between.mb-3 {
-              display: flex !important;
-              flex-direction: column !important;
-              align-items: stretch !important;
-              gap: 12px !important;
-              margin-bottom: 12px !important;
-            }
-
-            main.min-h-screen > div.flex.items-center.justify-between.mb-4 h1,
-            main.min-h-screen > div.flex.items-center.justify-between.mb-3 h1,
-            main.h-screen > div.flex.items-center.justify-between.mb-3 h1 {
-              font-size: 42px !important;
-              line-height: 0.9 !important;
-            }
-
-            main.min-h-screen > div.flex.items-center.justify-between.mb-4 > div:last-child,
-            main.min-h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child,
-            main.h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child {
-              display: grid !important;
-              grid-template-columns: 1fr 1fr !important;
-              gap: 8px !important;
-              width: 100% !important;
-            }
-
-            main.min-h-screen > div.flex.items-center.justify-between.mb-4 > div:last-child > *,
-            main.min-h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child > *,
-            main.h-screen > div.flex.items-center.justify-between.mb-3 > div:last-child > * {
-              width: 100% !important;
-              min-width: 0 !important;
-              text-align: center !important;
-            }
-
-            /* Room tabs */
-            main.min-h-screen > div.flex.gap-3.mb-4 {
-              display: grid !important;
-              grid-template-columns: 1fr 1fr !important;
-              gap: 8px !important;
-              margin-bottom: 12px !important;
-            }
-
-            main.min-h-screen > div.flex.gap-3.mb-4 button {
-              width: 100% !important;
-              padding: 10px 12px !important;
-              font-size: 16px !important;
-            }
-
-            /* Main lobby layout */
-            .grid.grid-rows-\[1fr_82px_300px\],
-            .grid.grid-rows-\[1fr_76px_300px\],
-            .grid.grid-rows-\[1fr_300px\] {
-              display: flex !important;
-              flex-direction: column !important;
-              height: auto !important;
-              gap: 12px !important;
-            }
-
-            /* Remove extra tall active table empty area on phones */
-            .grid.grid-rows-\[1fr_82px_300px\] > section:first-child,
-            .grid.grid-rows-\[1fr_76px_300px\] > section:first-child {
-              min-height: 150px !important;
-              max-height: none !important;
-            }
-
-            section {
-              width: 100% !important;
-              max-width: 100% !important;
-              overflow: hidden !important;
-              padding: 12px !important;
-            }
-
-            section h2 {
-              font-size: 22px !important;
-              line-height: 1.15 !important;
-            }
-
-            /* Events compact */
-            section:has(.text-amber-300.font-bold.text-lg) > div {
-              display: flex !important;
-              flex-direction: column !important;
-              align-items: stretch !important;
-              gap: 10px !important;
-            }
-
-            section:has(.text-amber-300.font-bold.text-lg) .flex-1 {
-              width: 100% !important;
-              overflow-x: auto !important;
-            }
-
-            .min-w-\[360px\] {
-              min-width: 260px !important;
-              max-width: 260px !important;
-            }
-
-            /* Bottom lobby stack */
-            .grid.grid-cols-\[300px_1fr\] {
-              display: flex !important;
-              flex-direction: column !important;
-              height: auto !important;
-              gap: 12px !important;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] > aside {
-              width: 100% !important;
-              max-height: 260px !important;
-              overflow-y: auto !important;
-              order: 1;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] > section {
-              width: 100% !important;
-              min-height: 520px !important;
-              order: 2;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] > section > div {
-              display: flex !important;
-              flex-direction: column !important;
-              gap: 12px !important;
-              height: auto !important;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] > section > div > div {
-              width: 100% !important;
-              min-height: 230px !important;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] input {
-              min-height: 48px !important;
-            }
-
-            .grid.grid-cols-\[300px_1fr\] button {
-              min-height: 48px !important;
-            }
-
-            /* GAME SCREEN */
-            main.h-screen {
-              height: auto !important;
-              min-height: 100dvh !important;
-              overflow: visible !important;
-            }
-
-            .grid.grid-cols-\[270px_1fr_340px\],
-            .grid.grid-cols-\[280px_1fr_340px\],
-            .grid.grid-cols-\[300px_1fr_340px\],
-            .grid.grid-cols-\[1fr_340px\] {
-              display: flex !important;
-              flex-direction: column !important;
-              height: auto !important;
-              min-height: 0 !important;
-              gap: 12px !important;
-            }
-
-            .grid.grid-cols-\[270px_1fr_340px\] > section,
-            .grid.grid-cols-\[280px_1fr_340px\] > section,
-            .grid.grid-cols-\[300px_1fr_340px\] > section,
-            .grid.grid-cols-\[1fr_340px\] > section {
-              order: 1 !important;
-            }
-
-            .grid.grid-cols-\[270px_1fr_340px\] > aside:first-child,
-            .grid.grid-cols-\[280px_1fr_340px\] > aside:first-child,
-            .grid.grid-cols-\[300px_1fr_340px\] > aside:first-child {
-              order: 2 !important;
-            }
-
-            .grid.grid-cols-\[270px_1fr_340px\] > aside:last-child,
-            .grid.grid-cols-\[280px_1fr_340px\] > aside:last-child,
-            .grid.grid-cols-\[300px_1fr_340px\] > aside:last-child,
-            .grid.grid-cols-\[1fr_340px\] > aside:last-child {
-              order: 3 !important;
-            }
-
-            /* Live Match top bar */
-            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child {
-              flex-direction: column !important;
-              align-items: stretch !important;
-              gap: 12px !important;
-            }
-
-            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child {
-              display: grid !important;
-              grid-template-columns: 1fr 1fr 1fr !important;
-              gap: 6px !important;
-            }
-
-            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child > div {
-              min-width: 0 !important;
-              padding: 8px 6px !important;
-            }
-
-            section.bg-\[\#241815\].border.border-amber-700.rounded-xl.p-4.overflow-hidden.flex.flex-col > div:first-child > div:last-child .text-2xl {
-              font-size: 20px !important;
-            }
-
-            /* Board wrapper */
-            .grid.grid-cols-\[24px_640px_24px\] {
-              grid-template-columns: 18px calc(100vw - 60px) 18px !important;
-              grid-template-rows: 18px calc(100vw - 60px) 18px !important;
-              width: calc(100vw - 24px) !important;
-              max-width: calc(100vw - 24px) !important;
-              justify-content: center !important;
-              margin: 0 auto !important;
-            }
-
-            .w-\[640px\].h-\[640px\],
-            .w-\[560px\].h-\[560px\],
-            .w-\[520px\].h-\[520px\] {
-              width: calc(100vw - 60px) !important;
-              height: calc(100vw - 60px) !important;
-            }
-
-            .grid.grid-rows-8.h-\[640px\],
-            .grid.grid-rows-8.h-\[560px\],
-            .grid.grid-rows-8.h-\[520px\] {
-              height: calc(100vw - 60px) !important;
-            }
-
-            /* Pieces scale to squares */
-            .h-14.w-14,
-            .w-14.h-14 {
-              width: 72% !important;
-              height: 72% !important;
-              border-width: 3px !important;
-            }
-
-            .h-10.w-10,
-            .w-10.h-10 {
-              width: 70% !important;
-              height: 70% !important;
-            }
-
-            /* Side panels below board */
-            aside {
-              width: 100% !important;
-              max-width: 100% !important;
-              max-height: none !important;
-              overflow: visible !important;
-            }
-
-            aside .text-2xl {
-              font-size: 22px !important;
-            }
-
-            /* Modals */
-            .fixed.inset-0 {
-              padding: 12px !important;
-              align-items: flex-start !important;
-              overflow-y: auto !important;
-            }
-
-            .fixed.inset-0 > div {
-              width: 100% !important;
-              max-width: 100% !important;
-              max-height: 90dvh !important;
-              overflow-y: auto !important;
-              padding: 18px !important;
-            }
-
-            .fixed.inset-0 .grid.grid-cols-\[260px_1fr\] {
-              display: flex !important;
-              flex-direction: column !important;
-            }
-          }
-        `}</style>
-
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-start select-none">
             <h1 className="text-5xl font-bold text-amber-400 tracking-wide leading-none">
@@ -4033,6 +3747,279 @@ export default function Home() {
                   <option>Casual</option>
                   {opponentType === "Human" && (
                     <>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          html,
+          body {
+            overflow-x: hidden;
+            background: #160d0b;
+          }
+
+          body {
+            touch-action: manipulation;
+          }
+
+          input,
+          button,
+          select,
+          textarea {
+            font-size: 16px !important;
+          }
+
+          /* Main page shell */
+          .min-h-screen.bg-\[\#160d0b\].text-white {
+            padding: 12px !important;
+          }
+
+          /* Header: stack into phone-friendly rows */
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child h1 {
+            font-size: 40px !important;
+            line-height: 0.9 !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child > div:last-child {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 8px !important;
+            width: 100% !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child > div:last-child > * {
+            width: 100% !important;
+            min-height: 44px !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:first-child > div:last-child button {
+            min-height: 44px !important;
+          }
+
+          /* Room tabs become swipeable pills */
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:nth-child(2) {
+            display: flex !important;
+            overflow-x: auto !important;
+            gap: 8px !important;
+            padding-bottom: 4px !important;
+            -webkit-overflow-scrolling: touch;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\].text-white > div:nth-child(2) button {
+            flex: 0 0 auto !important;
+            min-height: 44px !important;
+            padding: 10px 14px !important;
+          }
+
+          /* Main lobby grid: stack sections vertically */
+          .grid.h-\[82vh\],
+          .grid.grid-rows-\[1fr_150px_82px_300px\],
+          .grid.grid-rows-\[1fr_82px_300px\],
+          .grid.grid-rows-\[1fr_76px_300px\] {
+            display: flex !important;
+            flex-direction: column !important;
+            height: auto !important;
+            gap: 12px !important;
+          }
+
+          /* General cards */
+          section {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          section.rounded-xl,
+          section.bg-\[\#241815\] {
+            padding: 12px !important;
+          }
+
+          section h2 {
+            font-size: 20px !important;
+          }
+
+          /* Active tables should not be huge empty space on mobile */
+          section:has(h2) {
+            min-height: auto !important;
+          }
+
+          section:has(h2.text-2xl) {
+            max-height: none !important;
+          }
+
+          /* Active table cards */
+          .grid.grid-cols-2,
+          .grid.grid-cols-3,
+          .grid.grid-cols-\[300px_1fr\] {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+          }
+
+          /* Featured match compresses */
+          section:has(.uppercase.tracking-wide) {
+            min-height: auto !important;
+          }
+
+          section:has(.uppercase.tracking-wide) > div {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+          }
+
+          /* Events bar: swipe horizontally, smaller and centered */
+          section:has(button):has(.text-amber-300.font-bold.text-lg) > div {
+            align-items: stretch !important;
+          }
+
+          .min-w-\[360px\] {
+            min-width: 280px !important;
+            max-width: 280px !important;
+          }
+
+          .w-24 {
+            width: 48px !important;
+          }
+
+          /* Bottom lobby: players + chat/feed stack */
+          .grid.grid-cols-\[300px_1fr\] {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] > aside {
+            max-height: 180px !important;
+            overflow-y: auto !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] > section {
+            min-height: 420px !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] > section > div {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] input {
+            min-height: 46px !important;
+          }
+
+          .grid.grid-cols-\[300px_1fr\] button {
+            min-height: 46px !important;
+          }
+
+          /* Login/Register card */
+          .min-h-screen.bg-\[\#160d0b\] .w-\[540px\] {
+            width: calc(100vw - 24px) !important;
+            max-width: calc(100vw - 24px) !important;
+            padding: 20px !important;
+          }
+
+          .min-h-screen.bg-\[\#160d0b\] .w-\[540px\] h1 {
+            font-size: 42px !important;
+          }
+
+          /* Live game layout: stack board and info */
+          .grid.grid-cols-\[1fr_340px\],
+          .grid.grid-cols-\[280px_1fr_340px\],
+          .grid.grid-cols-\[300px_1fr_340px\] {
+            display: flex !important;
+            flex-direction: column !important;
+            height: auto !important;
+            gap: 12px !important;
+          }
+
+          /* Game header/buttons */
+          .flex.justify-end.gap-3,
+          .flex.items-center.justify-between {
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+          }
+
+          /* Board sizing on phones */
+          .grid.grid-cols-8.grid-rows-8 {
+            max-width: calc(100vw - 48px) !important;
+            max-height: calc(100vw - 48px) !important;
+          }
+
+          .w-\[560px\],
+          .h-\[560px\] {
+            width: calc(100vw - 48px) !important;
+            height: calc(100vw - 48px) !important;
+          }
+
+          .w-\[520px\],
+          .h-\[520px\] {
+            width: calc(100vw - 48px) !important;
+            height: calc(100vw - 48px) !important;
+          }
+
+          /* Checker pieces scale down */
+          .w-14.h-14,
+          .h-14.w-14 {
+            width: 70% !important;
+            height: 70% !important;
+          }
+
+          .w-12.h-12,
+          .h-12.w-12 {
+            width: 68% !important;
+            height: 68% !important;
+          }
+
+          /* Side panels become comfortable cards */
+          aside {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          aside .text-2xl {
+            font-size: 20px !important;
+          }
+
+          aside .grid {
+            gap: 8px !important;
+          }
+
+          /* Modals fit phone screens */
+          .fixed.inset-0 > .w-\[920px\],
+          .fixed.inset-0 > .w-\[460px\],
+          .fixed.inset-0 > .w-\[540px\] {
+            width: calc(100vw - 24px) !important;
+            max-width: calc(100vw - 24px) !important;
+            max-height: 88vh !important;
+            overflow-y: auto !important;
+            padding: 18px !important;
+          }
+
+          .fixed.inset-0 .grid.grid-cols-\[260px_1fr\] {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+
+          /* Make action buttons finger friendly */
+          button {
+            border-radius: 10px !important;
+          }
+
+          /* Keep chat input visible and easy to tap */
+          input[placeholder="Type message..."],
+          input[placeholder="Table message..."] {
+            height: 46px !important;
+          }
+
+          /* Hide decorative/empty dead space on mobile */
+          .opacity-20 {
+            display: none !important;
+          }
+        }
+      `}</style>
 
                       <option>Ranked</option>
                       <option>Blitz</option>
