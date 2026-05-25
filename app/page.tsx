@@ -294,7 +294,7 @@ function getRating(name: string) {
 
 function formatClock(seconds: number | null | undefined) {
   if (seconds === null || seconds === undefined) {
-    return "âˆž";
+    return "∞";
   }
 
   const safeSeconds = Math.max(0, seconds);
@@ -805,6 +805,7 @@ export default function Home() {
   >(null);
   const [showCreateTable, setShowCreateTable] = useState(false);
   const [isMobileLayout, setIsMobileLayout] = useState(false);
+  const [isMobileLandscape, setIsMobileLandscape] = useState(false);
 
   const [gameType, setGameType] = useState("Casual");
   const [timeControl, setTimeControl] = useState("5 Minutes");
@@ -824,7 +825,9 @@ export default function Home() {
 
   useEffect(() => {
     const updateMobileLayout = () => {
-      setIsMobileLayout(window.innerWidth <= 900);
+      const mobile = window.innerWidth <= 900;
+      setIsMobileLayout(mobile);
+      setIsMobileLandscape(mobile && window.innerWidth > window.innerHeight);
     };
 
     updateMobileLayout();
@@ -1467,6 +1470,336 @@ export default function Home() {
 
   function leaveTable() {
   
+
+  if (currentTable && isMobileLandscape) {
+    const forcedPieces = getForcedCapturePieces();
+
+    return (
+      <main className="min-h-screen bg-[#17100d] text-white p-3 overflow-x-hidden">
+        <BoardEffects />
+
+        <div className="flex items-center justify-between gap-3 mb-2">
+          <div className="flex items-start select-none min-w-0">
+            <h1 className="text-[30px] font-bold text-amber-400 tracking-wide leading-none">
+              CHEXKERS
+            </h1>
+
+            <span className="ml-1 mt-[3px] text-[8px] font-bold uppercase tracking-[0.18em] text-amber-700 opacity-80">
+              by JT
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => setSoundEnabled((value) => !value)}
+              className="bg-[#5a3a2d] hover:bg-[#6c4737] px-3 py-2 rounded-lg text-xs font-bold"
+            >
+              Sound {soundEnabled ? "On" : "Off"}
+            </button>
+
+            <button
+              onClick={leaveTable}
+              className="bg-[#5a3a2d] hover:bg-[#6c4737] px-3 py-2 rounded-lg text-xs font-bold"
+            >
+              Leave
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-[minmax(300px,56vh)_1fr] gap-3 items-start">
+          <section className="rounded-xl border border-amber-700 bg-[#241815] p-3">
+            <div className="flex items-center justify-between gap-3 mb-2">
+              <div>
+                <h2 className="text-lg text-amber-300 font-bold">Live Match</h2>
+
+                <div
+                  className={`text-xs mt-0.5 ${
+                    gameState.winner
+                      ? "text-green-400"
+                      : gameState.multiJumpActive || gameState.forcedPiece
+                      ? "text-orange-400"
+                      : forcedPieces.length > 0
+                      ? "text-red-400"
+                      : "text-zinc-400"
+                  }`}
+                >
+                  {reviewingMove
+                    ? `Reviewing ${analysisSnapshot?.label || "position"}`
+                    : gameState.resignedColor
+                    ? `${gameState.resignedColor.toUpperCase()} resigned`
+                    : gameState.timeoutWinner
+                    ? `${gameState.timeoutWinner.toUpperCase()} wins by timeout`
+                    : getTurnMessage()}
+                </div>
+              </div>
+
+              <div className="text-xs text-zinc-400 text-right">
+                {currentUser.screenName}
+                <div className="text-amber-300 font-bold uppercase">
+                  {playerRole}
+                </div>
+              </div>
+            </div>
+
+            <div className="mx-auto w-[min(56vh,calc(100vw-360px))] min-w-[300px] max-w-[520px]">
+              <div className="grid grid-cols-8 text-center text-[9px] text-amber-300/80 font-bold tracking-wide mb-1">
+                {Array.from({ length: 8 }).map((_, col) => (
+                  <div key={`mobile-landscape-file-${col}`}>{"ABCDEFGH"[col]}</div>
+                ))}
+              </div>
+
+              <div className="w-[min(56vh,calc(100vw-360px))] h-[min(56vh,calc(100vw-360px))] min-w-[300px] min-h-[300px] max-w-[520px] max-h-[520px] grid grid-cols-8 grid-rows-8 border-4 border-amber-900 shadow-2xl">
+                {Array.from({ length: 64 }).map((_, index) => {
+                  const row = Math.floor(index / 8);
+                  const col = index % 8;
+                  const dark = (row + col) % 2 === 1;
+                  const piece = displayBoard[row]?.[col];
+                  const isSelected = selected?.row === row && selected?.col === col;
+                  const legalTarget = isLegalTarget(row, col);
+                  const forcedPieceGlow = isForcedPiece(row, col);
+                  const canSelectPiece =
+                    piece &&
+                    piece.color === gameState.turn &&
+                    playerRole === gameState.turn &&
+                    !gameState.winner &&
+                    (!gameState.forcedPiece ||
+                      (gameState.forcedPiece.row === row &&
+                        gameState.forcedPiece.col === col));
+
+                  const captureTarget = Boolean(legalTarget?.capture);
+                  const isLastMoveFrom = positionsMatch(gameState.lastMove?.from, {
+                    row,
+                    col,
+                  });
+                  const isLastMoveTo = positionsMatch(gameState.lastMove?.to, {
+                    row,
+                    col,
+                  });
+
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => handleSquareClick(row, col)}
+                      className={`relative flex items-center justify-center transition ${
+                        dark ? "bg-[#5b2f1f]" : "bg-[#c08a5a]"
+                      } ${isSelected ? "ring-4 ring-amber-300 z-20" : ""} ${
+                        legalTarget
+                          ? captureTarget
+                            ? "ring-4 ring-red-400 z-10"
+                            : "ring-4 ring-green-400 z-10"
+                          : ""
+                      } ${
+                        forcedPieceGlow && !isSelected
+                          ? "ring-4 ring-orange-400 z-10"
+                          : ""
+                      } ${canSelectPiece ? "cursor-pointer" : ""}`}
+                    >
+                      {isLastMoveFrom && (
+                        <div className="absolute inset-1 border-2 border-blue-300/45 rounded-sm chex-move-trail" />
+                      )}
+
+                      {isLastMoveTo && (
+                        <div className="absolute inset-1 border-2 border-blue-200/60 rounded-sm chex-move-trail" />
+                      )}
+
+                      {legalTarget && (
+                        <div
+                          className={`absolute rounded-full ${
+                            captureTarget
+                              ? "h-5 w-5 bg-red-500/75 animate-pulse"
+                              : "h-3.5 w-3.5 bg-green-400/75"
+                          }`}
+                        />
+                      )}
+
+                      {piece && (
+                        <div
+                          className={`h-[72%] w-[72%] rounded-full border-[3px] shadow-lg flex items-center justify-center ${
+                            piece.color === "red"
+                              ? "bg-red-600 border-red-300"
+                              : "bg-zinc-900 border-zinc-500"
+                          } ${
+                            forcedPieceGlow
+                              ? "shadow-[0_0_18px_rgba(251,146,60,0.95)]"
+                              : canSelectPiece
+                              ? "shadow-[0_0_12px_rgba(251,191,36,0.65)]"
+                              : ""
+                          }`}
+                        >
+                          <div className="h-[70%] w-[70%] rounded-full border-2 border-black/30 flex items-center justify-center">
+                            {piece.king && (
+                              <span className="text-amber-300 text-base font-bold">
+                                K
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+          <aside className="rounded-xl border border-amber-700 bg-[#241815] p-3 max-h-[calc(100dvh-92px)] overflow-y-auto">
+            <div className="grid grid-cols-3 gap-2 mb-3">
+              <div
+                className={`rounded-lg border p-2 text-center ${
+                  gameState.turn === "red"
+                    ? "border-red-400 bg-red-950/40"
+                    : "border-zinc-700 bg-zinc-900/40"
+                }`}
+              >
+                <div className="text-[10px] uppercase text-zinc-400">Red</div>
+                <div
+                  className={`text-base font-bold ${
+                    isLowTime(gameState.redTimeLeft)
+                      ? "text-red-400 animate-pulse"
+                      : "text-white"
+                  }`}
+                >
+                  {formatClock(gameState.redTimeLeft)}
+                </div>
+              </div>
+
+              <div
+                className={`rounded-lg border p-2 text-center ${
+                  isLowTime(gameState.moveTimeLeft)
+                    ? "border-orange-400 bg-orange-950/40"
+                    : "border-amber-700 bg-[#2a1c17]"
+                }`}
+              >
+                <div className="text-[10px] uppercase text-zinc-400">Move</div>
+                <div
+                  className={`text-base font-bold ${
+                    isLowTime(gameState.moveTimeLeft)
+                      ? "text-orange-400 animate-pulse"
+                      : "text-amber-300"
+                  }`}
+                >
+                  {formatClock(gameState.moveTimeLeft)}
+                </div>
+              </div>
+
+              <div
+                className={`rounded-lg border p-2 text-center ${
+                  gameState.turn === "black"
+                    ? "border-zinc-300 bg-zinc-800/60"
+                    : "border-zinc-700 bg-zinc-900/40"
+                }`}
+              >
+                <div className="text-[10px] uppercase text-zinc-400">Black</div>
+                <div
+                  className={`text-base font-bold ${
+                    isLowTime(gameState.blackTimeLeft)
+                      ? "text-red-400 animate-pulse"
+                      : "text-white"
+                  }`}
+                >
+                  {formatClock(gameState.blackTimeLeft)}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              <button
+                onClick={resetGame}
+                disabled={playerRole !== "red"}
+                className="bg-[#5a3a2d] hover:bg-[#6c4737] disabled:opacity-40 disabled:cursor-not-allowed py-2 rounded-lg text-sm font-bold"
+              >
+                {gameState.winner ? "Rematch" : "Reset"}
+              </button>
+
+              <button
+                onClick={resignGame}
+                disabled={
+                  (playerRole !== "red" && playerRole !== "black") ||
+                  gameState.winner !== null ||
+                  reviewingMove
+                }
+                className="bg-red-700 hover:bg-red-600 disabled:opacity-40 disabled:cursor-not-allowed py-2 rounded-lg text-sm font-bold"
+              >
+                Resign
+              </button>
+            </div>
+
+            <div className="rounded-lg border border-[#3a2721] bg-[#1b120f] p-3 mb-3">
+              <h3 className="text-amber-300 font-bold mb-2">Table Info</h3>
+
+              <div className="grid grid-cols-2 gap-y-1 text-xs">
+                <span className="text-zinc-400">Mode</span>
+                <span className="text-right">{currentTable.gameType}</span>
+
+                <span className="text-zinc-400">Red</span>
+                <span className="text-right">{currentTable.redPlayer}</span>
+
+                <span className="text-zinc-400">Black</span>
+                <span className="text-right">{currentTable.blackPlayer}</span>
+
+                <span className="text-zinc-400">Captured</span>
+                <span className="text-right">
+                  R {gameState.redCaptured} • B {gameState.blackCaptured}
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-[#3a2721] bg-[#1b120f] p-3 mb-3">
+              <h3 className="text-amber-300 font-bold mb-2">Move History</h3>
+
+              <div className="max-h-28 overflow-y-auto text-xs space-y-1">
+                {(gameState.moveHistory || []).length === 0 ? (
+                  <div className="text-zinc-500">No moves yet.</div>
+                ) : (
+                  (gameState.moveHistory || []).map((move) => (
+                    <div
+                      key={move.number}
+                      className="grid grid-cols-[34px_1fr] gap-2"
+                    >
+                      <span className="text-zinc-500">#{move.number}</span>
+                      <span
+                        className={
+                          move.color === "red"
+                            ? "text-red-300"
+                            : "text-zinc-200"
+                        }
+                      >
+                        {move.notation}
+                      </span>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-[#3a2721] bg-[#1b120f] p-3">
+              <h3 className="text-amber-300 font-bold mb-2">Table Chat</h3>
+
+              <div className="h-20 overflow-y-auto text-xs space-y-1 mb-2">
+                <div>System: Table opened.</div>
+                <div>System: {currentTable.redPlayer} is seated as Red.</div>
+                {currentTable.blackPlayer !== "Open Seat" && (
+                  <div>System: {currentTable.blackPlayer} is seated as Black.</div>
+                )}
+              </div>
+
+              <div className="flex gap-2">
+                <input
+                  placeholder="Message..."
+                  className="flex-1 min-w-0 bg-[#2b1d18] border border-[#5a4034] rounded px-2 py-2 text-sm outline-none"
+                />
+
+                <button className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-3 rounded">
+                  Send
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    );
+  }
+
   if (currentTable && isMobileLayout) {
     const forcedPieces = getForcedCapturePieces();
 
@@ -1487,7 +1820,7 @@ export default function Home() {
             </div>
 
             <div className="text-xs text-zinc-400 mt-1">
-              {currentUser.screenName} â€¢ {playerRole?.toUpperCase()}
+              {currentUser.screenName} • {playerRole?.toUpperCase()}
             </div>
           </div>
 
@@ -1756,7 +2089,7 @@ export default function Home() {
 
             <span className="text-zinc-400">Captured</span>
             <span className="text-right">
-              R {gameState.redCaptured} â€¢ B {gameState.blackCaptured}
+              R {gameState.redCaptured} • B {gameState.blackCaptured}
             </span>
 
             <span className="text-zinc-400">Status</span>
@@ -3338,7 +3671,7 @@ export default function Home() {
                         </div>
 
                         <div className="text-xs text-zinc-500 mt-1">
-                          {match.gameType} â€¢ {match.moveCount} moves â€¢{" "}
+                          {match.gameType} • {match.moveCount} moves •{" "}
                           {match.reason}
                         </div>
 
@@ -3395,8 +3728,8 @@ export default function Home() {
                 </h2>
 
                 <div className="text-sm text-zinc-400 mt-1">
-                  {selectedTournament.type} â€¢ {selectedTournament.format} â€¢{" "}
-                  {selectedTournament.timeControl} â€¢ {selectedTournament.moveTimer}
+                  {selectedTournament.type} • {selectedTournament.format} •{" "}
+                  {selectedTournament.timeControl} • {selectedTournament.moveTimer}
                 </div>
               </div>
 
