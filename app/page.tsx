@@ -3058,6 +3058,715 @@ export default function Home() {
     );
   }
 
+
+  if (!currentTable && isMobileLayout) {
+    const mobilePlayers = [
+      ...(livePlayers.length > 0
+        ? livePlayers.map((player) => ({
+            name: player.screenName || "Unknown Player",
+            rating:
+              typeof player.rating === "number" ? player.rating : 1500,
+          }))
+        : [
+            {
+              name: currentUser.screenName,
+              rating: currentUser.rating,
+            },
+            ...leaderboardPlayers.map((player) => ({
+              name: player.screenName || "Unknown Player",
+              rating:
+                typeof player.rating === "number" ? player.rating : 1500,
+            })),
+          ]),
+    ]
+      .filter(
+        (player, index, list) =>
+          list.findIndex(
+            (item) =>
+              String(item.name || "").toLowerCase() ===
+              String(player.name || "").toLowerCase()
+          ) === index
+      )
+      .sort((a, b) => (b.rating || 0) - (a.rating || 0));
+
+    return (
+      <main className="min-h-screen bg-[#17100d] text-white overflow-x-hidden">
+        <BoardEffects />
+
+        <div
+          className={
+            isMobileLandscape
+              ? "mx-auto w-full max-w-[1180px] px-4 py-3"
+              : "mx-auto w-full max-w-[520px] px-4 py-5"
+          }
+        >
+          <header
+            className={
+              isMobileLandscape
+                ? "grid grid-cols-[1fr_1.15fr] gap-4 items-center mb-4"
+                : "flex flex-col gap-4 mb-5"
+            }
+          >
+            <div className="min-w-0">
+              <div className="flex items-start select-none">
+                <h1
+                  className={
+                    isMobileLandscape
+                      ? "text-[44px] font-bold text-amber-400 tracking-wide leading-none whitespace-nowrap"
+                      : "text-[43px] font-bold text-amber-400 tracking-wide leading-none whitespace-nowrap"
+                  }
+                >
+                  CHEXKERS
+                </h1>
+
+                <span className="ml-1 mt-[5px] text-[9px] font-bold uppercase tracking-[0.2em] text-amber-700 opacity-90">
+                  by JT
+                </span>
+              </div>
+
+              <div className="mt-2 text-base text-zinc-400">
+                Server:{" "}
+                <span
+                  className={
+                    serverStatus === "Connected"
+                      ? "text-green-400 font-bold"
+                      : "text-red-400 font-bold"
+                  }
+                >
+                  {serverStatus}
+                </span>
+              </div>
+            </div>
+
+            <div
+              className={
+                isMobileLandscape
+                  ? "grid grid-cols-4 gap-2"
+                  : "grid grid-cols-2 gap-3"
+              }
+            >
+              <div className="rounded-xl border border-orange-700/80 bg-[#241815] px-3 py-3">
+                <div className="text-zinc-400 text-sm">Player:</div>
+                <div className="text-amber-300 font-bold truncate">
+                  {currentUser.screenName}
+                </div>
+              </div>
+
+              <button
+                onClick={logout}
+                className="rounded-xl bg-[#5a3a2d] hover:bg-[#6c4737] px-4 py-3 font-bold"
+              >
+                Logout
+              </button>
+
+              <div
+                className={
+                  isMobileLandscape
+                    ? "col-span-2 rounded-xl border border-orange-700/80 bg-[#241815] p-2"
+                    : "col-span-2 rounded-xl border border-orange-700/80 bg-[#241815] p-2"
+                }
+              >
+                <div className="grid grid-cols-[auto_1fr_1fr] items-center gap-2">
+                  <span className="text-zinc-400 text-base px-1">Queue:</span>
+
+                  <button
+                    onClick={() => setQueueType("Casual")}
+                    className={`rounded-lg px-3 py-3 font-bold ${
+                      queueType === "Casual"
+                        ? "bg-amber-500 text-black"
+                        : "bg-[#2b1d18] text-zinc-300"
+                    }`}
+                  >
+                    Casual
+                  </button>
+
+                  <button
+                    onClick={() => setQueueType("Ranked")}
+                    className={`rounded-lg px-3 py-3 font-bold ${
+                      queueType === "Ranked"
+                        ? "bg-red-500 text-white"
+                        : "bg-[#2b1d18] text-zinc-300"
+                    }`}
+                  >
+                    Ranked
+                  </button>
+                </div>
+              </div>
+
+              {isMatchmaking ? (
+                <button
+                  onClick={cancelMatchmaking}
+                  className="rounded-xl bg-red-700 hover:bg-red-600 px-4 py-4 font-black"
+                >
+                  Cancel Search
+                </button>
+              ) : (
+                <button
+                  onClick={findMatch}
+                  className="rounded-xl bg-green-500 hover:bg-green-400 px-4 py-4 font-black text-black"
+                >
+                  Find Match
+                </button>
+              )}
+
+              <button
+                onClick={() => setShowCreateTable(true)}
+                className="rounded-xl bg-amber-500 hover:bg-amber-400 px-4 py-4 font-black text-black"
+              >
+                + Create Table
+              </button>
+            </div>
+          </header>
+
+          <nav
+            className={
+              isMobileLandscape
+                ? "grid grid-cols-5 gap-2 mb-4"
+                : "grid grid-cols-2 gap-3 mb-5"
+            }
+          >
+            {rooms.map((room) => (
+              <button
+                key={room.id}
+                onClick={() => setActiveRoom(room.id)}
+                className={`rounded-xl border px-3 py-3 transition ${
+                  activeRoom === room.id
+                    ? "bg-[#463027] border-amber-400"
+                    : "bg-[#2a1c17] border-[#5a4034] hover:border-amber-700"
+                }`}
+              >
+                <span className={`${room.color} font-bold`}>{room.name}</span>
+                <span className="ml-2 text-zinc-400 text-sm">
+                  ({room.population})
+                </span>
+              </button>
+            ))}
+          </nav>
+
+          {reconnectMessage && (
+            <div className="mb-4 rounded-xl border border-green-700 bg-green-950/30 px-4 py-3 text-sm text-green-300 flex justify-between items-center gap-3">
+              <span>{reconnectMessage}</span>
+              <button
+                onClick={() => setReconnectMessage("")}
+                className="text-green-200 hover:text-white"
+              >
+                X
+              </button>
+            </div>
+          )}
+
+          {matchmakingMessage && (
+            <div
+              className={`mb-4 rounded-xl border px-4 py-3 text-sm ${
+                isMatchmaking
+                  ? "border-green-500 bg-green-950/30 text-green-300"
+                  : "border-amber-700 bg-[#241815] text-amber-300"
+              }`}
+            >
+              {matchmakingMessage}
+            </div>
+          )}
+
+          <div className="flex flex-col gap-4">
+            <section className="rounded-xl border border-orange-700 bg-[#241815] p-4">
+              <h2 className="text-2xl text-amber-300 mb-3">
+                Active Tables -{" "}
+                {rooms.find((room) => room.id === activeRoom)?.name} Room
+              </h2>
+
+              {visibleTables.length === 0 ? (
+                <div className="text-zinc-400 text-base leading-relaxed">
+                  No active tables in this room. Create one or use Find Match.
+                </div>
+              ) : (
+                <div
+                  className={
+                    isMobileLandscape
+                      ? "grid grid-cols-2 gap-3"
+                      : "flex flex-col gap-3"
+                  }
+                >
+                  {visibleTables.map((table) => {
+                    const canJoin =
+                      table.blackPlayer === "Open Seat" &&
+                      table.opponentType === "Human";
+
+                    return (
+                      <div
+                        key={table.id}
+                        className="rounded-xl border border-amber-800 bg-[#3a2721] p-3"
+                      >
+                        <div className="flex justify-between text-xs mb-2">
+                          <span>Viewers: {table.spectators}</span>
+                          <span className="text-amber-300">
+                            {table.gameType}
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-lg border border-[#5a4034] bg-[#211512] p-3">
+                          <PlayerSeat name={table.redPlayer} side="red" />
+                          <MiniBoard />
+                          <PlayerSeat name={table.blackPlayer} side="black" />
+                        </div>
+
+                        <div className="mt-3 grid grid-cols-2 gap-2">
+                          <button
+                            onClick={() => watchTable(table.id)}
+                            disabled={!table.allowSpectators}
+                            className="rounded-lg bg-[#5a3a2d] hover:bg-[#6c4737] disabled:opacity-40 disabled:cursor-not-allowed px-3 py-2 text-sm font-bold"
+                          >
+                            Watch
+                          </button>
+
+                          <button
+                            onClick={() => joinTable(table.id)}
+                            disabled={!canJoin}
+                            className="rounded-lg bg-amber-500 hover:bg-amber-400 disabled:bg-zinc-600 disabled:text-zinc-300 disabled:cursor-not-allowed px-3 py-2 text-sm font-bold text-black"
+                          >
+                            {canJoin
+                              ? "Join"
+                              : table.opponentType === "Computer"
+                              ? "CPU"
+                              : "Full"}
+                          </button>
+                        </div>
+
+                        <div className="mt-2 flex justify-between text-[11px] text-zinc-400">
+                          <span>{table.timeControl}</span>
+                          <span>{table.opponentType}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </section>
+
+            <section className="rounded-xl border border-orange-700 bg-[#241815] p-4">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-2xl text-amber-300">Events</h2>
+                  <div className="text-sm text-zinc-500">Cups & brackets</div>
+                </div>
+
+                <button
+                  onClick={() => setShowCreateTournament(true)}
+                  className="rounded-lg bg-[#5a3a2d] hover:bg-[#6c4737] px-3 py-2 text-sm font-bold"
+                >
+                  + Event
+                </button>
+              </div>
+
+              <div
+                className={
+                  isMobileLandscape
+                    ? "grid grid-cols-2 gap-3"
+                    : "flex flex-col gap-3"
+                }
+              >
+                {tournaments.length === 0 ? (
+                  <div className="text-zinc-500 text-sm">No events live.</div>
+                ) : (
+                  tournaments.map((tournament) => {
+                    const joined = tournament.players.some(
+                      (player) =>
+                        player.screenName.toLowerCase() ===
+                        currentUser.screenName.toLowerCase()
+                    );
+
+                    const canStart =
+                      tournament.status === "Waiting" &&
+                      tournament.players.length >= 2 &&
+                      (tournament.host === currentUser.screenName ||
+                        currentUser.screenName === "JT");
+
+                    return (
+                      <div
+                        key={tournament.id}
+                        onClick={() => setSelectedTournamentId(tournament.id)}
+                        className="rounded-xl border border-[#5a4034] bg-[#1b120f] p-3 cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="min-w-0 flex-1 truncate text-amber-300 font-bold">
+                            {tournament.name}
+                          </span>
+
+                          <span
+                            className={`rounded px-2 py-1 text-[10px] font-bold ${
+                              tournament.status === "Waiting"
+                                ? "bg-green-950 text-green-300"
+                                : tournament.status === "In Progress"
+                                ? "bg-amber-950 text-amber-300"
+                                : "bg-zinc-800 text-zinc-300"
+                            }`}
+                          >
+                            {tournament.status}
+                          </span>
+                        </div>
+
+                        <div className="mt-2 grid grid-cols-3 gap-2 text-xs text-zinc-500">
+                          <span>{tournament.type}</span>
+                          <span>
+                            {tournament.players.length}/{tournament.maxPlayers} players
+                          </span>
+                          <span>{tournament.format}</span>
+                        </div>
+
+                        <div className="mt-3 h-2 rounded-full bg-[#2b1d18] overflow-hidden">
+                          <div
+                            className="h-full bg-amber-500"
+                            style={{
+                              width: `${Math.min(
+                                100,
+                                (tournament.players.length /
+                                  tournament.maxPlayers) *
+                                  100
+                              )}%`,
+                            }}
+                          />
+                        </div>
+
+                        {tournament.status === "Waiting" &&
+                          (joined ? (
+                            <button
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                leaveTournament(tournament.id);
+                              }}
+                              className="mt-3 w-full rounded-lg bg-red-700 hover:bg-red-600 py-2 text-sm font-bold"
+                            >
+                              Leave
+                            </button>
+                          ) : (
+                            <button
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                joinTournament(tournament.id);
+                              }}
+                              disabled={
+                                tournament.players.length >=
+                                tournament.maxPlayers
+                              }
+                              className="mt-3 w-full rounded-lg bg-amber-500 hover:bg-amber-400 disabled:bg-zinc-700 disabled:text-zinc-400 py-2 text-sm font-bold text-black"
+                            >
+                              Join
+                            </button>
+                          ))}
+
+                        {canStart && (
+                          <button
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              startTournament(tournament.id);
+                            }}
+                            className="mt-3 w-full rounded-lg bg-green-600 hover:bg-green-500 py-2 text-sm font-bold text-black"
+                          >
+                            Start
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </section>
+
+            <div
+              className={
+                isMobileLandscape
+                  ? "grid grid-cols-[0.85fr_1.15fr] gap-4"
+                  : "flex flex-col gap-4"
+              }
+            >
+              <section className="rounded-xl border border-orange-700 bg-[#241815] p-4">
+                <h2 className="text-2xl text-amber-300 mb-4">
+                  Players & Ratings
+                </h2>
+
+                <div className="flex flex-col gap-2">
+                  {mobilePlayers.map((player) => (
+                    <button
+                      key={player.name}
+                      onClick={() => openPlayerProfile(player.name)}
+                      className="flex items-center gap-3 rounded-lg bg-[#35231e] px-3 py-3 text-left hover:bg-[#463029]"
+                    >
+                      <RankCircle rating={player.rating} />
+                      <span className="flex-1 truncate">{player.name}</span>
+                      <span className="text-zinc-400 text-sm">
+                        {player.rating}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              <section className="rounded-xl border border-orange-700 bg-[#241815] p-4">
+                <div
+                  className={
+                    isMobileLandscape
+                      ? "grid grid-cols-2 gap-4"
+                      : "flex flex-col gap-4"
+                  }
+                >
+                  <div className="min-w-0">
+                    <h2 className="text-2xl text-amber-300 mb-4">
+                      Lobby Chat
+                    </h2>
+
+                    <div className="max-h-52 overflow-y-auto rounded-lg bg-[#1b120f] p-3 space-y-2 text-sm">
+                      {lobbyMessages.length === 0 ? (
+                        <div className="text-zinc-500">No messages yet.</div>
+                      ) : (
+                        lobbyMessages.map((message) => (
+                          <div key={message.id}>
+                            <span
+                              className={
+                                message.sender === "System"
+                                  ? "text-cyan-300 font-bold"
+                                  : message.sender === currentUser.screenName
+                                  ? "text-amber-300 font-bold"
+                                  : "text-white font-bold"
+                              }
+                            >
+                              {message.sender}
+                              {message.sender === "JT" && (
+                                <span className="ml-2 inline-flex items-center rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-2 py-[2px] text-[10px] font-black tracking-wide text-black shadow-[0_0_6px_rgba(251,191,36,0.45)]">
+                                  DEV
+                                </span>
+                              )}
+                              :
+                            </span>{" "}
+                            <span className="text-zinc-100">
+                              {message.text}
+                            </span>
+                          </div>
+                        ))
+                      )}
+                    </div>
+
+                    <div className="mt-3 flex gap-2">
+                      <input
+                        value={lobbyChatText}
+                        onChange={(event) =>
+                          setLobbyChatText(event.target.value)
+                        }
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter") {
+                            sendLobbyChat();
+                          }
+                        }}
+                        placeholder="Type message..."
+                        maxLength={160}
+                        className="min-w-0 flex-1 rounded-lg border border-[#5a4034] bg-[#2b1d18] px-3 py-3 outline-none"
+                      />
+
+                      <button
+                        onClick={sendLobbyChat}
+                        className="rounded-lg bg-amber-500 hover:bg-amber-400 px-4 py-3 font-bold text-black"
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="min-w-0">
+                    <h2 className="text-2xl text-amber-300 mb-4">
+                      System Feed
+                    </h2>
+
+                    <div className="max-h-52 overflow-y-auto rounded-lg border border-[#3a2721] bg-[#1b120f] p-3 space-y-2 text-sm">
+                      {systemFeedItems.length === 0 ? (
+                        <div className="text-zinc-500">No system events yet.</div>
+                      ) : (
+                        systemFeedItems.map((item) => (
+                          <div key={item.id}>{item.text}</div>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        {showCreateTable && (
+          <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/75 p-4">
+            <div className="w-full max-w-[520px] rounded-xl border border-amber-700 bg-[#241815] p-5 relative">
+              <button
+                onClick={() => setShowCreateTable(false)}
+                className="absolute right-3 top-3 text-zinc-400 hover:text-white"
+              >
+                X
+              </button>
+
+              <h2 className="text-2xl font-bold text-amber-300 mb-1">
+                Create Table
+              </h2>
+              <p className="text-sm text-zinc-400 mb-5">
+                Set your table rules, then sit down and wait for a player.
+              </p>
+
+              <div className="space-y-4 text-sm">
+                <label className="block">
+                  <span className="text-zinc-300">Opponent Type</span>
+                  <select
+                    value={opponentType}
+                    onChange={(event) => {
+                      const selectedOpponentType = event.target.value as
+                        | "Human"
+                        | "Computer";
+
+                      setOpponentType(selectedOpponentType);
+
+                      if (selectedOpponentType === "Computer") {
+                        setGameType("Casual");
+                        setRatedOnly(false);
+                        setComputerSkill("Beginner Bot");
+                      }
+                    }}
+                    className="mt-1 w-full rounded border border-[#5a4034] bg-[#2b1d18] px-3 py-3 outline-none"
+                  >
+                    <option>Human</option>
+                    <option>Computer</option>
+                  </select>
+                </label>
+
+                {opponentType === "Computer" && (
+                  <label className="block">
+                    <span className="text-zinc-300">Computer Skill</span>
+                    <select
+                      value={computerSkill}
+                      onChange={(event) => setComputerSkill(event.target.value)}
+                      className="mt-1 w-full rounded border border-[#5a4034] bg-[#2b1d18] px-3 py-3 outline-none"
+                    >
+                      <option>Beginner Bot</option>
+                      <option>Intermediate Bot</option>
+                      <option>Advanced Bot</option>
+                      <option>Expert Bot</option>
+                      <option>Master Bot</option>
+                    </select>
+                  </label>
+                )}
+
+                <label className="block">
+                  <span className="text-zinc-300">Game Type</span>
+                  <select
+                    value={gameType}
+                    onChange={(event) => setGameType(event.target.value)}
+                    disabled={opponentType === "Computer"}
+                    className="mt-1 w-full rounded border border-[#5a4034] bg-[#2b1d18] px-3 py-3 outline-none disabled:opacity-70"
+                  >
+                    <option>Casual</option>
+                    {opponentType === "Human" && (
+                      <>
+                        <option>Ranked</option>
+                        <option>Blitz</option>
+                        <option>Ranked Blitz</option>
+                      </>
+                    )}
+                  </select>
+                </label>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <label className="block">
+                    <span className="text-zinc-300">Game Time</span>
+                    <select
+                      value={timeControl}
+                      onChange={(event) => setTimeControl(event.target.value)}
+                      className="mt-1 w-full rounded border border-[#5a4034] bg-[#2b1d18] px-3 py-3 outline-none"
+                    >
+                      <option>5 Minutes</option>
+                      <option>10 Minutes</option>
+                      <option>15 Minutes</option>
+                      <option>30 Minutes</option>
+                      <option>No Timer</option>
+                    </select>
+                  </label>
+
+                  <label className="block">
+                    <span className="text-zinc-300">Move Timer</span>
+                    <select
+                      value={moveTimer}
+                      onChange={(event) => setMoveTimer(event.target.value)}
+                      className="mt-1 w-full rounded border border-[#5a4034] bg-[#2b1d18] px-3 py-3 outline-none"
+                    >
+                      <option>30 Seconds</option>
+                      <option>60 Seconds</option>
+                      <option>90 Seconds</option>
+                      <option>No Move Timer</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div className="grid grid-cols-1 gap-2">
+                  <label className="flex items-center gap-2 rounded bg-[#35231e] p-3">
+                    <input
+                      type="checkbox"
+                      checked={allowSpectators}
+                      onChange={(event) =>
+                        setAllowSpectators(event.target.checked)
+                      }
+                    />
+                    Allow spectators
+                  </label>
+
+                  <label className="flex items-center gap-2 rounded bg-[#35231e] p-3">
+                    <input
+                      type="checkbox"
+                      checked={spectatorChat}
+                      onChange={(event) =>
+                        setSpectatorChat(event.target.checked)
+                      }
+                    />
+                    Spectator chat
+                  </label>
+
+                  <label className="flex items-center gap-2 rounded bg-[#35231e] p-3">
+                    <input
+                      type="checkbox"
+                      checked={opponentType === "Computer" ? false : ratedOnly}
+                      disabled={opponentType === "Computer"}
+                      onChange={(event) => setRatedOnly(event.target.checked)}
+                    />
+                    Rated players only
+                  </label>
+
+                  <label className="flex items-center gap-2 rounded bg-[#35231e] p-3">
+                    <input
+                      type="checkbox"
+                      checked={privateTable}
+                      onChange={(event) =>
+                        setPrivateTable(event.target.checked)
+                      }
+                    />
+                    Private table
+                  </label>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 pt-2">
+                  <button
+                    onClick={() => setShowCreateTable(false)}
+                    className="rounded-lg bg-[#5a3a2d] hover:bg-[#6c4737] px-4 py-3 font-bold"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    onClick={createTable}
+                    className="rounded-lg bg-amber-500 hover:bg-amber-400 px-4 py-3 font-bold text-black"
+                  >
+                    Sit & Create
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-[#17100d] text-white p-5">
       <BoardEffects />
@@ -4671,178 +5380,6 @@ export default function Home() {
         }
       }
       /* CHEXKERS MOBILE LOBBY CLEANUP V3 END */
-
-      /* CHEXKERS MOBILE TOP CLEANUP V4 START */
-      @media (max-width: 900px) {
-        /* Header controls become intentional mobile cards */
-        main > div:first-child.flex.items-center.justify-between > div:last-child {
-          display: grid !important;
-          grid-template-columns: 1fr 1fr !important;
-          gap: 10px !important;
-          width: 100% !important;
-          min-width: 0 !important;
-          align-items: stretch !important;
-        }
-
-        /* Player card */
-        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(1) {
-          grid-column: 1 / 2 !important;
-          grid-row: 1 !important;
-        }
-
-        /* Logout */
-        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(2) {
-          grid-column: 2 / 3 !important;
-          grid-row: 1 !important;
-        }
-
-        /* Server status: move to its own clean row below CHEXKERS area on mobile */
-        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(3) {
-          grid-column: 1 / -1 !important;
-          grid-row: 2 !important;
-          min-height: 38px !important;
-          display: flex !important;
-          align-items: center !important;
-          justify-content: flex-start !important;
-          border: 0 !important;
-          background: transparent !important;
-          padding: 0 !important;
-          color: #a1a1aa !important;
-          font-size: 18px !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(3) span,
-        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(3) strong {
-          color: #22c55e !important;
-          font-weight: 800 !important;
-        }
-
-        /* Queue wrapper: full row, clean segmented control */
-        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) {
-          grid-column: 1 / -1 !important;
-          grid-row: 3 !important;
-          display: grid !important;
-          grid-template-columns: auto 1fr 1fr !important;
-          gap: 8px !important;
-          align-items: center !important;
-          min-height: 64px !important;
-          padding: 8px !important;
-          overflow: hidden !important;
-          border-radius: 12px !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) > span,
-        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) > div:first-child {
-          white-space: nowrap !important;
-          color: #a1a1aa !important;
-          font-size: 17px !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) button {
-          min-width: 0 !important;
-          width: 100% !important;
-          height: 48px !important;
-          min-height: 48px !important;
-          padding: 0 8px !important;
-          border-radius: 8px !important;
-          white-space: nowrap !important;
-          overflow: hidden !important;
-          text-overflow: ellipsis !important;
-          font-size: 17px !important;
-          font-weight: 800 !important;
-        }
-
-        /* Find + Create */
-        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(5) {
-          grid-column: 1 / 2 !important;
-          grid-row: 4 !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(6) {
-          grid-column: 2 / 3 !important;
-          grid-row: 4 !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(5),
-        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(6) {
-          min-height: 58px !important;
-          font-size: 18px !important;
-          line-height: 1.15 !important;
-          white-space: normal !important;
-          border-radius: 10px !important;
-        }
-
-        /* Avoid right-side Safari clipping */
-        main > div:first-child.flex.items-center.justify-between > div:last-child > * {
-          max-width: 100% !important;
-          overflow: hidden !important;
-        }
-      }
-
-      @media (max-width: 900px) and (orientation: landscape) {
-        /* Landscape: logo left, compact control grid right, no sideways clipping */
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between {
-          display: grid !important;
-          grid-template-columns: minmax(240px, 0.85fr) minmax(360px, 1.15fr) !important;
-          gap: 12px !important;
-          align-items: center !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child {
-          display: grid !important;
-          grid-template-columns: 1fr 1fr 1fr 1fr !important;
-          gap: 8px !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(1) {
-          grid-column: 1 / 2 !important;
-          grid-row: 1 !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(2) {
-          grid-column: 2 / 3 !important;
-          grid-row: 1 !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(3) {
-          grid-column: 3 / 5 !important;
-          grid-row: 1 !important;
-          font-size: 16px !important;
-          min-height: 48px !important;
-          align-items: center !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) {
-          grid-column: 1 / 3 !important;
-          grid-row: 2 !important;
-          min-height: 54px !important;
-          grid-template-columns: auto 1fr 1fr !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > div:nth-child(4) button {
-          height: 40px !important;
-          min-height: 40px !important;
-          font-size: 15px !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(5) {
-          grid-column: 3 / 4 !important;
-          grid-row: 2 !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(6) {
-          grid-column: 4 / 5 !important;
-          grid-row: 2 !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(5),
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-child(6) {
-          min-height: 54px !important;
-          font-size: 15px !important;
-        }
-      }
-      /* CHEXKERS MOBILE TOP CLEANUP V4 END */
-
 
     `}</style>
 
