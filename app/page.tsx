@@ -713,301 +713,7 @@ function BoardEffects() {
       .chex-move-trail {
         animation: chexMoveTrail 600ms ease-out forwards;
       }
-
-
-      /* CHEXKERS MOBILE LOBBY FIX V2 START */
-      @media (max-width: 900px) {
-        html,
-        body {
-          width: 100% !important;
-          max-width: 100vw !important;
-          overflow-x: hidden !important;
-          background: #17100d !important;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-
-        input,
-        button,
-        select,
-        textarea {
-          font-size: 16px !important;
-        }
-
-        body {
-          touch-action: manipulation;
-        }
-
-        main {
-          width: 100% !important;
-          max-width: 100vw !important;
-          overflow-x: hidden !important;
-          padding-left: 12px !important;
-          padding-right: 12px !important;
-        }
-
-        main > * {
-          max-width: 100% !important;
-        }
-
-        /* Lobby header: stop horizontal overflow */
-        main > div:first-child.flex.items-center.justify-between {
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: stretch !important;
-          gap: 12px !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between > div:first-child {
-          width: 100% !important;
-          min-width: 0 !important;
-          overflow: hidden !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between h1 {
-          font-size: clamp(36px, 12vw, 58px) !important;
-          line-height: 0.9 !important;
-          white-space: nowrap !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between > div:last-child {
-          display: grid !important;
-          grid-template-columns: 1fr 1fr !important;
-          gap: 8px !important;
-          width: 100% !important;
-          min-width: 0 !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between > div:last-child > * {
-          width: 100% !important;
-          min-width: 0 !important;
-          max-width: 100% !important;
-        }
-
-        main > div:first-child.flex.items-center.justify-between > div:last-child button,
-        main > div:first-child.flex.items-center.justify-between > div:last-child div {
-          min-height: 46px !important;
-        }
-
-        /* Queue + action buttons row: stacked on portrait, compact on landscape */
-        main > div:first-child.flex.items-center.justify-between + div,
-        main > div.flex.gap-3.mb-4 {
-          width: 100% !important;
-          max-width: 100% !important;
-          min-width: 0 !important;
-          overflow: hidden !important;
-        }
-
-        /* Room tabs: two columns instead of overflowing */
-        main > div.flex.gap-3.mb-4 {
-          display: grid !important;
-          grid-template-columns: 1fr 1fr !important;
-          gap: 8px !important;
-        }
-
-        main > div.flex.gap-3.mb-4 button {
-          width: 100% !important;
-          min-width: 0 !important;
-          padding: 12px 10px !important;
-          font-size: 16px !important;
-          white-space: normal !important;
-        }
-
-        main > div.flex.gap-3.mb-4 button:last-child:nth-child(odd) {
-          grid-column: span 1 !important;
-        }
-
-        /* Main lobby grid becomes one clean stack */
-        .grid.grid-rows-\[1fr_82px_300px\],
-        .grid.grid-rows-\[1fr_76px_300px\],
-        .grid.grid-rows-\[1fr_300px\],
-        .grid.h-\[82vh\] {
-          display: flex !important;
-          flex-direction: column !important;
-          height: auto !important;
-          min-height: 0 !important;
-          gap: 12px !important;
-          width: 100% !important;
-          max-width: 100% !important;
-          overflow: visible !important;
-        }
-
-        /* Active tables should not be giant empty dead space */
-        .grid.grid-rows-\[1fr_82px_300px\] > section:first-child,
-        .grid.grid-rows-\[1fr_76px_300px\] > section:first-child,
-        .grid.h-\[82vh\] > section:first-child {
-          min-height: 150px !important;
-          height: auto !important;
-          max-height: none !important;
-        }
-
-        section,
-        aside {
-          width: 100% !important;
-          max-width: 100% !important;
-          min-width: 0 !important;
-          overflow: hidden !important;
-          padding: 12px !important;
-        }
-
-        section h2,
-        aside h2 {
-          font-size: 22px !important;
-          line-height: 1.15 !important;
-        }
-
-        /* Active table cards and any nested grids stack */
-        .grid.grid-cols-2,
-        .grid.grid-cols-3,
-        .grid.grid-cols-\[300px_1fr\],
-        .grid.grid-cols-\[1fr_1fr\],
-        .grid.grid-cols-\[1fr_340px\],
-        .grid.grid-cols-\[280px_1fr_340px\],
-        .grid.grid-cols-\[270px_1fr_340px\],
-        .grid.grid-cols-\[300px_1fr_340px\] {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 12px !important;
-          width: 100% !important;
-          max-width: 100% !important;
-          min-width: 0 !important;
-          height: auto !important;
-        }
-
-        /* Events row: clean stack, no clipping */
-        section:has(.text-amber-300.font-bold.text-lg),
-        section:has(button):has(.text-amber-300.font-bold.text-lg) {
-          min-height: auto !important;
-        }
-
-        section:has(.text-amber-300.font-bold.text-lg) > div,
-        section:has(button):has(.text-amber-300.font-bold.text-lg) > div {
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: stretch !important;
-          gap: 10px !important;
-          width: 100% !important;
-          min-width: 0 !important;
-        }
-
-        .min-w-\[360px\],
-        .min-w-\[320px\],
-        .min-w-\[300px\] {
-          min-width: 0 !important;
-          width: 100% !important;
-          max-width: 100% !important;
-        }
-
-        /* Player/chats/feed stack correctly */
-        .grid.grid-cols-\[300px_1fr\] > aside,
-        .grid.grid-cols-\[300px_1fr\] > section {
-          width: 100% !important;
-          max-width: 100% !important;
-          min-width: 0 !important;
-        }
-
-        .grid.grid-cols-\[300px_1fr\] > aside {
-          max-height: 260px !important;
-          overflow-y: auto !important;
-        }
-
-        .grid.grid-cols-\[300px_1fr\] > section {
-          min-height: auto !important;
-          overflow: visible !important;
-        }
-
-        .grid.grid-cols-\[300px_1fr\] > section > div {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 12px !important;
-          height: auto !important;
-          width: 100% !important;
-          min-width: 0 !important;
-        }
-
-        .grid.grid-cols-\[300px_1fr\] > section > div > div {
-          width: 100% !important;
-          max-width: 100% !important;
-          min-width: 0 !important;
-          min-height: 240px !important;
-        }
-
-        .grid.grid-cols-\[300px_1fr\] input {
-          min-height: 48px !important;
-          min-width: 0 !important;
-        }
-
-        .grid.grid-cols-\[300px_1fr\] button {
-          min-height: 48px !important;
-        }
-
-        /* Prevent any random wide child from forcing page sideways */
-        [class*="min-w-"],
-        [class*="w-\["] {
-          max-width: 100% !important;
-        }
-
-        /* Modals fit mobile */
-        .fixed.inset-0 {
-          padding: 12px !important;
-          align-items: flex-start !important;
-          overflow-y: auto !important;
-        }
-
-        .fixed.inset-0 > div {
-          width: 100% !important;
-          max-width: 100% !important;
-          max-height: 90dvh !important;
-          overflow-y: auto !important;
-        }
-      }
-
-      @media (max-width: 900px) and (orientation: landscape) {
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) {
-          padding-top: 8px !important;
-          padding-bottom: 8px !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between {
-          display: grid !important;
-          grid-template-columns: minmax(220px, 1fr) minmax(300px, 1.25fr) !important;
-          align-items: center !important;
-          gap: 10px !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between h1 {
-          font-size: clamp(30px, 7vw, 46px) !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child {
-          grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-          gap: 6px !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div.flex.gap-3.mb-4 {
-          display: flex !important;
-          overflow-x: auto !important;
-          gap: 8px !important;
-          padding-bottom: 4px !important;
-        }
-
-        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div.flex.gap-3.mb-4 button {
-          flex: 0 0 auto !important;
-          width: auto !important;
-          min-width: 135px !important;
-        }
-
-        .grid.grid-rows-\[1fr_82px_300px\] > section:first-child,
-        .grid.grid-rows-\[1fr_76px_300px\] > section:first-child,
-        .grid.h-\[82vh\] > section:first-child {
-          min-height: 110px !important;
-        }
-      }
-      /* CHEXKERS MOBILE LOBBY FIX V2 END */
-
-    `}</style>
+`}</style>
   );
 }
 
@@ -4644,7 +4350,329 @@ export default function Home() {
             display: none !important;
           }
         }
-      `}</style>
+  
+
+      /* CHEXKERS MOBILE LOBBY CLEANUP V3 START */
+      @media (max-width: 900px) {
+        html,
+        body {
+          width: 100% !important;
+          max-width: 100vw !important;
+          overflow-x: hidden !important;
+          background: #17100d !important;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        input,
+        button,
+        select,
+        textarea {
+          font-size: 16px !important;
+        }
+
+        body {
+          touch-action: manipulation;
+        }
+
+        main {
+          width: 100% !important;
+          max-width: 100vw !important;
+          overflow-x: hidden !important;
+          padding: 16px !important;
+        }
+
+        main > * {
+          max-width: 100% !important;
+          min-width: 0 !important;
+        }
+
+        /* Mobile lobby header */
+        main > div:first-child.flex.items-center.justify-between {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: stretch !important;
+          gap: 12px !important;
+          margin-bottom: 14px !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:first-child {
+          width: 100% !important;
+          min-width: 0 !important;
+          overflow: hidden !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between h1 {
+          font-size: clamp(34px, 11.5vw, 52px) !important;
+          line-height: 0.92 !important;
+          white-space: nowrap !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr !important;
+          gap: 10px !important;
+          width: 100% !important;
+          min-width: 0 !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child > * {
+          width: 100% !important;
+          min-width: 0 !important;
+          max-width: 100% !important;
+          min-height: 54px !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div,
+        main > div:first-child.flex.items-center.justify-between > div:last-child > button {
+          border-radius: 10px !important;
+          padding: 12px !important;
+        }
+
+        /* Queue control gets full width and no hidden ranked button */
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:has(button) {
+          grid-column: 1 / -1 !important;
+          display: grid !important;
+          grid-template-columns: auto 1fr 1fr !important;
+          align-items: center !important;
+          gap: 8px !important;
+          overflow: hidden !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child > div:has(button) button {
+          width: 100% !important;
+          min-width: 0 !important;
+          white-space: nowrap !important;
+          padding: 12px 8px !important;
+        }
+
+        main > div:first-child.flex.items-center.justify-between > div:last-child > button {
+          font-size: 18px !important;
+          font-weight: 800 !important;
+        }
+
+        /* Keep Find/Create clean as two large buttons */
+        main > div:first-child.flex.items-center.justify-between > div:last-child > button:nth-last-child(2),
+        main > div:first-child.flex.items-center.justify-between > div:last-child > button:last-child {
+          min-height: 58px !important;
+        }
+
+        /* Room tabs */
+        main > div.flex.gap-3.mb-4 {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr !important;
+          gap: 10px !important;
+          margin-bottom: 14px !important;
+          width: 100% !important;
+        }
+
+        main > div.flex.gap-3.mb-4 button {
+          width: 100% !important;
+          min-width: 0 !important;
+          min-height: 54px !important;
+          padding: 12px 10px !important;
+          font-size: 17px !important;
+          line-height: 1.1 !important;
+          white-space: normal !important;
+        }
+
+        /* Main lobby stack */
+        .grid.grid-rows-\[1fr_82px_300px\],
+        .grid.grid-rows-\[1fr_76px_300px\],
+        .grid.grid-rows-\[1fr_300px\],
+        .grid.h-\[82vh\] {
+          display: flex !important;
+          flex-direction: column !important;
+          height: auto !important;
+          min-height: 0 !important;
+          gap: 14px !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          overflow: visible !important;
+        }
+
+        .grid.grid-rows-\[1fr_82px_300px\] > section:first-child,
+        .grid.grid-rows-\[1fr_76px_300px\] > section:first-child,
+        .grid.h-\[82vh\] > section:first-child {
+          min-height: 128px !important;
+          height: auto !important;
+          max-height: none !important;
+        }
+
+        section,
+        aside {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-width: 0 !important;
+          overflow: hidden !important;
+          padding: 14px !important;
+          border-radius: 14px !important;
+        }
+
+        section h2,
+        aside h2 {
+          font-size: 24px !important;
+          line-height: 1.12 !important;
+        }
+
+        /* Generic grid stacking */
+        .grid.grid-cols-2,
+        .grid.grid-cols-3,
+        .grid.grid-cols-\[300px_1fr\],
+        .grid.grid-cols-\[1fr_1fr\],
+        .grid.grid-cols-\[1fr_340px\],
+        .grid.grid-cols-\[280px_1fr_340px\],
+        .grid.grid-cols-\[270px_1fr_340px\],
+        .grid.grid-cols-\[300px_1fr_340px\] {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 14px !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          min-width: 0 !important;
+          height: auto !important;
+        }
+
+        /* Events: put card and +Event button in clean vertical layout */
+        section:has(.text-amber-300.font-bold.text-lg) > div,
+        section:has(button):has(.text-amber-300.font-bold.text-lg) > div {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: stretch !important;
+          gap: 10px !important;
+          width: 100% !important;
+          min-width: 0 !important;
+        }
+
+        .min-w-\[360px\],
+        .min-w-\[320px\],
+        .min-w-\[300px\] {
+          min-width: 0 !important;
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+
+        section:has(.text-amber-300.font-bold.text-lg) button,
+        section:has(button):has(.text-amber-300.font-bold.text-lg) button {
+          width: 100% !important;
+          min-height: 52px !important;
+        }
+
+        /* Players, lobby chat, feed: true stacked card layout */
+        .grid.grid-cols-\[300px_1fr\] > aside,
+        .grid.grid-cols-\[300px_1fr\] > section {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-width: 0 !important;
+        }
+
+        .grid.grid-cols-\[300px_1fr\] > aside {
+          max-height: none !important;
+          overflow: visible !important;
+        }
+
+        .grid.grid-cols-\[300px_1fr\] > section {
+          min-height: auto !important;
+          overflow: hidden !important;
+        }
+
+        .grid.grid-cols-\[300px_1fr\] > section > div {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 14px !important;
+          height: auto !important;
+          width: 100% !important;
+          min-width: 0 !important;
+        }
+
+        .grid.grid-cols-\[300px_1fr\] > section > div > div {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-width: 0 !important;
+          min-height: auto !important;
+          border-left: 0 !important;
+          padding-left: 0 !important;
+        }
+
+        .grid.grid-cols-\[300px_1fr\] input {
+          min-height: 52px !important;
+          min-width: 0 !important;
+        }
+
+        .grid.grid-cols-\[300px_1fr\] button {
+          min-height: 52px !important;
+        }
+
+        /* Prevent any wide child from forcing sideways page */
+        [class*="min-w-"],
+        [class*="w-\["] {
+          max-width: 100% !important;
+        }
+
+        .fixed.inset-0 {
+          padding: 12px !important;
+          align-items: flex-start !important;
+          overflow-y: auto !important;
+        }
+
+        .fixed.inset-0 > div {
+          width: 100% !important;
+          max-width: 100% !important;
+          max-height: 90dvh !important;
+          overflow-y: auto !important;
+        }
+      }
+
+      @media (max-width: 900px) and (orientation: landscape) {
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) {
+          padding: 10px 18px !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between {
+          display: grid !important;
+          grid-template-columns: 1fr 1.15fr !important;
+          align-items: center !important;
+          gap: 12px !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between h1 {
+          font-size: clamp(32px, 6vw, 46px) !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child {
+          grid-template-columns: 1fr 1fr !important;
+          gap: 8px !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div:first-child.flex.items-center.justify-between > div:last-child > div:has(button) {
+          grid-column: 1 / -1 !important;
+          grid-template-columns: auto 1fr 1fr !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div.flex.gap-3.mb-4 {
+          display: grid !important;
+          grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+          gap: 8px !important;
+        }
+
+        main:not(:has(.grid-cols-\[minmax\(280px\,58vh\)_1fr\])) > div.flex.gap-3.mb-4 button {
+          min-width: 0 !important;
+          width: 100% !important;
+          font-size: 14px !important;
+          min-height: 46px !important;
+        }
+
+        .grid.grid-rows-\[1fr_82px_300px\] > section:first-child,
+        .grid.grid-rows-\[1fr_76px_300px\] > section:first-child,
+        .grid.h-\[82vh\] > section:first-child {
+          min-height: 96px !important;
+        }
+      }
+      /* CHEXKERS MOBILE LOBBY CLEANUP V3 END */
+
+    `}</style>
 
                       <option>Ranked</option>
                       <option>Blitz</option>
