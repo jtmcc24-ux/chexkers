@@ -359,6 +359,7 @@ function reconnectSocketToTable(socket, table) {
 
   socket.emit("tableState", table);
   socket.emit("gameStateUpdated", table.gameState);
+  broadcastTableMessages(table);
 
   broadcastTables();
 
@@ -389,6 +390,59 @@ const systemFeed = [
     type: "system",
   },
 ];
+
+function createTableMessages() {
+  return [
+    {
+      id: `table-system-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      sender: "System",
+      text: "Table opened.",
+      createdAt: Date.now(),
+      type: "system",
+    },
+  ];
+}
+
+function addTableMessage(table, sender, text, type = "chat") {
+  if (!table) return;
+
+  if (!Array.isArray(table.tableMessages)) {
+    table.tableMessages = createTableMessages();
+  }
+
+  const cleanText = String(text || "").trim().slice(0, 220);
+  if (!cleanText) return;
+
+  table.tableMessages.push({
+    id: `table-msg-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    sender: sender || "System",
+    text: cleanText,
+    createdAt: Date.now(),
+    type,
+  });
+
+  if (table.tableMessages.length > 80) {
+    table.tableMessages = table.tableMessages.slice(-80);
+  }
+
+  io.to(table.id).emit("tableMessagesUpdated", {
+    tableId: table.id,
+    messages: table.tableMessages,
+  });
+}
+
+function broadcastTableMessages(table) {
+  if (!table) return;
+
+  if (!Array.isArray(table.tableMessages)) {
+    table.tableMessages = createTableMessages();
+  }
+
+  io.to(table.id).emit("tableMessagesUpdated", {
+    tableId: table.id,
+    messages: table.tableMessages,
+  });
+}
 
 function createStartingBoard() {
   return Array.from({ length: 8 }, (_, row) =>
@@ -1211,6 +1265,7 @@ function createMatchmakingTable(hostSocket, guestSocket, room, gameType) {
     computerSkill: "Around My Rating",
 
     gameState: createGameState(timeControl, moveTimer),
+    tableMessages: createTableMessages(),
   };
 
   activeTables.push(table);
@@ -1495,6 +1550,98 @@ function broadcastGame(table) {
   broadcastFeaturedMatch();
 }
 
+function getAllLegalMovesForColor(board, color, forcedPiece = null) {
+  const moves = [];
+
+  for (let row = 0; row < 8; row++) {
+    for (let col = 0; col < 8; col++) {
+      const piece = board[row]?.[col];
+      if (!piece || piece.color !== color) continue;
+
+      const legalMoves = getLegalMoves(board, color, forcedPiece, row, col);
+
+      for (const move of legalMoves) {
+        moves.push({
+          from: { row, col },
+          to: { row: move.row, col: move.col },
+          capture: move.capture || null,
+        });
+      }
+    }
+  }
+
+  return moves;
+}
+
+function pickForcedTimerMove(table) {
+  if (!table || !table.gameState) return null;
+
+  const gameState = table.gameState;
+  const moves = getAllLegalMovesForColor(
+    gameState.board,
+    gameState.turn,
+    gameState.forcedPiece
+  );
+
+  if (moves.length === 0) return null;
+
+  const captures = moves.filter((move) => move.capture);
+  const pool = captures.length > 0 ? captures : moves;
+
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function forceMoveOnMoveTimer(table) {
+  if (!table || !table.gameState) return false;
+  if (table.status !== "Playing") return false;
+  if (table.gameState.winner) return false;
+
+  const timedOutColor = table.gameState.turn;
+  const forcedMove = pickForcedTimerMove(table);
+
+  if (!forcedMove) {
+    const winner = timedOutColor === "red" ? "black" : "red";
+    table.gameState.winner = winner;
+    table.gameState.timeoutWinner = winner;
+    table.status = "Finished";
+
+    addTableMessage(
+      table,
+      "System",
+      `${timedOutColor.toUpperCase()} had no legal move when the move clock expired. ${winner.toUpperCase()} wins.`,
+      "system"
+    );
+
+    applyRankedResult(table, winner, "no-legal-moves");
+    saveCompletedMatch(table, winner, "no-legal-moves");
+
+    io.to(table.id).emit("tableState", table);
+    broadcastTables();
+    broadcastGame(table);
+    return true;
+  }
+
+  addTableMessage(
+    table,
+    "System",
+    `${timedOutColor.toUpperCase()} move clock expired. CHEXKERS forced a legal move.`,
+    "system"
+  );
+
+  const moved = makeServerMove(table, forcedMove.from, forcedMove.to);
+
+  if (moved) {
+    io.to(table.id).emit("tableState", table);
+    broadcastTables();
+
+    if (table.opponentType === "Computer") {
+      maybeScheduleBotMove(table);
+    }
+  }
+
+  return moved;
+}
+
 function finishByTimeout(table, winner) {
   table.gameState.winner = winner;
   table.gameState.timeoutWinner = winner;
@@ -1539,7 +1686,7 @@ setInterval(() => {
       table.gameState.moveTimeLeft = Math.max(0, table.gameState.moveTimeLeft - 1);
 
       if (table.gameState.moveTimeLeft <= 0) {
-        finishByTimeout(table, currentTurn === "red" ? "black" : "red");
+        forceMoveOnMoveTimer(table);
         changedTables = true;
         continue;
       }
@@ -1979,6 +2126,7 @@ io.on("connection", (socket) => {
       tableId: table.id,
       gameState: table.gameState,
     });
+    broadcastTableMessages(table);
 
     broadcastTables();
   });
@@ -2018,6 +2166,7 @@ io.on("connection", (socket) => {
       tableId: table.id,
       gameState: table.gameState,
     });
+    broadcastTableMessages(table);
 
     io.to(table.id).emit("tableState", table);
     broadcastTables();
@@ -2031,6 +2180,34 @@ io.on("connection", (socket) => {
       tableId: table.id,
       gameState: table.gameState,
     });
+  });
+
+  socket.on("requestTableMessages", (tableId) => {
+    const table = activeTables.find((item) => item.id === tableId);
+    if (!table) return;
+
+    socket.join(table.id);
+    broadcastTableMessages(table);
+  });
+
+  socket.on("sendTableMessage", ({ tableId, text }) => {
+    const table = activeTables.find((item) => item.id === tableId);
+    if (!table || !socket.data?.user) return;
+
+    const isRedPlayer = table.redPlayer === socket.data.user.screenName;
+    const isBlackPlayer = table.blackPlayer === socket.data.user.screenName;
+    const isSpectator = !isRedPlayer && !isBlackPlayer;
+
+    if (isSpectator && !table.spectatorChat) return;
+
+    socket.join(table.id);
+
+    addTableMessage(
+      table,
+      socket.data.user.screenName,
+      text,
+      "chat"
+    );
   });
 
   socket.on("makeMove", ({ tableId, from, to }) => {
@@ -2210,12 +2387,49 @@ io.on("connection", (socket) => {
     if (!table) return;
     if (table.hostSocket !== socket.id) return;
 
+    const hadHumanOpponent =
+      table.opponentType !== "Computer" &&
+      table.blackPlayer !== "Open Seat" &&
+      table.blackSocket;
+
+    if (hadHumanOpponent) {
+      const oldRedPlayer = table.redPlayer;
+      const oldRedSocket = table.hostSocket;
+      const oldBlackPlayer = table.blackPlayer;
+      const oldBlackSocket = table.blackSocket;
+
+      table.redPlayer = oldBlackPlayer;
+      table.hostSocket = oldBlackSocket;
+      table.blackPlayer = oldRedPlayer;
+      table.blackSocket = oldRedSocket;
+
+      io.to(table.hostSocket).emit("roleUpdated", {
+        tableId: table.id,
+        role: "red",
+      });
+
+      io.to(table.blackSocket).emit("roleUpdated", {
+        tableId: table.id,
+        role: "black",
+      });
+
+      addTableMessage(
+        table,
+        "System",
+        "Rematch started. Players switched sides.",
+        "system"
+      );
+    } else {
+      addTableMessage(table, "System", "Rematch started.", "system");
+    }
+
     table.gameState = createGameState(table.timeControl, table.moveTimer);
     table.status = table.blackPlayer === "Open Seat" ? "Waiting" : "Playing";
 
     io.to(table.id).emit("tableState", table);
     broadcastTables();
     broadcastGame(table);
+    broadcastTableMessages(table);
   });
 
   socket.on("leaveTable", (tableId) => {

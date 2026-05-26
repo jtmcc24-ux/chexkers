@@ -180,6 +180,14 @@ type LobbyMessage = {
   type: "chat" | "system";
 };
 
+type TableMessage = {
+  id: string;
+  sender: string;
+  text: string;
+  createdAt: number;
+  type: "chat" | "system";
+};
+
 type SystemFeedItem = {
   id: string;
   text: string;
@@ -779,6 +787,8 @@ export default function Home() {
   const [lobbyMessages, setLobbyMessages] = useState<LobbyMessage[]>([]);
   const [systemFeedItems, setSystemFeedItems] = useState<SystemFeedItem[]>([]);
   const [lobbyChatText, setLobbyChatText] = useState("");
+  const [tableMessages, setTableMessages] = useState<TableMessage[]>([]);
+  const [tableChatText, setTableChatText] = useState("");
   const [selectedProfile, setSelectedProfile] = useState<PlayerProfile | null>(null);
   const [profileError, setProfileError] = useState("");
   const [reconnectMessage, setReconnectMessage] = useState("");
@@ -972,6 +982,32 @@ export default function Home() {
       setSystemFeedItems(items);
     });
 
+    socket.on(
+      "tableMessagesUpdated",
+      ({
+        tableId,
+        messages,
+      }: {
+        tableId: string;
+        messages: TableMessage[];
+      }) => {
+        setTableMessages(messages || []);
+      }
+    );
+
+    socket.on(
+      "roleUpdated",
+      ({
+        tableId,
+        role,
+      }: {
+        tableId: string;
+        role: "red" | "black" | "spectator";
+      }) => {
+        setPlayerRole(role);
+      }
+    );
+
     socket.on("leaderboardUpdated", (players: LeaderboardPlayer[]) => {
       setLeaderboardPlayers(players);
     });
@@ -1099,12 +1135,24 @@ export default function Home() {
       socket.off("matchFound");
       socket.off("lobbyMessagesUpdated");
       socket.off("systemFeedUpdated");
+      socket.off("tableMessagesUpdated");
+      socket.off("roleUpdated");
       socket.off("leaderboardUpdated");
       socket.off("livePlayersUpdated");
       socket.off("tournamentsUpdated");
       socket.off("gameStateUpdated");
     };
   }, []);
+
+  useEffect(() => {
+    if (!currentTable?.id) {
+      setTableMessages([]);
+      setTableChatText("");
+      return;
+    }
+
+    socket.emit("requestTableMessages", currentTable.id);
+  }, [currentTable?.id]);
 
   const visibleTables = useMemo(() => {
     return tables.filter((table) => table.room === activeRoom);
@@ -1407,6 +1455,19 @@ export default function Home() {
   function requestReconnect() {
     setReconnectMessage("Checking for active table...");
     socket.emit("requestReconnect");
+  }
+
+  function sendTableChat() {
+    const text = tableChatText.trim();
+
+    if (!text || !currentTable) return;
+
+    socket.emit("sendTableMessage", {
+      tableId: currentTable.id,
+      text,
+    });
+
+    setTableChatText("");
   }
 
   function sendLobbyChat() {
@@ -2015,20 +2076,46 @@ export default function Home() {
               <h3 className="text-amber-300 font-bold mb-2">Table Chat</h3>
 
               <div className="h-20 overflow-y-auto text-xs space-y-1 mb-2">
-                <div>System: Table opened.</div>
-                <div>System: {currentTable.redPlayer} is seated as Red.</div>
-                {currentTable.blackPlayer !== "Open Seat" && (
-                  <div>System: {currentTable.blackPlayer} is seated as Black.</div>
+                {tableMessages.length === 0 ? (
+                  <div className="text-zinc-500">No table messages yet.</div>
+                ) : (
+                  tableMessages.map((message) => (
+                    <div key={message.id}>
+                      <span
+                        className={
+                          message.sender === "System"
+                            ? "text-cyan-300 font-bold"
+                            : message.sender === currentUser.screenName
+                            ? "text-amber-300 font-bold"
+                            : "text-white font-bold"
+                        }
+                      >
+                        {message.sender}:
+                      </span>{" "}
+                      <span className="text-zinc-100">{message.text}</span>
+                    </div>
+                  ))
                 )}
               </div>
 
               <div className="flex gap-2">
                 <input
+                  value={tableChatText}
+                  onChange={(event) => setTableChatText(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      sendTableChat();
+                    }
+                  }}
                   placeholder="Message..."
+                  maxLength={220}
                   className="flex-1 min-w-0 bg-[#2b1d18] border border-[#5a4034] rounded px-2 py-2 text-sm outline-none"
                 />
 
-                <button className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-3 rounded">
+                <button
+                  onClick={sendTableChat}
+                  className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-3 rounded"
+                >
                   Send
                 </button>
               </div>
@@ -2340,34 +2427,46 @@ export default function Home() {
           <h2 className="text-xl text-amber-300 font-bold mb-3">Table Chat</h2>
 
           <div className="bg-[#1b120f] rounded p-3 h-36 text-sm space-y-2 overflow-y-auto">
-            <div>System: Table opened.</div>
-            <div>System: {currentTable.redPlayer} is seated as Red.</div>
-            {currentTable.blackPlayer !== "Open Seat" && (
-              <div>System: {currentTable.blackPlayer} is seated as Black.</div>
-            )}
-            {forcedPieces.length > 0 && !gameState.winner && (
-              <div className="text-red-300">System: Capture required.</div>
-            )}
-            {(gameState.multiJumpActive || gameState.forcedPiece) &&
-              !gameState.winner && (
-                <div className="text-orange-300">
-                  System: Multi-jump must continue.
-                </div>
-              )}
-            {gameState.winner && (
-              <div className="text-amber-300">
-                System: {gameState.winner.toUpperCase()} wins.
-              </div>
-            )}
+            {tableMessages.length === 0 ? (
+                  <div className="text-zinc-500">No table messages yet.</div>
+                ) : (
+                  tableMessages.map((message) => (
+                    <div key={message.id}>
+                      <span
+                        className={
+                          message.sender === "System"
+                            ? "text-cyan-300 font-bold"
+                            : message.sender === currentUser.screenName
+                            ? "text-amber-300 font-bold"
+                            : "text-white font-bold"
+                        }
+                      >
+                        {message.sender}:
+                      </span>{" "}
+                      <span className="text-zinc-100">{message.text}</span>
+                    </div>
+                  ))
+                )}
           </div>
 
           <div className="mt-3 flex gap-2">
             <input
+              value={tableChatText}
+              onChange={(event) => setTableChatText(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  sendTableChat();
+                }
+              }}
               placeholder="Table message..."
+              maxLength={220}
               className="flex-1 bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-3 text-sm outline-none"
             />
 
-            <button className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-4 rounded">
+            <button
+              onClick={sendTableChat}
+              className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-4 rounded"
+            >
               Send
             </button>
           </div>
@@ -2992,51 +3091,46 @@ export default function Home() {
               <h3 className="text-amber-300 mb-2 shrink-0">Table Chat</h3>
 
               <div className="bg-[#1b120f] rounded p-3 flex-1 min-h-[100px] text-sm space-y-2 overflow-y-auto">
-                <div>System: Table opened.</div>
-                <div>System: {currentTable.redPlayer} is seated as Red.</div>
-                <div>System: Sounds and last-move highlights enabled.</div>
-                {currentTable.blackPlayer !== "Open Seat" && (
-                  <div>
-                    System: {currentTable.blackPlayer} is seated as Black.
-                  </div>
-                )}
-                {forcedPieces.length > 0 && !gameState.winner && (
-                  <div className="text-red-300">
-                    System: Capture required.
-                  </div>
-                )}
-                {(gameState.multiJumpActive || gameState.forcedPiece) &&
-                  !gameState.winner && (
-                    <div className="text-orange-300">
-                      System: Multi-jump required with the highlighted piece.
+                {tableMessages.length === 0 ? (
+                  <div className="text-zinc-500">No table messages yet.</div>
+                ) : (
+                  tableMessages.map((message) => (
+                    <div key={message.id}>
+                      <span
+                        className={
+                          message.sender === "System"
+                            ? "text-cyan-300 font-bold"
+                            : message.sender === currentUser.screenName
+                            ? "text-amber-300 font-bold"
+                            : "text-white font-bold"
+                        }
+                      >
+                        {message.sender}:
+                      </span>{" "}
+                      <span className="text-zinc-100">{message.text}</span>
                     </div>
-                  )}
-                {gameState.resignedColor && (
-                  <div className="text-red-300">
-                    System: {gameState.resignedColor} resigned.
-                  </div>
-                )}
-                {gameState.timeoutWinner && (
-                  <div className="text-red-300">
-                    System: {gameState.timeoutWinner} wins by timeout.
-                  </div>
-                )}
-                {gameState.winner &&
-                  !gameState.timeoutWinner &&
-                  !gameState.resignedColor && (
-                  <div className="text-amber-300">
-                    System: {gameState.winner} wins!
-                  </div>
+                  ))
                 )}
               </div>
 
               <div className="mt-3 flex gap-2">
                 <input
+                  value={tableChatText}
+                  onChange={(event) => setTableChatText(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      sendTableChat();
+                    }
+                  }}
                   placeholder="Type message..."
+                  maxLength={220}
                   className="flex-1 bg-[#2b1d18] border border-[#5a4034] rounded px-3 py-2 outline-none"
                 />
 
-                <button className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-3 rounded">
+                <button
+                  onClick={sendTableChat}
+                  className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-3 rounded"
+                >
                   Send
                 </button>
               </div>
